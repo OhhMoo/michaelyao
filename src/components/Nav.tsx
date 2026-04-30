@@ -61,7 +61,26 @@ export function Nav() {
       </Link>
 
       <div className="nav-center">
-        <Link href="/works" onClick={() => setMenuOpen(false)}>
+        <Link
+          href="/#featured"
+          onClick={(e) => {
+            setMenuOpen(false);
+            if (typeof window !== "undefined" && window.location.pathname === "/") {
+              const el = document.getElementById("featured");
+              if (el) {
+                e.preventDefault();
+                const navH =
+                  parseInt(
+                    getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
+                  ) || 52;
+                window.scrollTo({
+                  top: el.getBoundingClientRect().top + window.scrollY - navH,
+                  behavior: "smooth",
+                });
+              }
+            }
+          }}
+        >
           Work
         </Link>
         <Link href="/about" onClick={() => setMenuOpen(false)}>
