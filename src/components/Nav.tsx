@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { LinkedInIcon, GitHubIcon, XIcon, EmailIcon } from "./icons";
+import { LinkedInIcon, GitHubIcon, EmailIcon } from "./icons";
 
 export function Nav() {
   const [hidden, setHidden] = useState(false);
@@ -44,34 +44,28 @@ export function Nav() {
   return (
     <nav className={`nav ${hidden ? "nav--hidden" : ""} ${menuOpen ? "menu-open" : ""}`} id="nav">
       <Link href="/" className="nav-logo">
-        GEORGIA LYU
+        MICHAEL YAO
         <br />
-        <span style={{ color: "var(--text-2)" }}>DESIGN ENGINEER</span>
+        <span style={{ color: "var(--text-2)" }}>RESEARCHER</span>
       </Link>
 
       <div className="nav-center">
-        <a href="#work" onClick={() => setMenuOpen(false)}>
+        <Link href="/works" onClick={() => setMenuOpen(false)}>
           Work
-        </a>
-        <a href="#" onClick={() => setMenuOpen(false)}>
-          Art
-        </a>
-        <a href="#" onClick={() => setMenuOpen(false)}>
+        </Link>
+        <Link href="/about" onClick={() => setMenuOpen(false)}>
           About
-        </a>
+        </Link>
       </div>
 
       <div className="nav-icons">
-        <a href="https://www.linkedin.com/in/georgia-lyu-899349270/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/myao3411/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
           <LinkedInIcon />
         </a>
-        <a href="https://github.com/georgialyu05" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
           <GitHubIcon />
         </a>
-        <a href="https://x.com/Georgiaze0101" target="_blank" rel="noreferrer" aria-label="X">
-          <XIcon />
-        </a>
-        <a href="mailto:georgialyu05@gmail.com" aria-label="Email">
+        <a href="mailto:myao3411@gmail.com" aria-label="Email">
           <EmailIcon />
         </a>
       </div>

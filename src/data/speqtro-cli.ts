@@ -1,0 +1,26 @@
+import type { CliLine } from "@/components/CliMockup";
+
+export const SPEQTRO_LINES: CliLine[] = [
+  { text: "╭────────────────────────────────────────────────────── speqtro ───────────────────────────────────────────────────────╮" },
+  { text: "│                                                                                                                      │" },
+  { text: "│      ██████╗ ██████╗  ███████╗ ██████╗ ████████╗██████╗   ██████╗                                                    │", variant: "logo" },
+  { text: "│     ██╔════╝ ██╔══██╗ ██╔════╝██╔═══██╗╚══██╔══╝██╔══██╗ ██╔═══██╗                                                   │", variant: "logo" },
+  { text: "│     ╚█████╗  ██████╔╝ █████╗  ██║   ██║   ██║   ██████╔╝ ██║   ██║                                                   │", variant: "logo" },
+  { text: "│      ╚════██╗██╔═══╝  ██╔══╝  ██║   ██║   ██║   ██╔══██╗ ██║   ██║                                                   │", variant: "logo" },
+  { text: "│     ██████╔╝ ██║      ███████╗╚██████╔╝   ██║   ██║  ██║ ╚██████╔╝                                                   │", variant: "logo" },
+  { text: "│     ╚═════╝  ╚═╝      ╚══════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝  ╚═════╝                                                    │", variant: "logo" },
+  { text: "│   ╰──────────────────────────────────────────────────────────────╯                                                   │" },
+  { text: "│                                                                                                                      │" },
+  { text: "│   Autonomous spectroscopy reasoning agent for chemists                                                               │", variant: "subtitle" },
+  { text: "│   v0.1.4  ·  21 tools loaded                                                                                         │", variant: "meta" },
+  { text: "│                                                                                                                      │" },
+  { text: "│   Type a spectroscopy question, or /help for commands.                                                               │", variant: "hint" },
+  { text: "│                                                                                                                      │" },
+  { text: "╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯" },
+  { text: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────", variant: "rule" },
+  { text: "> identify the compound from 1H NMR: 7.3 (5H, m), 3.7 (2H, s), 2.1 (3H, s)", variant: "prompt" },
+  { text: "" },
+  { text: "" },
+  { text: "" },
+  { text: "   Haiku 4.5   /help for commands  ·  Ctrl+C to interrupt  ·  Ctrl+C × 2 to exit", variant: "status" },
+];

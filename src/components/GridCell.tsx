@@ -1,13 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { CellSpec } from "@/lib/grid-data";
+import type { CellSpec, SocialLinkType } from "@/lib/grid-data";
 import { imgPath } from "@/lib/grid-data";
+import { GitHubIcon, LinkedInIcon, EmailIcon } from "./icons";
 
 type GridCellProps = {
   cell: CellSpec;
   startsOpen?: boolean;
 };
+
+function SocialIcon({ type }: { type: SocialLinkType }) {
+  if (type === "github") return <GitHubIcon className="cell-social-icon" />;
+  if (type === "linkedin") return <LinkedInIcon className="cell-social-icon" />;
+  return <EmailIcon className="cell-social-icon" />;
+}
 
 export function GridCell({ cell, startsOpen = false }: GridCellProps) {
   const [open, setOpen] = useState(startsOpen);
@@ -16,7 +23,6 @@ export function GridCell({ cell, startsOpen = false }: GridCellProps) {
   const closingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideBubbleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // When the cell starts open, schedule the auto-hide of the bubble (matches site behavior)
   useEffect(() => {
     if (startsOpen) {
       hideBubbleTimer.current = setTimeout(() => setBubbleHidden(true), 3000);
@@ -32,6 +38,22 @@ export function GridCell({ cell, startsOpen = false }: GridCellProps) {
       <div className="cell">
         <span className="cell-num">{cell.index + 1}</span>
       </div>
+    );
+  }
+
+  // Social link cell — bare icon, no tile / no bubble
+  if (cell.link) {
+    const isMail = cell.link.href.startsWith("mailto:");
+    return (
+      <a
+        className={`cell social-cell social-${cell.link.type}`}
+        href={cell.link.href}
+        target={isMail ? undefined : "_blank"}
+        rel={isMail ? undefined : "noreferrer"}
+        aria-label={cell.link.label}
+      >
+        <SocialIcon type={cell.link.type} />
+      </a>
     );
   }
 

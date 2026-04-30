@@ -1,6 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { HeroGrid } from "@/components/HeroGrid";
-import { WorkSection } from "@/components/WorkSection";
+import { Featured } from "@/components/Featured";
+import { Folders } from "@/components/Folders";
 import { GridRowSection } from "@/components/GridRowSection";
 import { Footer } from "@/components/Footer";
 import { ScrollDownIcon } from "@/components/icons";
@@ -19,7 +20,18 @@ export default function Home() {
         <ScrollDownIcon />
       </div>
 
-      <WorkSection />
+      <Featured />
+
+      <Folders />
+
+      <div className="page-decor-wrap">
+        <img
+          className="page-decor page-decor-bed"
+          src="/images/extra-bed.png"
+          alt=""
+          aria-hidden
+        />
+      </div>
 
       <GridRowSection />
 

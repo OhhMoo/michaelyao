@@ -16,21 +16,20 @@ const ibmPlexCondensed = IBM_Plex_Sans_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Georgia Lyu",
-  description: "Product Designer & Design Engineer",
-  metadataBase: new URL("https://georgialyu.com"),
+  title: {
+    default: "Michael Yao",
+    template: "%s",
+  },
+  description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
   openGraph: {
-    title: "Georgia Lyu",
-    description: "Product Designer & Design Engineer",
+    title: "Michael Yao",
+    description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
     type: "website",
-    url: "https://georgialyu.com",
-    images: ["/seo/cover-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Georgia Lyu",
-    description: "Product Designer & Design Engineer",
-    images: ["/seo/cover-image.jpg"],
+    title: "Michael Yao",
+    description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
   },
   icons: {
     icon: "/seo/favicon.png",

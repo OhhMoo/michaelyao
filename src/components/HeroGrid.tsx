@@ -67,6 +67,9 @@ export function HeroGrid() {
           <div className="grid-col-ext-cell"></div>
           <div className="grid-col-ext-cell"></div>
           <div className="grid-col-ext-cell"></div>
+          <div className="grid-col-ext-cell"></div>
+          <div className="grid-col-ext-cell"></div>
+          <div className="grid-col-ext-cell"></div>
           <div className="grid-col-ext-char">
             <img className="grid-col-ext-img" src="/images/extra-1.png" alt="" />
             <div className="grid-col-ext-bubble">
