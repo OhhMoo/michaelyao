@@ -28,6 +28,12 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Strip custom-domain CNAME on user-site deploy
+        # michaelyao.site is verified on OhhMoo/michaelyao; the user-site repo
+        # ohhmoo.github.io must not claim the same custom domain.
+        if: github.repository == 'OhhMoo/ohhmoo.github.io'
+        run: rm -f public/CNAME
+
       - name: Build
         run: npm run build
         env:
