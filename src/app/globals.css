@@ -1413,3 +1413,126 @@ body.lock { overflow: hidden; }
   .pair-live-pane { aspect-ratio: 4 / 3; }
   .gallery-live { --gallery-pane-width: 86%; }
 }
+
+/* ============================================================
+   ERSILIA (/ersilia route — open-source contribution page)
+   Coherent with the site type + layout; plum accent + a
+   diamond-lattice signature echoing the Ersilia mark.
+============================================================ */
+.ersilia {
+  --ers-plum: #50285a;
+  --ers-plum-2: #6c4a7e;
+  --ers-tint: rgba(80, 40, 90, 0.07);
+  padding: 5rem max(1.5rem, calc((100% - 760px) / 2)) 6rem;
+}
+.ersilia .em { color: var(--ers-plum); font-weight: 500; }
+.ersilia code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.86em; background: var(--ers-tint);
+  padding: 1px 6px; border-radius: 3px; color: var(--ers-plum);
+}
+
+/* Hero */
+.ers-hero { position: relative; padding: 1.5rem 0 3.5rem; }
+.ers-lattice {
+  position: absolute; inset: -2.5rem -3rem auto; height: 240px;
+  z-index: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,  var(--ers-tint) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(-45deg, var(--ers-tint) 0 1px, transparent 1px 22px);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 82%);
+          mask-image: linear-gradient(to bottom, #000, transparent 82%);
+}
+.ers-hero > *:not(.ers-lattice) { position: relative; z-index: 1; }
+.ers-eyebrow {
+  font-family: var(--ff-label), sans-serif; font-size: 11px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ers-plum-2); margin-bottom: 1.25rem;
+}
+.ers-brand { margin-bottom: 1.75rem; }
+.ers-logo { height: 44px; width: auto; display: block; }
+.ers-headline {
+  font-family: var(--ff-body), sans-serif; font-weight: 350;
+  font-size: clamp(34px, 5.4vw, 58px); line-height: 1.02;
+  letter-spacing: -0.028em; color: var(--text);
+}
+.ers-script {
+  font-style: italic; font-weight: 400; color: var(--ers-plum);
+}
+.ers-lede {
+  font-size: 1.05rem; line-height: 1.65; color: var(--text);
+  max-width: 60ch; margin-top: 1.5rem;
+}
+
+/* Content blocks */
+.ers-block {
+  display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+  gap: 2.5rem; padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+.ers-block-label {
+  font-family: var(--ff-label), sans-serif; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ers-plum-2); padding-top: 3px;
+}
+.ers-block-label::before {
+  content: "◇"; margin-right: 0.5rem; color: var(--ers-plum);
+  font-size: 0.85em;
+}
+.ers-block-body p {
+  font-size: 1rem; line-height: 1.68; color: var(--text);
+  max-width: 62ch;
+}
+.ers-block-body p + p { margin-top: 1rem; }
+
+/* Pipeline diagram */
+.ers-pipeline {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 12.5px; line-height: 1.5; color: var(--text);
+  background: var(--bg-card);
+  border-left: 2px solid var(--ers-plum);
+  border-radius: 0 6px 6px 0;
+  padding: 1.1rem 1.25rem; margin-bottom: 1rem;
+  width: max-content; max-width: 100%;
+  overflow-x: auto; white-space: pre;
+}
+.ers-caption {
+  font-size: 0.9rem; line-height: 1.6; color: var(--text-2);
+  max-width: 62ch;
+}
+
+/* Benchmark figure */
+.ers-figure {
+  border: 1px solid var(--border); border-radius: 10px;
+  background: #ffffff; padding: 12px 12px 0;
+  box-shadow: 0 10px 30px rgba(26, 24, 23, 0.06), 0 2px 8px rgba(26, 24, 23, 0.03);
+}
+.ers-figure img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.ers-figure figcaption {
+  font-size: 0.88rem; line-height: 1.6; color: var(--text-2);
+  padding: 0.9rem 0.35rem 1.1rem;
+}
+.ers-figure figcaption code { font-size: 0.82em; }
+
+/* Links */
+.ers-links {
+  display: flex; flex-wrap: wrap; gap: 1.5rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--border);
+}
+.ers-links a {
+  font-family: var(--ff-label), sans-serif; font-size: 0.95rem;
+  letter-spacing: 0.01em; color: var(--ers-plum);
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: border-color 0.2s var(--ease);
+}
+.ers-links a:hover { border-bottom-color: var(--ers-plum); }
+
+@media (max-width: 680px) {
+  .ersilia { padding: 3.5rem 1.5rem 4.5rem; }
+  .ers-block { grid-template-columns: 1fr; gap: 0.9rem; padding: 2rem 0; }
+  .ers-block-label { padding-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ersilia .fade-in { transition: none; }
+  .ers-links a { transition: none; }
+}
