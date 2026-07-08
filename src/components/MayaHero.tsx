@@ -3,6 +3,8 @@ import { FadeIn } from "@/components/FadeIn";
 export function MayaHero() {
   return (
     <section id="home" className="maya-hero">
+      <div className="maya-hero-bg maya-hero-bg-1" aria-hidden />
+      <div className="maya-hero-bg maya-hero-bg-2" aria-hidden />
       <div className="maya-container">
         <div className="maya-hero-thumb">
           <FadeIn style={{ transitionDelay: "0.3s" }}>
