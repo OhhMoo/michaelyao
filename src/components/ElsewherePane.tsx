@@ -14,7 +14,11 @@ const COMPANIES: { name: string; sub: string; logo?: string; href?: string }[] =
   },
   { name: "Alkera AI", sub: "ML Engineering Intern · YC-S26" },
   { name: "Algoverse", sub: "Mechanistic Interpretability Researcher" },
-  { name: "Harvey Mudd College", sub: "Zhuang Group · Student Researcher" },
+  {
+    name: "Harvey Mudd College",
+    sub: "Zhuang Group · Student Researcher",
+    href: "https://ohhmoo.github.io/FLUID-LabSite/bilin/",
+  },
 ];
 
 export function ElsewherePane() {

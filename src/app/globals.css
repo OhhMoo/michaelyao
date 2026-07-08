@@ -958,24 +958,26 @@ img { display: block; max-width: 100%; }
 .folder:hover:not(.open) .hint { opacity: 1; }
 .folder:hover:not(.open) .hint .arrow { width: 48px; }
 
-/* folder color variants (unified light/clean, Maya palette) */
+/* folder color variants — all covers unified light/clean (Maya palette) */
 .f-accent,
 .f-grey,
 .f-dgrey,
+.f-black,
 .f-white { --f-bg: #ffffff; --f-fg: #2b2b2b; --f-meta: #696969; }
 
-/* Photography folder stays dark */
-.f-black { --f-bg: #1A1817; --f-fg: #f2efe7; --f-meta: #a8a294; }
-.f-black .body,
-.f-black .tab { border-color: rgba(255, 255, 255, 0.28); }
-.f-black:hover:not(.open) .body,
-.f-black:hover:not(.open) .tab { border-color: #f2efe7; }
-.f-black .pane-heading,
-.f-black .project-card-pane h4 { color: #f2efe7; }
-.f-black .pane-left { border-right-color: rgba(255, 255, 255, 0.18); }
-.f-black .project-list { border-top-color: rgba(255, 255, 255, 0.2); }
-.f-black .project-item { border-bottom-color: rgba(255, 255, 255, 0.14); }
-.f-black .project-item.active { color: #d6a89a; }
+/* Photography folder: cover white like the rest, but its OPEN preview page is dark */
+.f-black.open > .body { background: #1A1817; color: #f2efe7; }
+.f-black.open .tab {
+  background: #1A1817; color: #f2efe7;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.f-black.open .pane-heading,
+.f-black.open .project-card-pane h4 { color: #f2efe7; }
+.f-black.open .pane-left { border-right-color: rgba(255, 255, 255, 0.18); }
+.f-black.open .project-list { border-top-color: rgba(255, 255, 255, 0.2); }
+.f-black.open .project-item { border-bottom-color: rgba(255, 255, 255, 0.14); }
+.f-black.open .project-item.active { color: #d6a89a; }
+.f-black.open .close-btn { color: #f2efe7; }
 
 /* ─── OPEN OVERLAY ─── */
 .folder.open {
@@ -1372,7 +1374,7 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
   opacity: .78;
 }
 .gallery-live-row {
-  display: flex; flex-direction: row; gap: var(--gallery-row-gap);
+  display: flex; flex-direction: row; gap: 0;
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -1389,7 +1391,7 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
 .gallery-live-frame {
   margin: 0; flex: 0 0 auto; height: var(--gallery-frame-height, 345px);
   scroll-snap-align: start;
-  border: 1px solid var(--frame-border-soft); border-radius: 10px;
+  border: 0; border-radius: 0;
   overflow: hidden; background: transparent;
   display: block;
 }
