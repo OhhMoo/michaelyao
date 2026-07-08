@@ -22,9 +22,7 @@ export function ErsiliaSection() {
         </h1>
         <p className="ers-lede">
           I contribute to the <span className="em">Ersilia Open Source Initiative</span>, a non-profit
-          that builds free AI/ML tools for scientists working on neglected and infectious diseases.
-          My work there is <code>chem-icl</code> — a small pipeline that turns Ersilia&apos;s model hub
-          into an in-context learner for chemistry.
+          building free ML tools for neglected-disease research. My work there is <code>chem-icl</code>.
         </p>
       </FadeIn>
 
@@ -32,13 +30,11 @@ export function ErsiliaSection() {
         <div className="ers-block-label">The idea</div>
         <div className="ers-block-body">
           <p>
-            Predicting whether a molecule is toxic or membrane-permeable usually means training a fresh
-            model per task. <code>chem-icl</code> skips the training. It picks a handful of Ersilia models,
-            groups their outputs into representation <span className="em">families</span> —
-            structural, physicochemical, learned — selects the most predictive features, and hands a
-            labelled <span className="em">context</span> to <code>TabPFN</code>, a transformer that reasons
-            over the context at inference time. The context <span className="em">is</span> the input;
-            nothing is fit.
+            Predicting a molecule&apos;s toxicity usually means training a fresh model per task.{" "}
+            <code>chem-icl</code> skips training: it groups Ersilia model outputs into
+            representation <span className="em">families</span>, selects the best features, and hands a
+            labelled context to <code>TabPFN</code>, a transformer that reasons over it at inference.
+            The context <span className="em">is</span> the input; nothing is fit.
           </p>
         </div>
       </FadeIn>
@@ -48,9 +44,8 @@ export function ErsiliaSection() {
         <div className="ers-block-body">
           <pre className="ers-pipeline">{PIPELINE}</pre>
           <p className="ers-caption">
-            Molecules resolve cheapest-first — the local Isaura store, then the shared cloud lake,
-            then a one-off Ersilia run cached back. Every model must cover every molecule; nothing is
-            silently dropped.
+            Molecules resolve cheapest-first: local store → cloud lake → a one-off run, cached back.
+            Every model must cover every molecule.
           </p>
         </div>
       </FadeIn>
@@ -61,10 +56,8 @@ export function ErsiliaSection() {
           <figure className="ers-figure">
             <img src="/images/ersilia/benchmark.png" alt="family_stack vs family_concat across 9 TDC tasks: a dead heat" />
             <figcaption>
-              Stacking per-family TabPFNs against a plain concatenate-then-one-TabPFN, over nine TDC
-              ADME/Tox tasks × ten seeds. The honest result: a dead heat. The added machinery of a
-              stacker doesn&apos;t beat the simpler concat, so <code>chem-icl</code> ships concat as the
-              default and keeps the stacker as an option.
+              Per-family stacking vs. a plain concat, over nine TDC ADME/Tox tasks × ten seeds — a
+              dead heat. So <code>chem-icl</code> ships the simpler concat as default.
             </figcaption>
           </figure>
         </div>

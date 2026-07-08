@@ -431,6 +431,10 @@ html {
   gap: 30px;
 }
 
+.maya-projects-grid--rest {
+  margin-top: 56px;
+}
+
 .maya-projects-grid > .fade-in {
   grid-column: span 2;
 }

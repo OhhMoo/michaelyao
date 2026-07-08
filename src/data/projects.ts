@@ -124,7 +124,7 @@ export const folders: FolderMeta[] = [
     indexRoman: "IV",
     tabLabel: "04 · Photography",
     group: "Photography",
-    color: "black",
+    color: "white",
     headline: "Frames,\nwhen I look up.",
     headlineScript: ["when I look up"],
     paneHeading: "Photography — frames, when I look up.",
@@ -174,7 +174,10 @@ export const projects: Project[] = [
     descriptionHtml: `An agentic spectroscopy reasoning system. Parses <tt>JCAMP-DX</tt>, Bruker FID, and raw CSV spectra; routes them through four independent ML evidence streams that collapse into one defensible structural guess. CLI, GUI, and MCP-server surfaces.`,
     year: "2026",
     techStack: ["Python", "PyTorch", "MCP", "Spectroscopy"],
-    links: [{ label: "GitHub ↗", href: "https://github.com/OhhMoo/SPEQTRO" }],
+    links: [
+      { label: "Read the page →", href: "/speqtro/" },
+      { label: "GitHub ↗", href: "https://github.com/OhhMoo/SPEQTRO" },
+    ],
     stats: [
       { k: "Parsers", v: "JCAMP · FID · CSV" },
       { k: "Ensemble", v: "4 streams" },
@@ -192,6 +195,7 @@ export const projects: Project[] = [
     year: "2025–26",
     techStack: ["FastAPI", "LangGraph", "React", "Daytona"],
     links: [
+      { label: "Read the page →", href: "/langalpha/" },
       { label: "GitHub ↗", href: "https://github.com/ginlix-ai/LangAlpha" },
       { label: "Live ↗", href: "https://langalpha.com/" },
     ],
@@ -220,7 +224,10 @@ export const projects: Project[] = [
     descriptionHtml: `Structural heterogeneity in supercooled water, framed against the <span class="scriptital">Shi &amp; Tanaka</span> two-state hypothesis. MD on HPC → order-parameter extraction → UMAP → HDBSCAN / GMM. The plot above is live — scroll, zoom, it's the actual run.`,
     year: "2025–26",
     techStack: ["OpenMM", "HDBSCAN", "UMAP", "HPC"],
-    links: [{ label: "GitHub ↗", href: "https://github.com/OhhMoo/Water_Clustering" }],
+    links: [
+      { label: "Read the page →", href: "/water/" },
+      { label: "GitHub ↗", href: "https://github.com/OhhMoo/Water_Clustering" },
+    ],
     stats: [
       { k: "Framework", v: "Shi & Tanaka" },
       { k: "Embedding", v: "UMAP → 2D" },
@@ -244,7 +251,10 @@ export const projects: Project[] = [
     descriptionHtml: `ICEBERG's MS/MS fragmentation pipeline — 19 files, 8 GNN families (GGNN, PNA, GINE…) — ported from DGL to PyTorch Geometric. DAG fragment pipelines redesigned around <tt>Batch</tt> and <tt>scatter_</tt>.`,
     year: "2025",
     techStack: ["PyTorch", "PyG", "Chem"],
-    links: [{ label: "GitHub ↗", href: "https://github.com/OhhMoo/ms-pred-PyG-ver" }],
+    links: [
+      { label: "Read the page →", href: "/ms-pred/" },
+      { label: "GitHub ↗", href: "https://github.com/OhhMoo/ms-pred-PyG-ver" },
+    ],
     stats: [
       { k: "Files", v: "19 migrated" },
       { k: "GNN families", v: "8" },
@@ -265,7 +275,10 @@ export const projects: Project[] = [
     descriptionHtml: `Can sparse autoencoders trained on a chain of PPO checkpoints tell you what RL fine-tuning changes inside a model? Qwen2.5-0.5B on GSM8K across three matched reward chains — <span class="em scriptital">strict</span>, <span class="em scriptital">flexible</span>, and a label-<span class="scriptital">shuffled</span> control. Statistical reorganization reproduces even in the chain that learns nothing; causal load is graded by reward content. Three signals that dissociate.`,
     year: "2025",
     techStack: ["PyTorch", "SAELens", "verl", "TopK SAE"],
-    links: [{ label: "GitHub ↗", href: "https://github.com/OhhMoo/sae_rl" }],
+    links: [
+      { label: "Read the page →", href: "/sae-rl/" },
+      { label: "GitHub ↗", href: "https://github.com/OhhMoo/sae_rl" },
+    ],
     stats: [
       { k: "Model", v: "Qwen2.5-0.5B" },
       { k: "Chains", v: "strict · flex · shuffled" },
@@ -289,7 +302,7 @@ export const projects: Project[] = [
     descriptionHtml: `Mean-field signal propagation in random <tt>tanh</tt> networks — a replication of <span class="scriptital">Poole et al. (2016)</span>, <span class="em">transient chaos</span>. Variance and length maps, the correlation map <tt>C(c)</tt>, and the <tt>χ₁ = 1</tt> chaos boundary that separates order from chaos. The working hypothesis: a network's own wiring decides which Fourier modes reach criticality and survive to any depth, while fine detail dies out — and an SAE is the instrument that reads those modes back out of a disordered network.`,
     year: "2025–26",
     techStack: ["NumPy", "Mean-field theory", "SAE"],
-    links: [],
+    links: [{ label: "Read the page →", href: "/criticality/" }],
     stats: [
       { k: "Replicates", v: "Poole et al. 2016" },
       { k: "Boundary", v: "χ₁ = 1" },

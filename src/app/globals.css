@@ -718,19 +718,11 @@ img { display: block; max-width: 100%; }
 }
 .about .em { color: var(--accent); font-weight: 500; }
 .about-photo .photo {
-  width: 100%; aspect-ratio: 4 / 5; border-radius: 12px;
+  width: 100%; aspect-ratio: 4 / 5; border-radius: 6px;
   overflow: hidden; position: relative;
-  background: #ffffff;
-  padding: 12px 12px 56px;
-  border: 1px solid var(--border);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 10px 30px rgba(26, 24, 23, 0.10),
-    0 2px 8px rgba(26, 24, 23, 0.04);
 }
 .about-photo .photo img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  border-radius: 4px;
 }
 .about-body p { font-size: 1rem; line-height: 1.65; color: var(--text); margin-bottom: 1rem; }
 .about-list {
@@ -803,9 +795,9 @@ img { display: block; max-width: 100%; }
   flex: 0 0 42%; min-width: 0;
 }
 .feat-item-title {
-  font-family: var(--ff-body), sans-serif; font-weight: 400;
-  font-size: clamp(28px, 3.2vw, 40px);
-  line-height: 1; letter-spacing: -.02em; color: var(--text);
+  font-family: var(--ff-label), sans-serif; font-weight: 500;
+  font-size: clamp(26px, 2.9vw, 36px);
+  line-height: 1.08; letter-spacing: -.02em; color: var(--text);
   margin: 0;
 }
 .feat-item-eyebrow {
@@ -839,6 +831,7 @@ img { display: block; max-width: 100%; }
 .feat-links a:hover { background: var(--text); color: var(--bg); }
 .feat-item-preview { flex: 1 1 0; min-width: 0; align-self: flex-start; }
 .feat-item-preview .mac-window { height: auto; }
+.feat-plain-img { width: 100%; height: auto; display: block; border-radius: 6px; }
 
 /* ============================================================
    ARCHIVE HEAD + FOLDERS (ported, tokens unified)
@@ -1466,7 +1459,7 @@ body.lock { overflow: hidden; }
     gap: 2rem;
     padding: 4rem 1.5rem;
   }
-  .about-photo .photo { aspect-ratio: 4 / 5; max-width: 280px; padding: 10px 10px 44px; }
+  .about-photo .photo { aspect-ratio: 4 / 5; max-width: 280px; }
   .stats-row { grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; }
   .stats-row .v { font-size: 0.85rem; }
 
@@ -1583,12 +1576,8 @@ body.lock { overflow: hidden; }
 }
 
 /* Benchmark figure */
-.ers-figure {
-  border: 1px solid var(--border); border-radius: 10px;
-  background: #ffffff; padding: 12px 12px 0;
-  box-shadow: 0 10px 30px rgba(26, 24, 23, 0.06), 0 2px 8px rgba(26, 24, 23, 0.03);
-}
-.ers-figure img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.ers-figure { margin: 0; }
+.ers-figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
 .ers-figure figcaption {
   font-size: 0.88rem; line-height: 1.6; color: var(--text-2);
   padding: 0.9rem 0.35rem 1.1rem;
@@ -1616,4 +1605,158 @@ body.lock { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .ersilia .fade-in { transition: none; }
   .ers-links a { transition: none; }
+}
+
+/* ============================================================
+   RESEARCH PAGES (/water, /criticality) — same editorial system
+   as Ersilia, parameterized by an accent per page.
+============================================================ */
+.rpage {
+  --acc: #303F9F;
+  --acc-2: #6169b8;
+  --tint: rgba(48, 63, 159, 0.07);
+  padding: 5rem max(1.5rem, calc((100% - 820px) / 2)) 6rem;
+}
+.rpage--water {
+  --acc: #1f6f78;
+  --acc-2: #4f9aa1;
+  --tint: rgba(31, 111, 120, 0.07);
+}
+.rpage--crit {
+  --acc: #3b3f8f;
+  --acc-2: #7075bf;
+  --tint: rgba(59, 63, 143, 0.08);
+}
+.rpage--speqtro {
+  --acc: #a1502b;
+  --acc-2: #c48059;
+  --tint: rgba(161, 80, 43, 0.07);
+}
+.rpage--langalpha {
+  --acc: #2f6f5a;
+  --acc-2: #5f9a86;
+  --tint: rgba(47, 111, 90, 0.07);
+}
+.rpage--mspred {
+  --acc: #35618c;
+  --acc-2: #6f92b6;
+  --tint: rgba(53, 97, 140, 0.07);
+}
+.rpage--saerl {
+  --acc: #6b3f8c;
+  --acc-2: #9a72bb;
+  --tint: rgba(107, 63, 140, 0.08);
+}
+.rpage .em { color: var(--acc); font-weight: 500; }
+.rpage code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.86em; background: var(--tint);
+  padding: 1px 6px; border-radius: 3px; color: var(--acc);
+}
+
+.rp-hero { position: relative; padding: 1.5rem 0 3.5rem; }
+.rp-lattice {
+  position: absolute; inset: -2.5rem -3rem auto; height: 240px;
+  z-index: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,  var(--tint) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(-45deg, var(--tint) 0 1px, transparent 1px 22px);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 82%);
+          mask-image: linear-gradient(to bottom, #000, transparent 82%);
+}
+.rp-hero > *:not(.rp-lattice) { position: relative; z-index: 1; }
+.rp-eyebrow {
+  font-family: var(--ff-label), sans-serif; font-size: 11px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--acc-2); margin-bottom: 1.25rem;
+}
+.rp-headline {
+  font-family: var(--ff-label), sans-serif; font-weight: 500;
+  font-size: clamp(30px, 4.6vw, 50px); line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--text);
+}
+.rp-script { font-style: italic; font-weight: 400; color: var(--acc); }
+.rp-lede {
+  font-size: 1.05rem; line-height: 1.65; color: var(--text);
+  max-width: 62ch; margin-top: 1.5rem;
+}
+
+.rp-block {
+  display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+  gap: 2.5rem; padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+.rp-block-label {
+  font-family: var(--ff-label), sans-serif; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--acc-2); padding-top: 3px;
+}
+.rp-block-label::before {
+  content: "◇"; margin-right: 0.5rem; color: var(--acc); font-size: 0.85em;
+}
+.rp-block-body p {
+  font-size: 1rem; line-height: 1.68; color: var(--text); max-width: 64ch;
+}
+.rp-block-body p + p { margin-top: 1rem; }
+
+.rp-figure { margin-top: 1.25rem; }
+.rp-figure:first-child { margin-top: 0; }
+.rp-pipeline {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 12.5px; line-height: 1.55; color: var(--text);
+  background: var(--bg-card);
+  border-left: 2px solid var(--acc);
+  border-radius: 0 6px 6px 0;
+  padding: 1.1rem 1.25rem; margin: 0 0 1rem;
+  width: max-content; max-width: 100%;
+  overflow-x: auto; white-space: pre;
+}
+.rp-caption { font-size: 0.9rem; line-height: 1.6; color: var(--text-2); max-width: 64ch; }
+.rp-figure video { width: 100%; height: auto; display: block; border-radius: 6px; }
+.rp-figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.rp-figure figcaption {
+  font-size: 0.88rem; line-height: 1.6; color: var(--text-2);
+  padding: 0.9rem 0.35rem 1.1rem;
+}
+.rp-figure figcaption code { font-size: 0.82em; }
+
+.rp-links {
+  display: flex; flex-wrap: wrap; gap: 1.5rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--border);
+}
+.rp-links a {
+  font-family: var(--ff-label), sans-serif; font-size: 0.95rem;
+  color: var(--acc); border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: border-color 0.2s var(--ease);
+}
+.rp-links a:hover { border-bottom-color: var(--acc); }
+
+/* Mac-style window chrome (SPEQTRO terminal) — scoped to avoid the FolderPreview .mac-window */
+.rp-macwin {
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
+  background: #1e1e1e;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.16);
+}
+.rp-macbar {
+  display: flex; align-items: center; gap: 8px;
+  height: 34px; padding: 0 14px;
+  background: #2b2b2b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.rp-macbar span { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+.rp-macbar span:nth-child(1) { background: #ff5f56; }
+.rp-macbar span:nth-child(2) { background: #ffbd2e; }
+.rp-macbar span:nth-child(3) { background: #27c93f; }
+.rp-macwin img { display: block; width: 100%; height: auto; border-radius: 0; }
+
+@media (max-width: 680px) {
+  .rpage { padding: 3.5rem 1.5rem 4.5rem; }
+  .rp-block { grid-template-columns: 1fr; gap: 0.9rem; padding: 2rem 0; }
+  .rp-block-label { padding-top: 0; }
+  .rp-lattice { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rpage .fade-in { transition: none; }
+  .rp-links a { transition: none; }
 }
