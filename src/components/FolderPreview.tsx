@@ -153,7 +153,6 @@ export function FolderPreview({ preview }: { preview: ProjectPreview }) {
           {preview.images.map((img, i) => (
             <figure key={i} className="gallery-live-frame">
               <img src={img.src} alt={img.alt ?? ""} loading="lazy" />
-              {img.caption ? <figcaption>{img.caption}</figcaption> : null}
             </figure>
           ))}
         </div>

@@ -35,7 +35,7 @@ const CARDS: ProjectCard[] = [
     Icon: IconChartCandle,
   },
   {
-    title: "MS-PyG",
+    title: "ms-pred-PyG",
     blurb:
       "ICEBERG's MS/MS fragmentation pipeline — 19 files, 8 GNN families (GGNN, PNA, GINE…) — ported from DGL to PyTorch Geometric. DAG fragment pipelines redesigned around Batch and scatter_.",
     tags: ["PyTorch", "PyG", "Chem"],
