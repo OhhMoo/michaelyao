@@ -1,6 +1,6 @@
 import {
   IconBinaryTree,
-  IconBrain,
+  IconTopologyStar3,
   IconChartCandle,
   IconDroplet,
   IconMathFunction,
@@ -56,7 +56,7 @@ const CARDS: ProjectCard[] = [
       "Can sparse autoencoders trained on a chain of PPO checkpoints tell you what RL fine-tuning changes inside a model?",
     tags: ["PyTorch", "SAELens", "verl", "TopK SAE"],
     href: "https://github.com/OhhMoo/sae_rl",
-    Icon: IconBrain,
+    Icon: IconTopologyStar3,
   },
   {
     title: "Mode-Selective Criticality",

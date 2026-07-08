@@ -24,6 +24,18 @@ export const experience: TimelineEntry[] = [
     ],
   },
   {
+    heading: "Ersilia Open Source Initiative",
+    meta: ["Machine Learning Research Intern", "Remote — Barcelona, Spain", "Mar 2026 – Present"],
+    bullets: [
+      "Built an in-context TabPFN fusion ensemble (KS-gated AUC selection, 1,458 → 200 features); matched grid-tuned RF/XGBoost across 9 endpoints × 10 stratified splits (n=89, paired Wilcoxon)",
+    ],
+    footnote: {
+      text: "Read more about this work",
+      label: "here",
+      href: "/ersilia",
+    },
+  },
+  {
     heading: "Zhuang Group — Harvey Mudd College",
     meta: [
       "Student Researcher, Computational Physics & Machine Learning (Prof. Bilin Zhuang)",
@@ -50,18 +62,6 @@ export const experience: TimelineEntry[] = [
     ],
   },
   {
-    heading: "Ersilia Open Source Initiative",
-    meta: ["Machine Learning Research Intern", "Remote — Barcelona, Spain", "Mar 2026 – Present"],
-    bullets: [
-      "Built an in-context TabPFN fusion ensemble (KS-gated AUC selection, 1,458 → 200 features); matched grid-tuned RF/XGBoost across 9 endpoints × 10 stratified splits (n=89, paired Wilcoxon)",
-    ],
-    footnote: {
-      text: "Read more about this work",
-      label: "here",
-      href: "/ersilia",
-    },
-  },
-  {
     heading: "Algoverse",
     meta: [
       "Mechanistic Interpretability Researcher (Supervisor: Cole Blodin, Amazon Web Services)",
@@ -86,10 +86,7 @@ export const education: TimelineEntry[] = [
   {
     heading: "Shanghai Qibao Dwight High School",
     meta: ["IB Diploma — 44/45", "Shanghai, China", "2022 – 2025"],
-  },
-  {
-    heading: "Chemistry Olympiads",
-    meta: ["Awards", "2022 – 2024"],
+    paragraphs: ["Awards:"],
     bullets: [
       "UK Chemistry Olympiad: Round 1 Gold Medalist (2023, 2024), Silver Medalist (2022)",
       "Canadian Chemistry Olympiad: Round 2 Gold Medalist (2024), Round 1 Gold Medalist (2022)",
