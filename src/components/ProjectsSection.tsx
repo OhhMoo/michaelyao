@@ -13,7 +13,7 @@ type ProjectCard = {
   title: string;
   blurb: string;
   tags: string[];
-  href: string;
+  href?: string;
   Icon: LucideIcon;
 };
 
@@ -63,7 +63,7 @@ const CARDS: ProjectCard[] = [
     blurb:
       "Mean-field signal propagation in random tanh networks — a replication of Poole et al. (2016), transient chaos.",
     tags: ["NumPy", "Mean-field theory", "SAE"],
-    href: "/#projects",
+    // TODO(user): add a repo/writeup link for this project
     Icon: Waves,
   },
 ];
@@ -80,28 +80,35 @@ export function ProjectsSection() {
         </FadeIn>
         <div className="maya-projects-grid">
           {CARDS.map((card) => {
-            const isExternal = !card.href.startsWith("/");
+            const isExternal = card.href !== undefined && !card.href.startsWith("/");
+            const thumb = (
+              <div className="service-thumb">
+                <div className="maya-card-icon">
+                  <card.Icon size={45} strokeWidth={1.5} />
+                </div>
+                <h4>{card.title}</h4>
+                <p>{card.blurb}</p>
+                <div className="skill-container">
+                  {card.tags.map((t) => (
+                    <span key={t} className="skill">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
             return (
               <FadeIn key={card.title} style={{ transitionDelay: "0.4s" }}>
-                <a
-                  href={card.href}
-                  {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-                >
-                  <div className="service-thumb">
-                    <div className="maya-card-icon">
-                      <card.Icon size={45} strokeWidth={1.5} />
-                    </div>
-                    <h4>{card.title}</h4>
-                    <p>{card.blurb}</p>
-                    <div className="skill-container">
-                      {card.tags.map((t) => (
-                        <span key={t} className="skill">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </a>
+                {card.href ? (
+                  <a
+                    href={card.href}
+                    {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
+                  >
+                    {thumb}
+                  </a>
+                ) : (
+                  <div className="maya-card-static">{thumb}</div>
+                )}
               </FadeIn>
             );
           })}

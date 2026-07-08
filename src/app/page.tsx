@@ -1,41 +1,30 @@
 import { Nav } from "@/components/Nav";
-import { HeroGrid } from "@/components/HeroGrid";
-import { Featured } from "@/components/Featured";
+import { MayaHero } from "@/components/MayaHero";
+import { InfoSection } from "@/components/InfoSection";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { EducationSection } from "@/components/EducationSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
 import { Folders } from "@/components/Folders";
-import { GridRowSection } from "@/components/GridRowSection";
-import { Footer } from "@/components/Footer";
-import { ScrollDownIcon } from "@/components/icons";
+import { ClosingSection } from "@/components/ClosingSection";
 
 export default function Home() {
   return (
     <>
       <Nav />
 
-      <section className="hero">
-        <div className="hero-bg-circle"></div>
-        <HeroGrid />
-      </section>
+      <MayaHero />
 
-      <div className="scroll-arrow">
-        <ScrollDownIcon />
-      </div>
+      <InfoSection />
 
-      <Featured />
+      <ExperienceSection />
+
+      <EducationSection />
+
+      <ProjectsSection />
 
       <Folders />
 
-      <div className="page-decor-wrap">
-        <img
-          className="page-decor page-decor-bed"
-          src="/images/extra-bed.png"
-          alt=""
-          aria-hidden
-        />
-      </div>
-
-      <GridRowSection />
-
-      <Footer />
+      <ClosingSection />
     </>
   );
 }

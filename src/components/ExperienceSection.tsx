@@ -4,7 +4,7 @@ import { experience } from "@/data/resume";
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="maya-section">
+    <section id="experience" className="maya-section maya-section--alt">
       <div className="maya-container">
         <FadeIn style={{ transitionDelay: "0.2s" }}>
           <div className="maya-title">

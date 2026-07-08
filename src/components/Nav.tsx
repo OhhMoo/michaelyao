@@ -62,11 +62,11 @@ export function Nav() {
 
       <div className="nav-center">
         <Link
-          href="/#featured"
+          href="/#projects"
           onClick={(e) => {
             setMenuOpen(false);
             if (typeof window !== "undefined" && window.location.pathname === "/") {
-              const el = document.getElementById("featured");
+              const el = document.getElementById("projects");
               if (el) {
                 e.preventDefault();
                 const navH =

@@ -372,9 +372,15 @@ html {
   gap: 30px;
 }
 
-.maya-projects-grid > a {
+.maya-projects-grid .fade-in {
+  height: 100%;
+}
+
+.maya-projects-grid a,
+.maya-card-static {
   text-decoration: none;
   display: block;
+  height: 100%;
 }
 
 .service-thumb {
