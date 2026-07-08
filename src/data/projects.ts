@@ -238,7 +238,7 @@ export const projects: Project[] = [
   {
     id: "iceberg",
     folder: "simulation",
-    title: "Iceberg PyG",
+    title: "MS-PyG",
     scriptParts: ["PyG"],
     oneLiner: "same numbers, different home.",
     descriptionHtml: `ICEBERG's MS/MS fragmentation pipeline — 19 files, 8 GNN families (GGNN, PNA, GINE…) — ported from DGL to PyTorch Geometric. DAG fragment pipelines redesigned around <tt>Batch</tt> and <tt>scatter_</tt>.`,
@@ -250,7 +250,11 @@ export const projects: Project[] = [
       { k: "GNN families", v: "8" },
       { k: "Primitive", v: "MessagePassing" },
     ],
-    preview: { kind: "svg", node: "iceberg" },
+    preview: {
+      kind: "image",
+      src: "/images/projects/ms-pyg-teaser.png",
+      alt: "MS/MS fragmentation: precursor molecule through collision cell to a learned neural simulator predicting the mass spectrum",
+    },
   },
   {
     id: "sae",
@@ -437,7 +441,7 @@ export const projects: Project[] = [
     title: "GitHub",
     oneLiner: "all the code, in one place.",
     descriptionHtml:
-      "Repositories for SPEQTRO, LangAlpha, Water Clustering, SAE × RL, Iceberg PyG, and the small things.",
+      "Repositories for SPEQTRO, LangAlpha, Water Clustering, SAE × RL, MS-PyG, and the small things.",
     year: "live",
     techStack: [],
     links: [{ label: "github.com/OhhMoo ↗", href: "https://github.com/OhhMoo" }],

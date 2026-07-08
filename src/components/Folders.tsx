@@ -63,8 +63,7 @@ export function Folders() {
         </FadeIn>
         <FadeIn className="archive-note" style={{ transitionDelay: "0.12s" }}>
           <p>
-            Six folders, twenty-odd projects. Click a tab to open it — atoms, agents, photos,
-            and what&apos;s in between.
+            atoms, agents, photos, and what&apos;s in between.
           </p>
         </FadeIn>
       </div>

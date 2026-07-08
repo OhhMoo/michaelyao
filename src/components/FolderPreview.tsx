@@ -149,7 +149,6 @@ export function FolderPreview({ preview }: { preview: ProjectPreview }) {
   if (preview.kind === "image-gallery") {
     return (
       <div className="gallery-live">
-        <div className="gallery-live-head">{preview.images.length} views · swipe to browse</div>
         <div className="gallery-live-row">
           {preview.images.map((img, i) => (
             <figure key={i} className="gallery-live-frame">

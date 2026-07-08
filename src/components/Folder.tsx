@@ -32,14 +32,6 @@ export function Folder({
 
   const colorClass = `f-${folder.color}`;
   const openClass = isOpen ? " open" : "";
-  const projectCount = projects.length;
-  const countLabel =
-    folder.id === "writing"
-      ? `${projectCount} in prep`
-      : folder.id === "elsewhere"
-        ? ""
-        : `${projectCount} project${projectCount === 1 ? "" : "s"}`;
-
   const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
     if (isOpen) return;
     const target = e.target as HTMLElement;
@@ -68,11 +60,6 @@ export function Folder({
 
       <div className="body">
         <h3 className="cover-name">{folder.group}</h3>
-        {countLabel && (
-          <div className="meta">
-            <span className="count">{countLabel}</span>
-          </div>
-        )}
         <div className="hint">
           <span className="arrow" />
         </div>

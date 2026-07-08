@@ -1345,11 +1345,9 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
   --frame-border-soft: color-mix(in srgb, var(--f-fg, var(--text)) 14%, transparent);
   --frame-scroll:      color-mix(in srgb, var(--f-fg, var(--text)) 30%, transparent);
   --frame-scroll-hover:color-mix(in srgb, var(--f-fg, var(--text)) 55%, transparent);
-  --gallery-pane-width: clamp(260px, 82%, 520px);
-  --gallery-row-gap: 14px;
+  --gallery-pane-width: clamp(140px, 34%, 240px);
+  --gallery-row-gap: 12px;
   display: flex; flex-direction: column; gap: 12px;
-  padding: 14px 16px 16px;
-  border: 1px solid var(--frame-border); border-radius: 14px;
   background: transparent; color: var(--frame-text);
 }
 .gallery-live-head {
@@ -1376,7 +1374,7 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
 .gallery-live-frame {
   margin: 0; flex: 0 0 var(--gallery-pane-width);
   scroll-snap-align: start;
-  border: 1px solid var(--frame-border); border-radius: 12px;
+  border: 1px solid var(--frame-border-soft); border-radius: 4px;
   overflow: hidden; background: transparent;
   display: flex; flex-direction: column; align-self: flex-start;
 }
