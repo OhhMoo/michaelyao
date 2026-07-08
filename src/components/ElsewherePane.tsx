@@ -17,6 +17,7 @@ const COMPANIES: { name: string; sub: string; logo?: string; href?: string }[] =
   {
     name: "Harvey Mudd College",
     sub: "Zhuang Group · Student Researcher",
+    logo: "/images/logos/harvey-mudd.png",
     href: "https://ohhmoo.github.io/FLUID-LabSite/bilin/",
   },
 ];
