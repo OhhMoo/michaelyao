@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "About — Michael Yao",
-  description: "Chemistry & computer-science student at Harvey Mudd, Zhuang group.",
+  description: "Computer-science & physics student at Harvey Mudd, Zhuang group.",
 };
 
 export default function AboutPage() {

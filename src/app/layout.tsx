@@ -23,16 +23,16 @@ export const metadata: Metadata = {
     default: "Michael Yao",
     template: "%s",
   },
-  description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
+  description: "Computer-science & physics student at Harvey Mudd. Atoms and algorithms.",
   openGraph: {
     title: "Michael Yao",
-    description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
+    description: "Computer-science & physics student at Harvey Mudd. Atoms and algorithms.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Michael Yao",
-    description: "Chemistry & computer-science student at Harvey Mudd. Atoms and algorithms.",
+    description: "Computer-science & physics student at Harvey Mudd. Atoms and algorithms.",
   },
   icons: {
     icon: [

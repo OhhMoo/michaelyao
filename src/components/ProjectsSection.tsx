@@ -29,18 +29,10 @@ const CARDS: ProjectCard[] = [
   {
     title: "LangAlpha",
     blurb:
-      "A persistent multi-agent research harness. Every investigation gets its own Daytona sandbox with an agent.md memory the agent reads, appends, and cites.",
+      "Open-source agentic investing platform (1.5k+ GitHub stars) — live market data, inline financial time-series charts, and TradingView integration for systematic research workflows.",
     tags: ["FastAPI", "LangGraph", "React", "Daytona"],
     href: "https://github.com/ginlix-ai/LangAlpha",
     Icon: TrendingUp,
-  },
-  {
-    title: "Water, clustered",
-    blurb:
-      "Structural heterogeneity in supercooled water, framed against the Shi & Tanaka two-state hypothesis. MD on HPC → order-parameter extraction → UMAP → HDBSCAN / GMM.",
-    tags: ["OpenMM", "HDBSCAN", "UMAP", "HPC"],
-    href: "https://github.com/OhhMoo/Water_Clustering",
-    Icon: Droplets,
   },
   {
     title: "Iceberg PyG",
@@ -49,6 +41,14 @@ const CARDS: ProjectCard[] = [
     tags: ["PyTorch", "PyG", "Chem"],
     href: "https://github.com/OhhMoo/ms-pred-PyG-ver",
     Icon: Network,
+  },
+  {
+    title: "Water, clustered",
+    blurb:
+      "Structural heterogeneity in supercooled water, framed against the Shi & Tanaka two-state hypothesis. MD on HPC → order-parameter extraction → UMAP → HDBSCAN / GMM. First-author ACS Central Science manuscript.",
+    tags: ["OpenMM", "HDBSCAN", "UMAP", "HPC"],
+    href: "https://github.com/OhhMoo/Water_Clustering",
+    Icon: Droplets,
   },
   {
     title: "SAE × RL",

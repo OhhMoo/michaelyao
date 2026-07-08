@@ -9,7 +9,7 @@ export function MayaHero() {
             <h1>Hello, I am Michael!</h1>
           </FadeIn>
           <FadeIn style={{ transitionDelay: "0.5s" }}>
-            <p>Chemistry &amp; CS student &mdash; atoms and algorithms</p>
+            <p>CS &amp; Physics student &mdash; atoms and algorithms</p>
           </FadeIn>
           <FadeIn style={{ transitionDelay: "0.8s" }}>
             <a href="#info" className="section-btn">

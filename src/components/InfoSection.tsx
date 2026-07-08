@@ -12,10 +12,10 @@ export function InfoSection() {
                 <strong>Name:</strong> <span>Michael Yao</span>
               </li>
               <li>
-                <strong>School:</strong> <span>Harvey Mudd College &rsquo;29</span>
+                <strong>School:</strong> <span>Harvey Mudd College &rsquo;28</span>
               </li>
               <li>
-                <strong>Major:</strong> <span>Chemistry &amp; Computer Science</span>
+                <strong>Major:</strong> <span>Joint Computer Science &amp; Physics</span>
               </li>
               <li>
                 <strong>Lab:</strong> <span>Zhuang Group</span>
@@ -56,10 +56,10 @@ export function InfoSection() {
             <div>
               <div className="about-text">
                 <p>
-                  I&apos;m Michael &mdash; a chemistry &amp; computer-science student at Harvey
-                  Mudd, working in the Zhuang group on the structural heterogeneity of supercooled
-                  water: large MD simulations, order-parameter embeddings, clustering into two
-                  liquid-like states.
+                  I&apos;m Michael &mdash; a computer-science &amp; physics student at Harvey
+                  Mudd, working in the Zhuang group on the statistical physics of deep neural
+                  networks and the structural heterogeneity of supercooled water: mean-field
+                  theory, large MD simulations, order-parameter embeddings.
                 </p>
                 <p>
                   Outside the lab I build tools at the seam of atoms and algorithms &mdash; agentic
@@ -69,7 +69,6 @@ export function InfoSection() {
                 </p>
               </div>
               <div className="about-btns">
-                {/* TODO: drop the real PDF at public/resume.pdf */}
                 <a
                   target="_blank"
                   rel="noreferrer"

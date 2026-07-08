@@ -907,7 +907,7 @@ img { display: block; max-width: 100%; }
   position: relative;
 }
 .folder h3 {
-  font-family: var(--ff-body), sans-serif; font-weight: 350;
+  font-family: var(--ff-label), monospace; font-weight: 400;
   font-size: clamp(30px, 2.8vw, 44px);
   line-height: .98; letter-spacing: -.022em;
   white-space: pre-line;
