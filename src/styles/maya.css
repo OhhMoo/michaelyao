@@ -151,10 +151,10 @@ html {
 }
 
 .about-text p {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 16.5px;
+  color: rgba(0, 0, 0, 0.68);
   line-height: 1.8em;
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 }
 
 .about-text {
