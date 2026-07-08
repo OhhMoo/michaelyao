@@ -5,13 +5,14 @@
 ============================================================ */
 :root {
   --bg:           #ffffff;
-  --bg-card:      #EDEAE4;
-  --projects-tag: #f7f7f7;
-  --text:         #1A1817;
-  --text-2:       #919191;
-  --text-3:       #AAA49C;
-  --accent:       #C4593A;
-  --border:       #DDD8CF;
+  --bg-card:      #f0f7ff;
+  --projects-tag: #f0f0f0;
+  --text:         #2b2b2b;
+  --text-2:       #696969;
+  --text-3:       #9a9a9a;
+  --accent:       #303F9F;
+  --accent-2:     #7682cc;
+  --border:       #D0D0D0;
 
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 

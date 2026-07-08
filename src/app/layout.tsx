@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { DM_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
+import { Lora, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import "@/styles/maya.css";
 
-const dmSans = DM_Sans({
+const lora = Lora({
   variable: "--ff-body",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const ibmPlexCondensed = IBM_Plex_Sans_Condensed({
+const robotoMono = Roboto_Mono({
   variable: "--ff-label",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -49,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${ibmPlexCondensed.variable}`}>
+    <html lang="en" className={`${lora.variable} ${robotoMono.variable}`}>
       <body>{children}</body>
     </html>
   );
