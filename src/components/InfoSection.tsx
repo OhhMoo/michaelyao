@@ -15,7 +15,7 @@ export function InfoSection() {
                 <strong>School:</strong> <span>Harvey Mudd College &rsquo;28</span>
               </li>
               <li>
-                <strong>Major:</strong> <span>Joint Computer Science &amp; Physics</span>
+                <strong>Major:</strong> <span>Joint Computer Science &amp; Mathematics</span>
               </li>
               <li>
                 <strong>Lab:</strong> <span>Zhuang Group</span>
@@ -56,7 +56,7 @@ export function InfoSection() {
             <div>
               <div className="about-text">
                 <p>
-                  I&apos;m Michael &mdash; a computer-science &amp; physics student at Harvey
+                  I&apos;m Michael &mdash; a computer-science &amp; math student at Harvey
                   Mudd, working in the Zhuang group on the statistical physics of deep neural
                   networks and the structural heterogeneity of supercooled water: mean-field
                   theory, large MD simulations, order-parameter embeddings.

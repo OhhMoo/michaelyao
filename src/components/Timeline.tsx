@@ -24,6 +24,19 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
                   ))}
                 </ul>
               )}
+              {entry.subEntries?.map((sub) => (
+                <div className="timeline-sub" key={sub.subtitle}>
+                  <h5 className="timeline-subtitle">
+                    <span>{sub.subtitle}</span>
+                    {sub.dates && <span className="timeline-sub-dates">{sub.dates}</span>}
+                  </h5>
+                  <ul>
+                    {sub.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
               {entry.paragraphs?.map((p) => (
                 <p key={p}>{p}</p>
               ))}

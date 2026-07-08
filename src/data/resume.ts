@@ -1,7 +1,14 @@
+export type TimelineSubEntry = {
+  subtitle: string;
+  dates?: string;
+  bullets: string[];
+};
+
 export type TimelineEntry = {
   heading: string;
   meta: string[]; // rendered joined with " | "
   bullets?: string[];
+  subEntries?: TimelineSubEntry[];
   paragraphs?: string[];
   footnote?: { text: string; label: string; href: string };
 };
@@ -19,13 +26,27 @@ export const experience: TimelineEntry[] = [
   {
     heading: "Zhuang Group — Harvey Mudd College",
     meta: [
-      "Student Researcher — Statistical Physics of Deep Neural Networks",
+      "Student Researcher, Computational Physics & Machine Learning (Prof. Bilin Zhuang)",
       "Claremont, CA",
-      "Mar 2026 – Present",
+      "Oct 2025 – Present",
     ],
-    bullets: [
-      "Modeling forward signal propagation as an iterated random map; deriving fixed-point and stability conditions on the variance–correlation recursion via mean-field theory to predict maximum trainable network depth",
-      "Locating the order-to-chaos phase boundary and its dependence on weight and bias variance, connecting the edge-of-chaos critical point to gradient stability and trainable initialization",
+    subEntries: [
+      {
+        subtitle: "Statistical Physics of Deep Neural Networks",
+        dates: "Mar 2026 – Present",
+        bullets: [
+          "Modeling forward signal propagation as an iterated random map; deriving fixed-point and stability conditions on the variance–correlation recursion via mean-field theory to predict maximum trainable network depth",
+          "Locating the order-to-chaos phase boundary and its dependence on weight and bias variance, connecting the edge-of-chaos critical point to gradient stability and trainable initialization",
+        ],
+      },
+      {
+        subtitle: "Unsupervised Classification of Water Structure — first-author ACS Central Science manuscript",
+        dates: "Oct 2025 – Feb 2026",
+        bullets: [
+          "Reduced 20 molecular-dynamics trajectories (20,480 configurations) to a four-dimensional order-parameter representation via Python pipelines (NumPy, Pandas, MDtraj)",
+          "Applied K-Means, GMM, DBSCAN, and UMAP to resolve two latent structural populations, tuning hyperparameters by silhouette score and validating against an independent oxygen–oxygen structure factor held out from the classifier",
+        ],
+      },
     ],
   },
   {
@@ -52,29 +73,19 @@ export const experience: TimelineEntry[] = [
       "Trained 32 warm-start sparse autoencoders with feature indices aligned across checkpoints, making decoder cosine-similarity a well-defined drift metric on high-dimensional feature space",
     ],
   },
-  {
-    heading: "Zhuang Group — Harvey Mudd College",
-    meta: [
-      "Student Researcher — Unsupervised Classification of Water Structure",
-      "Claremont, CA",
-      "Oct 2025 – Feb 2026",
-    ],
-    bullets: [
-      "Reduced 20 molecular-dynamics trajectories (20,480 configurations) to a four-dimensional order-parameter representation via Python pipelines (NumPy, Pandas, MDtraj)",
-      "Applied K-Means, GMM, DBSCAN, and UMAP to resolve two latent structural populations, tuning hyperparameters by silhouette score and validating against an independent oxygen–oxygen structure factor held out from the classifier",
-    ],
-    paragraphs: ["First-author ACS Central Science manuscript."],
-  },
 ];
 
 export const education: TimelineEntry[] = [
   {
     heading: "Harvey Mudd College",
-    meta: ["B.S. — Joint Computer Science & Physics", "Claremont, CA", "Expected May 2028"],
+    meta: ["B.S. — Joint Computer Science & Mathematics", "Claremont, CA", "Expected May 2028"],
     paragraphs: [
-      "GPA: 3.93",
       "Relevant coursework: Statistical Mechanics, Probability, Statistics, Differential Equations, Graph Theory",
     ],
+  },
+  {
+    heading: "Shanghai Qibao Dwight High School",
+    meta: ["IB Diploma — 44/45", "Shanghai, China", "2022 – 2025"],
   },
   {
     heading: "Chemistry Olympiads",

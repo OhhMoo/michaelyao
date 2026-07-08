@@ -1,12 +1,12 @@
 import {
-  Brain,
-  Droplets,
-  FlaskConical,
-  Network,
-  TrendingUp,
-  Waves,
-  type LucideIcon,
-} from "lucide-react";
+  IconBinaryTree,
+  IconBrain,
+  IconChartCandle,
+  IconDroplet,
+  IconMathFunction,
+  IconWaveSine,
+  type Icon as TablerIcon,
+} from "@tabler/icons-react";
 import { FadeIn } from "@/components/FadeIn";
 
 type ProjectCard = {
@@ -14,7 +14,7 @@ type ProjectCard = {
   blurb: string;
   tags: string[];
   href?: string;
-  Icon: LucideIcon;
+  Icon: TablerIcon;
 };
 
 const CARDS: ProjectCard[] = [
@@ -24,7 +24,7 @@ const CARDS: ProjectCard[] = [
       "An agentic spectroscopy reasoning system. Parses JCAMP-DX, Bruker FID, and raw CSV spectra; routes them through four independent ML evidence streams that collapse into one defensible structural guess.",
     tags: ["Python", "PyTorch", "MCP", "Spectroscopy"],
     href: "https://github.com/OhhMoo/SPEQTRO",
-    Icon: FlaskConical,
+    Icon: IconWaveSine,
   },
   {
     title: "LangAlpha",
@@ -32,7 +32,7 @@ const CARDS: ProjectCard[] = [
       "Open-source agentic investing platform (1.5k+ GitHub stars) — live market data, inline financial time-series charts, and TradingView integration for systematic research workflows.",
     tags: ["FastAPI", "LangGraph", "React", "Daytona"],
     href: "https://github.com/ginlix-ai/LangAlpha",
-    Icon: TrendingUp,
+    Icon: IconChartCandle,
   },
   {
     title: "Iceberg PyG",
@@ -40,7 +40,7 @@ const CARDS: ProjectCard[] = [
       "ICEBERG's MS/MS fragmentation pipeline — 19 files, 8 GNN families (GGNN, PNA, GINE…) — ported from DGL to PyTorch Geometric. DAG fragment pipelines redesigned around Batch and scatter_.",
     tags: ["PyTorch", "PyG", "Chem"],
     href: "https://github.com/OhhMoo/ms-pred-PyG-ver",
-    Icon: Network,
+    Icon: IconBinaryTree,
   },
   {
     title: "Water, clustered",
@@ -48,7 +48,7 @@ const CARDS: ProjectCard[] = [
       "Structural heterogeneity in supercooled water, framed against the Shi & Tanaka two-state hypothesis. MD on HPC → order-parameter extraction → UMAP → HDBSCAN / GMM. First-author ACS Central Science manuscript.",
     tags: ["OpenMM", "HDBSCAN", "UMAP", "HPC"],
     href: "https://github.com/OhhMoo/Water_Clustering",
-    Icon: Droplets,
+    Icon: IconDroplet,
   },
   {
     title: "SAE × RL",
@@ -56,7 +56,7 @@ const CARDS: ProjectCard[] = [
       "Can sparse autoencoders trained on a chain of PPO checkpoints tell you what RL fine-tuning changes inside a model?",
     tags: ["PyTorch", "SAELens", "verl", "TopK SAE"],
     href: "https://github.com/OhhMoo/sae_rl",
-    Icon: Brain,
+    Icon: IconBrain,
   },
   {
     title: "Mode-Selective Criticality",
@@ -64,7 +64,7 @@ const CARDS: ProjectCard[] = [
       "Mean-field signal propagation in random tanh networks — a replication of Poole et al. (2016), transient chaos.",
     tags: ["NumPy", "Mean-field theory", "SAE"],
     // TODO(user): add a repo/writeup link for this project
-    Icon: Waves,
+    Icon: IconMathFunction,
   },
 ];
 
@@ -84,7 +84,7 @@ export function ProjectsSection() {
             const thumb = (
               <div className="service-thumb">
                 <div className="maya-card-icon">
-                  <card.Icon size={45} strokeWidth={1.5} />
+                  <card.Icon size={45} stroke={1.5} />
                 </div>
                 <h4>{card.title}</h4>
                 <p>{card.blurb}</p>

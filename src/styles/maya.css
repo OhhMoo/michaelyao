@@ -348,6 +348,34 @@ html {
   font-size: 14px;
 }
 
+.timeline-sub {
+  margin-top: 16px;
+}
+
+.timeline-sub:first-of-type {
+  margin-top: 4px;
+}
+
+.timeline-subtitle {
+  font-family: var(--ff-body), serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: rgba(0, 0, 0, 0.75);
+  margin: 0 0 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.timeline-sub-dates {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
 .timeline-footnote {
   font-size: 14px;
   margin-top: 10px !important;
