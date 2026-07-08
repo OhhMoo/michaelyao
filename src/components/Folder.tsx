@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FolderMeta, Project } from "@/data/projects";
 import { FolderPreview } from "@/components/FolderPreview";
+import { ElsewherePane } from "@/components/ElsewherePane";
 
 type Props = {
   folder: FolderMeta;
@@ -35,11 +36,9 @@ export function Folder({
   const countLabel =
     folder.id === "writing"
       ? `${projectCount} in prep`
-      : folder.id === "experiments"
-        ? "placeholder"
-        : folder.id === "elsewhere"
-          ? `${projectCount} places`
-          : `${projectCount} project${projectCount === 1 ? "" : "s"}`;
+      : folder.id === "elsewhere"
+        ? ""
+        : `${projectCount} project${projectCount === 1 ? "" : "s"}`;
 
   const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
     if (isOpen) return;
@@ -69,15 +68,22 @@ export function Folder({
 
       <div className="body">
         <h3 className="cover-name">{folder.group}</h3>
-        <div className="meta">
-          <span className="count">{countLabel}</span>
-        </div>
+        {countLabel && (
+          <div className="meta">
+            <span className="count">{countLabel}</span>
+          </div>
+        )}
         <div className="hint">
-          <span>open folder</span>
           <span className="arrow" />
         </div>
 
-        {isOpen && (
+        {isOpen && folder.id === "elsewhere" && (
+          <div className="panes panes-single">
+            <ElsewherePane />
+          </div>
+        )}
+
+        {isOpen && folder.id !== "elsewhere" && (
           <div className="panes">
             <div className="pane-left">
               <div className="group-title">
