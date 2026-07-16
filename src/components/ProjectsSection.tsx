@@ -2,6 +2,7 @@ import {
   IconChartCandle,
   IconBinaryTree,
   IconMathFunction,
+  IconMusic,
   type Icon as TablerIcon,
 } from "@tabler/icons-react";
 import { FadeIn } from "@/components/FadeIn";
@@ -98,6 +99,14 @@ const CARDS: ProjectCard[] = [
     tags: ["NumPy", "Mean-field theory", "SAE"],
     href: "/criticality",
     Icon: IconMathFunction,
+  },
+  {
+    title: "Popping Dictionary",
+    blurb:
+      "A curated dictionary of popping dance elements — 18 moves with history, technique, and practice clips, plus the dancers who defined them. Rebuilt from Wix as a static Next.js site, live at poppindex.com.",
+    tags: ["Next.js", "Dance", "poppindex.com"],
+    href: "/popping",
+    Icon: IconMusic,
   },
 ];
 

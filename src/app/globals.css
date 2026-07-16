@@ -100,9 +100,9 @@ img { display: block; max-width: 100%; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 max(1.5rem, calc((100% - 1296px) / 2));
-  background: rgba(249, 249, 249, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(249, 249, 249, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   transition: transform 0.3s var(--ease);
 }
 .nav--hidden {
@@ -987,6 +987,19 @@ img { display: block; max-width: 100%; }
 .folder.open > .body {
   height: 100%; padding: 0; overflow: hidden; min-height: 0; display: block;
 }
+/* frosted glass on the open overlay (photography folder keeps its dark body) */
+.folder.open:not(.f-black) > .body {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+.folder.open:not(.f-black) .tab {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  border-color: rgba(255, 255, 255, 0.65);
+}
 .folder.open > .body > h3,
 .folder.open > .body > .meta,
 .folder.open > .body > .hint { display: none; }
@@ -1005,6 +1018,7 @@ img { display: block; max-width: 100%; }
   padding: 56px clamp(28px, 4vw, 52px) 40px;
   border-right: 1px solid rgba(0, 0, 0, 0.15);
   overflow: auto;
+  overscroll-behavior: contain;
   display: flex; flex-direction: column; gap: 18px;
 }
 .pane-left .group-title {
@@ -1058,6 +1072,7 @@ img { display: block; max-width: 100%; }
   position: relative;
   padding: 56px clamp(28px, 4vw, 52px) 48px;
   overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .project-card-pane {
@@ -1120,7 +1135,7 @@ img { display: block; max-width: 100%; }
 .close-btn:hover { background: currentColor; color: var(--f-bg); }
 
 /* ─── ELSEWHERE single info pane ─── */
-.panes-single { display: block; overflow: auto; }
+.panes-single { display: block; overflow: auto; overscroll-behavior: contain; }
 .elsewhere-pane {
   padding: 56px clamp(28px, 5vw, 64px) 48px;
   display: flex; flex-direction: column; gap: 20px;
@@ -1403,7 +1418,10 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
 .backdrop.show { opacity: 1; pointer-events: auto; }
 
 /* Body lock when folder open */
-body.lock { overflow: hidden; }
+/* Scroll lock while a folder overlay is open: freeze the page on both the
+   root and body, and stop wheel/touch overscroll from chaining outward. */
+body.lock { overflow: hidden; overscroll-behavior: none; }
+html:has(> body.lock) { overflow: hidden; }
 
 /* ============================================================
    RESPONSIVE
@@ -1477,7 +1495,7 @@ body.lock { overflow: hidden; }
   .folder-row { grid-template-columns: 1fr; gap: 14px; }
   .folder-row + .folder-row { margin-top: 14px; }
   .folder.open { top: 40px; left: 10px; right: 10px; bottom: 10px; }
-  .panes { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow: auto; }
+  .panes { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow: auto; overscroll-behavior: contain; }
   .pane-left { border-right: 0; border-bottom: 1px solid currentColor; padding: 48px 24px 28px; }
   .pane-right { padding: 32px 24px 32px; }
   .project-card-pane { position: relative; inset: auto; }
@@ -1526,12 +1544,15 @@ body.lock { overflow: hidden; }
 .ers-brand { margin-bottom: 1.75rem; }
 .ers-logo { height: 44px; width: auto; display: block; }
 .ers-headline {
-  font-family: var(--ff-body), sans-serif; font-weight: 350;
-  font-size: clamp(34px, 5.4vw, 58px); line-height: 1.02;
-  letter-spacing: -0.028em; color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 54px); line-height: 1.06;
+  letter-spacing: -0.03em; color: var(--text);
 }
 .ers-script {
-  font-style: italic; font-weight: 400; color: var(--ers-plum);
+  font-family: var(--ff-body), Georgia, serif;
+  font-style: italic; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--ers-plum);
 }
 .ers-lede {
   font-size: 1.05rem; line-height: 1.65; color: var(--text);
@@ -1563,9 +1584,13 @@ body.lock { overflow: hidden; }
 .ers-pipeline {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 12.5px; line-height: 1.5; color: var(--text);
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-left: 2px solid var(--ers-plum);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
   padding: 1.1rem 1.25rem; margin-bottom: 1rem;
   width: max-content; max-width: 100%;
   overflow-x: auto; white-space: pre;
@@ -1647,6 +1672,11 @@ body.lock { overflow: hidden; }
   --acc-2: #9a72bb;
   --tint: rgba(107, 63, 140, 0.08);
 }
+.rpage--popping {
+  --acc: #b54511;
+  --acc-2: #d07a4e;
+  --tint: rgba(181, 69, 17, 0.07);
+}
 .rpage .em { color: var(--acc); font-weight: 500; }
 .rpage code {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -1671,11 +1701,16 @@ body.lock { overflow: hidden; }
   color: var(--acc-2); margin-bottom: 1.25rem;
 }
 .rp-headline {
-  font-family: var(--ff-label), sans-serif; font-weight: 500;
-  font-size: clamp(30px, 4.6vw, 50px); line-height: 1.1;
-  letter-spacing: -0.02em; color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 54px); line-height: 1.06;
+  letter-spacing: -0.03em; color: var(--text);
 }
-.rp-script { font-style: italic; font-weight: 400; color: var(--acc); }
+.rp-script {
+  font-family: var(--ff-body), Georgia, serif;
+  font-style: italic; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--acc);
+}
 .rp-lede {
   font-size: 1.05rem; line-height: 1.65; color: var(--text);
   max-width: 62ch; margin-top: 1.5rem;
@@ -1704,9 +1739,13 @@ body.lock { overflow: hidden; }
 .rp-pipeline {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 12.5px; line-height: 1.55; color: var(--text);
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-left: 2px solid var(--acc);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
   padding: 1.1rem 1.25rem; margin: 0 0 1rem;
   width: max-content; max-width: 100%;
   overflow-x: auto; white-space: pre;
@@ -1730,6 +1769,44 @@ body.lock { overflow: hidden; }
   transition: border-color 0.2s var(--ease);
 }
 .rp-links a:hover { border-bottom-color: var(--acc); }
+
+/* Live browser-window embed (frosted-glass chrome) — LangAlpha / Popping pages */
+.rp-livewin {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.rp-livebar {
+  display: flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+.rp-livebar span { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+.rp-livebar span:nth-child(1) { background: #ff5f56; }
+.rp-livebar span:nth-child(2) { background: #ffbd2e; }
+.rp-livebar span:nth-child(3) { background: #27c93f; }
+.rp-liveurl {
+  flex: 1; margin: 0 10px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 99px; background: rgba(0, 0, 0, 0.05);
+  font-family: var(--ff-label), monospace; font-size: 11px;
+  letter-spacing: 0.02em; color: var(--text-2);
+}
+.rp-livego {
+  font-family: var(--ff-label), sans-serif; font-size: 10.5px;
+  letter-spacing: 0.06em; color: var(--text-2);
+  transition: color 0.2s;
+}
+.rp-livego:hover { color: var(--acc, var(--accent)); }
+.rp-livewin iframe {
+  display: block; width: 100%; height: 620px; border: 0; background: #fff;
+}
+@media (max-width: 680px) {
+  .rp-livewin iframe { height: 480px; }
+}
 
 /* Mac-style window chrome (SPEQTRO terminal) — scoped to avoid the FolderPreview .mac-window */
 .rp-macwin {

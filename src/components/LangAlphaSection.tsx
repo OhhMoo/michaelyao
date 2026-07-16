@@ -1,4 +1,5 @@
 import { FadeIn } from "./FadeIn";
+import { LiveFrame } from "./LiveFrame";
 
 const PIPELINE = `question → plan → sandbox (agent.md memory)
    → 23 finance skills → stream over SSE / WebSocket
@@ -31,12 +32,12 @@ export function LangAlphaSection() {
             nothing is asserted without a citation.
           </p>
           <figure className="rp-figure">
-            <img src="/images/works/langalpha/1-chart.png" alt="LangAlpha technical chart view with moving averages and RSI" />
-            <figcaption>Inline financial charts with TradingView-style overlays.</figcaption>
-          </figure>
-          <figure className="rp-figure">
-            <img src="/images/works/langalpha/2-market.png" alt="LangAlpha market overview dashboard with an AI-generated brief" />
-            <figcaption>An AI-generated market brief over live data.</figcaption>
+            <LiveFrame
+              src="https://ginlix.ai/home"
+              url="ginlix.ai"
+              title="Ginlix — the live LangAlpha platform"
+            />
+            <figcaption>The live platform — browse it right here.</figcaption>
           </figure>
         </div>
       </FadeIn>
@@ -45,8 +46,8 @@ export function LangAlphaSection() {
         <a href="https://github.com/ginlix-ai/LangAlpha" target="_blank" rel="noreferrer">
           LangAlpha on GitHub ↗
         </a>
-        <a href="https://langalpha.com/" target="_blank" rel="noreferrer">
-          langalpha.com ↗
+        <a href="https://ginlix.ai/home" target="_blank" rel="noreferrer">
+          ginlix.ai ↗
         </a>
       </FadeIn>
     </section>
