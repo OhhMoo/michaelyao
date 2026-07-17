@@ -1088,6 +1088,11 @@ img { display: block; max-width: 100%; }
   inset: 20px;
   display: block;
 }
+/* Pages rendered inside that iframe hide their own chrome */
+.embedded .nav { display: none; }
+.embedded .foot { display: none; }
+.embedded .page-with-nav { padding-top: 0; }
+.embedded .npage { padding-top: 2rem; }
 .project-page-pane iframe {
   width: 100%; height: 100%; border: 0;
   border-radius: 16px;
@@ -1419,6 +1424,27 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
 .gallery-live-frame img {
   display: block; height: 100%; width: auto; max-width: none;
   object-fit: cover;
+}
+
+/* Immersive photography folder (id "writing"): photos bleed edge-to-edge —
+   no mac-window chrome, no padding, no rounding. Text keeps its inset. */
+.folder--writing.open .pane-right { padding: 0; }
+.folder--writing.open .project-card-pane {
+  inset: 0; padding: 0 0 40px; gap: 14px;
+}
+.folder--writing.open .project-card-pane .mac-window {
+  border: 0; border-radius: 0; background: transparent; box-shadow: none;
+}
+.folder--writing.open .project-card-pane .mac-titlebar { display: none; }
+.folder--writing.open .project-card-pane .preview img {
+  width: 100%; height: auto; display: block; border-radius: 0;
+}
+.folder--writing.open .gallery-live { gap: 0; }
+.folder--writing.open .gallery-live-head { display: none; }
+.folder--writing.open .gallery-live-row { padding: 0; }
+.folder--writing.open .project-card-pane > *:not(.mac-window):not(.gallery-live) {
+  margin-left: clamp(28px, 4vw, 52px);
+  margin-right: clamp(28px, 4vw, 52px);
 }
 
 /* Backdrop (for open folder modal) */

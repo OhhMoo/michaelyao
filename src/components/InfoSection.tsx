@@ -73,10 +73,9 @@ export function InfoSection() {
                   target="_blank"
                   rel="noreferrer"
                   href="/resume.pdf"
-                  className="btn-custom"
-                  download="Michael Yao Resume"
+                  className="btn-discover"
                 >
-                  Download Resume
+                  Discover more <span aria-hidden="true">›</span>
                 </a>
               </div>
             </div>

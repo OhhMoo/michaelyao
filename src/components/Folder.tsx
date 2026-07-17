@@ -50,7 +50,7 @@ export function Folder({
 
   return (
     <article
-      className={`folder ${colorClass}${openClass}`}
+      className={`folder ${colorClass} folder--${folder.id}${openClass}`}
       style={{
         ["--tilt" as string]: `${tilt}deg`,
         ["--tx" as string]: `${tx}px`,
@@ -168,18 +168,6 @@ export function Folder({
           </div>
         )}
 
-        {isOpen && (
-          <button
-            className="close-btn"
-            data-close
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose();
-            }}
-          >
-            close ×
-          </button>
-        )}
       </div>
     </article>
   );

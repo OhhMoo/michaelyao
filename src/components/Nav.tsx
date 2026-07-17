@@ -24,6 +24,13 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Inside the folder's live preview iframe: hide site chrome (nav + footer)
+  useEffect(() => {
+    if (window.self !== window.top) {
+      document.documentElement.classList.add("embedded");
+    }
+  }, []);
+
   useEffect(() => {
     const onClick = (e: Event) => {
       const target = e.target as HTMLAnchorElement;
