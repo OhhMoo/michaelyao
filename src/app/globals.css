@@ -1186,19 +1186,25 @@ img { display: block; max-width: 100%; }
 }
 .elsewhere-links a:hover { color: var(--accent); }
 .company-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
-  margin-top: 4px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+  margin-top: 16px;
 }
 .company-tile {
-  border: 1px solid #B6B6B6;
-  padding: 26px 20px;
-  min-height: 110px;
+  background: #ffffff;
+  border: 1px solid rgba(20, 20, 19, 0.10);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  padding: 32px 24px;
+  min-height: 130px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; text-align: center; text-decoration: none;
-  transition: border-color .4s ease-in-out, transform .4s ease-in-out;
+  gap: 12px; text-align: center; text-decoration: none;
+  transition: box-shadow .4s ease-in-out, transform .4s ease-in-out;
 }
-a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
-.company-tile img { max-height: 46px; max-width: 72%; object-fit: contain; }
+a.company-tile:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+  transform: translateY(-4px);
+}
+.company-tile img { max-height: 50px; max-width: 72%; object-fit: contain; }
 .company-tile .company-name {
   font-family: var(--ff-label), monospace; font-weight: 500;
   font-size: 15px; color: #2b2b2b; letter-spacing: .02em;

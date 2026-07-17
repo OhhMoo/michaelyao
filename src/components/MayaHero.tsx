@@ -14,14 +14,8 @@ export function MayaHero() {
             <p>CS &amp; Math student &mdash; atoms and algorithms</p>
           </FadeIn>
           <FadeIn style={{ transitionDelay: "0.8s" }}>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="section-btn"
-              download="Michael Yao Resume"
-            >
-              Download Resume
+            <a href="#info" className="section-btn">
+              Discover more
             </a>
           </FadeIn>
         </div>
