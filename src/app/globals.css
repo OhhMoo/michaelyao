@@ -1682,11 +1682,13 @@ html:has(> body.lock) { overflow: hidden; }
   --acc: #303F9F;
   --acc-2: #6169b8;
   --tint: rgba(48, 63, 159, 0.07);
+  --paper-ink: #141413;
+  --paper-muted: #5e5d59;
+  --paper-bg: #faf9f5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #1d1d1f;
-  /* left-anchored: columns align with the nav's content edge, not page center */
-  padding: 4.5rem max(1.5rem, calc((100% - 1296px) / 2)) 6.5rem;
-  background: #fff;
+  color: var(--paper-ink);
+  padding: 4.5rem 1.5rem 6.5rem;
+  background: var(--paper-bg);
 }
 .npage--water    { --acc: #1f6f78; --acc-2: #4f9aa1; --tint: rgba(31, 111, 120, 0.07); }
 .npage--crit     { --acc: #3b3f8f; --acc-2: #7075bf; --tint: rgba(59, 63, 143, 0.08); }
@@ -1697,79 +1699,77 @@ html:has(> body.lock) { overflow: hidden; }
 .npage--popping  { --acc: #b54511; --acc-2: #d07a4e; --tint: rgba(181, 69, 17, 0.07); }
 .npage--ersilia  { --acc: #50285a; --acc-2: #6c4a7e; --tint: rgba(80, 40, 90, 0.07); }
 
-.np-col  { max-width: 653px; margin-right: auto; }
-.np-wide { max-width: 980px; margin-right: auto; }
+.np-col  { max-width: 640px; margin-left: auto; margin-right: auto; }
+.np-wide { max-width: 983px; margin-left: auto; margin-right: auto; }
 
-/* Header */
-.np-head { padding: 1.5rem 0 0.5rem; }
+/* Header — centered, paper-style (title spans wider than the reading column) */
+.np-head { padding: 1.5rem 0 0.5rem; text-align: center; }
+.np-head.np-col { max-width: 983px; }
 .np-eyebrow {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--acc);
+  font-size: 15px; font-weight: 700; letter-spacing: 0;
+  text-transform: none; color: var(--paper-ink);
 }
 .np-date {
-  margin-top: 4px; font-size: 14px; font-weight: 600;
-  letter-spacing: -0.016em; color: #6e6e73;
+  margin-top: 6px; font-size: 15px; font-weight: 400;
+  letter-spacing: 0; color: var(--paper-muted);
 }
 .np-headline {
-  margin-top: 1.1rem;
-  font-size: clamp(34px, 4.8vw, 48px); font-weight: 700;
-  line-height: 1.09; letter-spacing: -0.003em; color: #1d1d1f;
+  margin-top: 1.4rem;
+  font-size: clamp(36px, 4.5vw, 52px); font-weight: 700;
+  line-height: 1.1; letter-spacing: normal; color: var(--paper-ink);
 }
 .np-subhead {
-  margin-top: 1.1rem;
-  font-size: clamp(19px, 2.2vw, 24px); font-weight: 400;
-  line-height: 1.35; letter-spacing: 0.007em; color: #6e6e73;
+  margin: 2.2rem auto 0;
+  max-width: 640px;
+  text-align: left;
+  font-family: var(--ff-body), Georgia, serif;
+  font-size: 20px; font-weight: 400;
+  line-height: 1.5; letter-spacing: 0; color: var(--paper-muted);
 }
 
-/* Body */
-.np-body { padding-top: 1.6rem; }
+/* Body — serif reading column */
+.np-body { padding-top: 1.4rem; }
 .np-body p, .np-p {
-  font-size: 19px; font-weight: 400; line-height: 1.4211;
-  letter-spacing: 0.012em; color: #1d1d1f;
+  font-family: var(--ff-body), Georgia, serif;
+  font-size: 17px; font-weight: 400; line-height: 1.55;
+  letter-spacing: 0; color: var(--paper-ink);
 }
-.np-body p + p { margin-top: 1.35rem; }
-.npage .em { color: var(--acc); font-weight: 600; }
+.np-body p + p { margin-top: 1.25rem; }
+.npage .em { color: var(--paper-ink); font-weight: 600; }
 .npage code {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-  font-size: 0.84em; background: var(--tint);
-  padding: 1px 6px; border-radius: 5px; color: var(--acc);
+  font-size: 0.84em; background: rgba(20, 20, 19, 0.06);
+  padding: 1px 6px; border-radius: 4px; color: var(--paper-ink);
 }
 .np-h2 {
-  margin: 2.6rem 0 0.9rem;
-  font-size: clamp(24px, 3vw, 32px); font-weight: 700;
-  line-height: 1.14; letter-spacing: 0.004em; color: #1d1d1f;
+  margin: 2.8rem 0 1rem;
+  font-size: clamp(24px, 2.6vw, 32px); font-weight: 600;
+  line-height: 1.2; letter-spacing: 0; color: var(--paper-ink);
 }
 
-/* Media band — wide, rounded, frosted-glass frame */
-.np-media { margin: 2.75rem 0; }
+/* Media band — flat paper-style figures */
+.np-media { margin: 2.75rem auto; }
 .np-media > figure { margin: 0; }
 .np-glass {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 18px;
-  box-shadow: 0 10px 44px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
-  padding: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(20, 20, 19, 0.10);
+  border-radius: 12px;
+  padding: 10px;
 }
-.np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 10px; }
-.np-media .rp-livewin, .np-media .rp-macwin { border-radius: 18px; }
+.np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 6px; }
+.np-media .rp-livewin, .np-media .rp-macwin { border-radius: 12px; }
 .np-caption {
   margin-top: 0.9rem; text-align: left;
-  font-size: 14px; line-height: 1.45; letter-spacing: -0.016em; color: #6e6e73;
+  font-size: 14px; line-height: 1.5; letter-spacing: 0; color: var(--paper-muted);
 }
 
 /* Pipeline / code block inside articles */
 .np-pipeline {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-  font-size: 13px; line-height: 1.6; color: #1d1d1f;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-left: 3px solid var(--acc);
-  border-radius: 14px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+  font-size: 13px; line-height: 1.6; color: var(--paper-ink);
+  background: rgba(20, 20, 19, 0.04);
+  border: 1px solid rgba(20, 20, 19, 0.08);
+  border-radius: 8px;
   padding: 1.2rem 1.4rem; margin: 2rem 0;
   width: max-content; max-width: 100%;
   overflow-x: auto; white-space: pre;
@@ -1781,40 +1781,39 @@ html:has(> body.lock) { overflow: hidden; }
 }
 .np-stat {
   flex: 1 1 140px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 14px; padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid rgba(20, 20, 19, 0.10);
+  border-radius: 8px; padding: 14px 16px;
 }
-.np-stat .k { font-size: 12px; font-weight: 600; color: #6e6e73; letter-spacing: 0.02em; }
-.np-stat .v { font-size: 20px; font-weight: 700; color: var(--acc); margin-top: 2px; }
+.np-stat .k { font-size: 12px; font-weight: 600; color: var(--paper-muted); letter-spacing: 0.02em; }
+.np-stat .v { font-size: 20px; font-weight: 700; color: var(--paper-ink); margin-top: 2px; }
 
-/* Footer link pills */
+/* Footer link pills — dark ink pills on paper */
 .np-links {
   display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 14px;
   margin-top: 3.2rem; padding-top: 2.4rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(20, 20, 19, 0.10);
 }
 .np-links a {
   display: inline-flex; align-items: center;
-  padding: 9px 20px; border-radius: 980px;
-  font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
-  color: #fff; background: var(--acc);
+  padding: 10px 22px; border-radius: 980px;
+  font-size: 15px; font-weight: 500; letter-spacing: 0;
+  color: var(--paper-bg); background: var(--paper-ink);
   transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
 }
-.np-links a:hover { opacity: 0.85; transform: translateY(-1px); }
+.np-links a:hover { opacity: 0.82; transform: translateY(-1px); }
 .np-links a.np-link-quiet {
-  color: var(--acc); background: var(--tint);
+  color: var(--paper-ink); background: rgba(20, 20, 19, 0.06);
 }
 .np-note {
   display: inline-flex; align-items: center;
-  padding: 9px 20px; border-radius: 980px;
-  font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
-  color: #6e6e73; background: rgba(0, 0, 0, 0.045);
+  padding: 10px 22px; border-radius: 980px;
+  font-size: 15px; font-weight: 500; letter-spacing: 0;
+  color: var(--paper-muted); background: rgba(20, 20, 19, 0.05);
+  border: 1px solid rgba(20, 20, 19, 0.08);
 }
 
-.np-logo { height: 40px; width: auto; display: block; margin-bottom: 1.2rem; }
+.np-logo { height: 40px; width: auto; display: block; margin: 0 auto 1.2rem; }
 
 @media (max-width: 680px) {
   .npage { padding: 3rem 1.25rem 4.5rem; }
