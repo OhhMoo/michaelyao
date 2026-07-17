@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { FolderMeta, Project } from "@/data/projects";
 import { FolderPreview } from "@/components/FolderPreview";
 import { ElsewherePane } from "@/components/ElsewherePane";
@@ -29,6 +30,12 @@ export function Folder({
   ty,
 }: Props) {
   const [activeId, setActiveId] = useState<string>(projects[0]?.id ?? "");
+  const router = useRouter();
+
+  // Projects with a dedicated page (internal "Read the page →" link) navigate
+  // straight there; the rest fall back to the in-folder description pane.
+  const pageHref = (p: Project) =>
+    p.links.find((l) => l.href.startsWith("/"))?.href;
 
   const colorClass = `f-${folder.color}`;
   const openClass = isOpen ? " open" : "";
@@ -88,8 +95,14 @@ export function Folder({
                     className={`project-item${p.id === activeId ? " active" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setActiveId(p.id);
+                      const href = pageHref(p);
+                      if (href) {
+                        router.push(href);
+                      } else {
+                        setActiveId(p.id);
+                      }
                     }}
+                    onMouseEnter={() => setActiveId(p.id)}
                   >
                     <span className="idx">{pad2(i + 1)}</span>
                     <span className="name">{p.title}</span>

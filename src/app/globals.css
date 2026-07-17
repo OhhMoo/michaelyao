@@ -778,13 +778,19 @@ img { display: block; max-width: 100%; }
 }
 
 .featured-stack {
-  display: flex; flex-direction: column;
-  border-top: 1px dotted var(--border);
+  display: flex; flex-direction: column; gap: 24px;
 }
 .feat-item {
-  padding: 34px 0 38px;
-  border-bottom: 1px dotted var(--border);
+  padding: 34px 38px 38px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   display: flex; flex-direction: column; gap: 22px;
+  transition: box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.feat-item:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+  transform: translateY(-3px);
 }
 .feat-item.feat-item-inline { flex-direction: row; align-items: flex-start; gap: 40px; }
 .feat-item.feat-item-stacked { flex-direction: column; gap: 28px; }
@@ -1637,7 +1643,8 @@ html:has(> body.lock) { overflow: hidden; }
   --tint: rgba(48, 63, 159, 0.07);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #1d1d1f;
-  padding: 4.5rem 1.5rem 6.5rem;
+  /* left-anchored: columns align with the nav's content edge, not page center */
+  padding: 4.5rem max(1.5rem, calc((100% - 1296px) / 2)) 6.5rem;
   background: #fff;
 }
 .npage--water    { --acc: #1f6f78; --acc-2: #4f9aa1; --tint: rgba(31, 111, 120, 0.07); }
@@ -1649,8 +1656,8 @@ html:has(> body.lock) { overflow: hidden; }
 .npage--popping  { --acc: #b54511; --acc-2: #d07a4e; --tint: rgba(181, 69, 17, 0.07); }
 .npage--ersilia  { --acc: #50285a; --acc-2: #6c4a7e; --tint: rgba(80, 40, 90, 0.07); }
 
-.np-col  { max-width: 653px; margin-left: auto; margin-right: auto; }
-.np-wide { max-width: 980px; margin-left: auto; margin-right: auto; }
+.np-col  { max-width: 653px; margin-right: auto; }
+.np-wide { max-width: 980px; margin-right: auto; }
 
 /* Header */
 .np-head { padding: 1.5rem 0 0.5rem; }
@@ -1693,7 +1700,7 @@ html:has(> body.lock) { overflow: hidden; }
 }
 
 /* Media band — wide, rounded, frosted-glass frame */
-.np-media { margin: 2.75rem auto; }
+.np-media { margin: 2.75rem 0; }
 .np-media > figure { margin: 0; }
 .np-glass {
   background: rgba(255, 255, 255, 0.55);
@@ -1707,7 +1714,7 @@ html:has(> body.lock) { overflow: hidden; }
 .np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 10px; }
 .np-media .rp-livewin, .np-media .rp-macwin { border-radius: 18px; }
 .np-caption {
-  margin-top: 0.9rem; text-align: center;
+  margin-top: 0.9rem; text-align: left;
   font-size: 14px; line-height: 1.45; letter-spacing: -0.016em; color: #6e6e73;
 }
 
@@ -1722,7 +1729,7 @@ html:has(> body.lock) { overflow: hidden; }
   border-left: 3px solid var(--acc);
   border-radius: 14px;
   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
-  padding: 1.2rem 1.4rem; margin: 2rem auto;
+  padding: 1.2rem 1.4rem; margin: 2rem 0;
   width: max-content; max-width: 100%;
   overflow-x: auto; white-space: pre;
 }
@@ -1744,7 +1751,7 @@ html:has(> body.lock) { overflow: hidden; }
 
 /* Footer link pills */
 .np-links {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+  display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 14px;
   margin-top: 3.2rem; padding-top: 2.4rem;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }

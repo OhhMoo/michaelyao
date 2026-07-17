@@ -21,7 +21,7 @@ html {
 }
 
 .maya-section--alt {
-  background: #f0f7ff;
+  background: #f5f5f7;
 }
 
 .maya-title {
@@ -460,22 +460,24 @@ html {
 }
 
 .service-thumb {
-  background: #2b2b2b;
-  border-radius: 5px;
-  padding: 42px 22px;
-  cursor: crosshair;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 42px 28px;
+  cursor: pointer;
   position: relative;
   height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   transition: all ease-in-out 0.4s;
 }
 
 .service-thumb:hover {
   background: #ffffff;
   transform: translateY(-5px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
 }
 
 .service-thumb .maya-card-icon {
-  color: #ffffff;
+  color: #1d1d1f;
   padding-left: 15px;
   margin-bottom: 22px;
   transition: color ease-in-out 0.4s;
@@ -485,7 +487,7 @@ html {
   font-family: var(--ff-label), monospace;
   font-size: 20px;
   font-weight: 500;
-  color: #f0f0f0;
+  color: #1d1d1f;
   padding-bottom: 5px;
   margin: 0;
   transition: color ease-in-out 0.4s;
@@ -513,25 +515,22 @@ html {
 
 .skill {
   padding: 2px 10px;
-  border: solid 1px #d9d9d9;
+  border: solid 1px transparent;
   border-radius: 2em;
-  background: #2b2b2b;
-  color: #d9d9d9;
+  background: #f5f5f7;
+  color: #1d1d1f;
   font-family: var(--ff-label), monospace;
   font-size: 12px;
   transition: all ease-in-out 0.4s;
 }
 
 .service-thumb:hover .skill {
-  border-color: #2b2b2b;
-  background: #d9d9d9;
-  color: #2b2b2b;
+  background: #e8e8ed;
 }
 
 .service-thumb:hover .skill:hover {
-  border-color: #d9d9d9;
-  background: #2b2b2b;
-  color: #d9d9d9;
+  background: #1d1d1f;
+  color: #f5f5f7;
 }
 
 /* ---------- closing footer block ---------- */
