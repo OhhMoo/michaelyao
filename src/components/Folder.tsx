@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import type { FolderMeta, Project } from "@/data/projects";
 import { FolderPreview } from "@/components/FolderPreview";
 import { ElsewherePane } from "@/components/ElsewherePane";
@@ -30,10 +29,9 @@ export function Folder({
   ty,
 }: Props) {
   const [activeId, setActiveId] = useState<string>(projects[0]?.id ?? "");
-  const router = useRouter();
 
-  // Projects with a dedicated page (internal "Read the page →" link) navigate
-  // straight there; the rest fall back to the in-folder description pane.
+  // Projects with a dedicated page (internal "Read the page →" link) show that
+  // page live in the right pane; the rest keep the description pane.
   const pageHref = (p: Project) =>
     p.links.find((l) => l.href.startsWith("/"))?.href;
 
@@ -95,14 +93,8 @@ export function Folder({
                     className={`project-item${p.id === activeId ? " active" : ""}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      const href = pageHref(p);
-                      if (href) {
-                        router.push(href);
-                      } else {
-                        setActiveId(p.id);
-                      }
+                      setActiveId(p.id);
                     }}
-                    onMouseEnter={() => setActiveId(p.id)}
                   >
                     <span className="idx">{pad2(i + 1)}</span>
                     <span className="name">{p.title}</span>
@@ -113,7 +105,22 @@ export function Folder({
             </div>
 
             <div className="pane-right">
-              {projects.map((p) => (
+              {projects.map((p) => {
+                const href = pageHref(p);
+                if (href) {
+                  // Live embed of the project's own detail page
+                  return (
+                    <div
+                      key={p.id}
+                      className={`project-card-pane project-page-pane${p.id === activeId ? " show" : ""}`}
+                    >
+                      {p.id === activeId && (
+                        <iframe src={href} title={p.title} loading="lazy" />
+                      )}
+                    </div>
+                  );
+                }
+                return (
                 <div
                   key={p.id}
                   className={`project-card-pane${p.id === activeId ? " show" : ""}`}
@@ -155,7 +162,8 @@ export function Folder({
                     </div>
                   )}
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

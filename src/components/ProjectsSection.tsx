@@ -1,6 +1,5 @@
 import {
   IconChartCandle,
-  IconBinaryTree,
   IconMathFunction,
   IconMusic,
   type Icon as TablerIcon,
@@ -83,14 +82,6 @@ const CARDS: ProjectCard[] = [
     tags: ["FastAPI", "LangGraph", "React", "Daytona"],
     href: "/langalpha",
     Icon: IconChartCandle,
-  },
-  {
-    title: "ms-pred-PyG",
-    blurb:
-      "ICEBERG's MS/MS fragmentation pipeline — 19 files, 8 GNN families (GGNN, PNA, GINE…) — ported from DGL to PyTorch Geometric. DAG fragment pipelines redesigned around Batch and scatter_.",
-    tags: ["PyTorch", "PyG", "Chem"],
-    href: "/ms-pred",
-    Icon: IconBinaryTree,
   },
   {
     title: "Mode-Selective Criticality",

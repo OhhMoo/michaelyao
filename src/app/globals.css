@@ -837,7 +837,7 @@ img { display: block; max-width: 100%; }
 .feat-links a:hover { background: var(--text); color: var(--bg); }
 .feat-item-preview { flex: 1 1 0; min-width: 0; align-self: flex-start; }
 .feat-item-preview .mac-window { height: auto; }
-.feat-plain-img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.feat-plain-img { width: 100%; height: auto; display: block; border-radius: 16px; }
 
 /* ============================================================
    ARCHIVE HEAD + FOLDERS (ported, tokens unified)
@@ -890,6 +890,7 @@ img { display: block; max-width: 100%; }
   padding: 0 18px 0 14px;
   background: var(--f-bg, #ffffff);
   border: 1px solid #B6B6B6; border-bottom: 0;
+  border-radius: 10px 10px 0 0;
   margin-bottom: -1px;
   font-family: var(--ff-label), sans-serif; font-size: 10.5px;
   letter-spacing: .12em; text-transform: uppercase;
@@ -903,6 +904,7 @@ img { display: block; max-width: 100%; }
   min-height: 170px;
   display: flex; flex-direction: column; gap: 12px;
   border: 1px solid #B6B6B6;
+  border-radius: 0 18px 18px 18px;
   transition: border-color .4s ease-in-out;
   position: relative;
 }
@@ -996,6 +998,7 @@ img { display: block; max-width: 100%; }
 /* The open folder stays solid white; the frosted-glass effect lives on the
    page BEHIND it (see .backdrop). A soft shadow lifts it off the glass. */
 .folder.open > .body {
+  border-radius: 0 24px 24px 24px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16), 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 .folder.open > .body > h3,
@@ -1079,6 +1082,18 @@ img { display: block; max-width: 100%; }
   opacity: 0; pointer-events: none;
   transform: translateY(8px);
   transition: opacity .4s var(--ease), transform .45s var(--ease);
+}
+/* Live embed of a project's detail page inside the right pane */
+.project-page-pane {
+  inset: 20px;
+  display: block;
+}
+.project-page-pane iframe {
+  width: 100%; height: 100%; border: 0;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.06);
 }
 .project-card-pane.show { opacity: 1; pointer-events: auto; transform: none; }
 
@@ -1196,7 +1211,7 @@ a.company-tile:hover { border-color: #2b2b2b; transform: translateY(-4px); }
    MAC WINDOW + PREVIEW MEDIA
 ============================================================ */
 .mac-window {
-  position: relative; width: 100%; border-radius: 10px;
+  position: relative; width: 100%; border-radius: 16px;
   overflow: hidden;
   background: #141210;
   border: 1px solid #2a2520;
@@ -1925,7 +1940,7 @@ html:has(> body.lock) { overflow: hidden; }
 
 /* Live browser-window embed (frosted-glass chrome) — LangAlpha / Popping pages */
 .rp-livewin {
-  border-radius: 12px; overflow: hidden;
+  border-radius: 18px; overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.65);
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
