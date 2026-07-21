@@ -93,6 +93,9 @@ export function Nav() {
         <Link href="/about" onClick={() => setMenuOpen(false)}>
           About
         </Link>
+        <Link href="/studies" onClick={() => setMenuOpen(false)}>
+          Studies
+        </Link>
       </div>
 
       <div className="nav-icons">

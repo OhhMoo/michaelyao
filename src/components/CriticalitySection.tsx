@@ -4,8 +4,6 @@ export function CriticalitySection() {
   return (
     <section className="npage npage--crit" id="criticality">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Research</div>
-        <div className="np-date">Harvey Mudd · Zhuang Group</div>
         <h1 className="np-headline">How deep can a signal go before it dies?</h1>
         <p className="np-subhead">
           A deep network is a signal passed through many layers. Whether it survives or scrambles is

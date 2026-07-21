@@ -11,8 +11,6 @@ export function ErsiliaSection() {
     <section className="npage npage--ersilia" id="ersilia">
       <FadeIn className="np-head np-col">
         <img src="/images/ersilia/ersilia-logo.png" alt="Ersilia" className="np-logo" />
-        <div className="np-eyebrow">Open source</div>
-        <div className="np-date">Open-source contribution</div>
         <h1 className="np-headline">Drug-discovery models, in context</h1>
         <p className="np-subhead">
           I contribute to the <span className="em">Ersilia Open Source Initiative</span>, a non-profit

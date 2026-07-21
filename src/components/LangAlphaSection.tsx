@@ -9,8 +9,6 @@ export function LangAlphaSection() {
   return (
     <section className="npage npage--langalpha" id="langalpha">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Project</div>
-        <div className="np-date">Multi-agent systems</div>
         <h1 className="np-headline">A research memory, on purpose</h1>
         <p className="np-subhead">
           An open-source agentic investing platform (1.5k+ stars). Each investigation runs in its

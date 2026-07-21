@@ -5,8 +5,6 @@ export function PoppingSection() {
   return (
     <section className="npage npage--popping" id="popping">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Side quest</div>
-        <div className="np-date">Dance archive · poppindex.com</div>
         <h1 className="np-headline">A popping dictionary, move by move</h1>
         <p className="np-subhead">
           A curated dictionary of popping dance elements — <span className="em">18 moves</span> from

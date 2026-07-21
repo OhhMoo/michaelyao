@@ -9,8 +9,6 @@ export function SpeqtroSection() {
   return (
     <section className="npage npage--speqtro" id="speqtro">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Project</div>
-        <div className="np-date">Agentic AI · Spectroscopy</div>
         <h1 className="np-headline">Name a molecule from its spectra</h1>
         <p className="np-subhead">
           Structure elucidation is slow, expert work. SPEQTRO is an autonomous agent that reads NMR,

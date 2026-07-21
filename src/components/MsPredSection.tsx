@@ -8,8 +8,6 @@ export function MsPredSection() {
   return (
     <section className="npage npage--mspred" id="ms-pred">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Open source</div>
-        <div className="np-date">Graph neural networks</div>
         <h1 className="np-headline">Same model, new framework</h1>
         <p className="np-subhead">
           ICEBERG predicts a molecule&apos;s tandem mass spectrum from its fragmentation graph. I

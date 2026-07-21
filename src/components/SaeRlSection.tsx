@@ -9,8 +9,6 @@ export function SaeRlSection() {
   return (
     <section className="npage npage--saerl" id="sae-rl">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Research</div>
-        <div className="np-date">Mechanistic interpretability</div>
         <h1 className="np-headline">What does RL change inside a model?</h1>
         <p className="np-subhead">
           Reinforcement fine-tuning makes a model better — but at what, and where? I train sparse

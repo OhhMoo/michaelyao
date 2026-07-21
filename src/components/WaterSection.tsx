@@ -4,14 +4,27 @@ export function WaterSection() {
   return (
     <section className="npage npage--water" id="water">
       <FadeIn className="np-head np-col">
-        <div className="np-eyebrow">Research</div>
-        <div className="np-date">Harvey Mudd · Zhuang Group</div>
         <h1 className="np-headline">Two states of water, made visible</h1>
         <p className="np-subhead">
           Is liquid water one continuum, or a mixture of two local structures? A century-old debate,
           because both pictures fit the same bulk data. Unsupervised clustering decides — validated
           against an observable the clustering never saw.
         </p>
+      </FadeIn>
+
+      <FadeIn className="np-media np-wide">
+        <figure>
+          <div className="np-glass">
+            <img
+              src="/images/research/water/0-flowchart.png"
+              alt="Flowchart from molecular-dynamics trajectories through feature extraction, GMM fitting, and likelihood-ratio classification into LFTS, transitional, and DNLS water structures"
+            />
+          </div>
+          <figcaption className="np-caption">
+            From molecular-dynamics trajectories to an unsupervised classification of locally
+            favoured tetrahedral and disordered normal-liquid structures.
+          </figcaption>
+        </figure>
       </FadeIn>
 
       <FadeIn className="np-body np-col">
