@@ -25,7 +25,7 @@ export function SaeRlSection() {
           decoder cosine-similarity becomes a well-defined drift metric.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/works/sae-rl/scorecard.png" alt="Per-feature scorecard tracking representational drift across PPO checkpoints" />
@@ -33,7 +33,7 @@ export function SaeRlSection() {
           <figcaption className="np-caption">Feature-level drift tracked across the checkpoint chain.</figcaption>
         </figure>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/works/sae-rl/accuracy.png" alt="Reconstruction accuracy of the trained sparse autoencoders" />
@@ -44,9 +44,8 @@ export function SaeRlSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/OhhMoo/sae_rl" target="_blank" rel="noreferrer">
-          sae_rl on GitHub ↗
+          GitHub ↗
         </a>
-        <span className="np-note">Algoverse · AWS-supervised</span>
       </FadeIn>
     </section>
   );

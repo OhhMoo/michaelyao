@@ -31,7 +31,7 @@ export function CriticalitySection() {
           a handful of layers — the weight scale sets where.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/criticality/length.png" alt="Variance map and its layer dynamics for three weight scales" />
@@ -51,7 +51,7 @@ export function CriticalitySection() {
           nearby inputs are driven apart (chaotic). The crossover is sharp.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/criticality/correlation.png" alt="Correlation map and correlation dynamics vs layer for ordered, critical, and chaotic regimes" />
@@ -71,7 +71,7 @@ export function CriticalitySection() {
           the line a network should be initialised on to train at any depth.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/criticality/phase.png" alt="Fixed-point value and the chi1 = 1 order-to-chaos boundary over weight and bias scale" />
@@ -96,9 +96,8 @@ export function CriticalitySection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/OhhMoo/sae_rl" target="_blank" rel="noreferrer">
-          Related SAE work on GitHub ↗
+          GitHub ↗
         </a>
-        <span className="np-note">Replication of Poole et al., NeurIPS 2016</span>
       </FadeIn>
     </section>
   );

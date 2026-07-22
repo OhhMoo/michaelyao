@@ -2037,10 +2037,17 @@ html:has(> body.lock) { overflow: hidden; }
 
 .np-col  { max-width: 640px; margin-left: auto; margin-right: auto; }
 .np-wide {
-  width: min(100%, 1100px);
-  max-width: 1100px;
+  width: min(100%, 640px);
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Keep the two live website previews wider so they remain usable as browser windows. */
+.npage--langalpha .np-wide,
+.npage--popping .np-wide {
+  width: min(100%, 1100px);
+  max-width: 1100px;
 }
 
 /* Header — centered, paper-style (title spans wider than the reading column) */

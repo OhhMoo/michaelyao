@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 import { studyFolders, type StudyEntry } from "@/data/studies";
 
+function formatStudyDate(date: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(`${date}T00:00:00`));
+}
+
 function StudyEntryRow({
   entry,
   index,
@@ -19,7 +27,7 @@ function StudyEntryRow({
         <strong>{entry.title}</strong>
       </span>
       <span className="study-entry-meta">
-        <span>{entry.date}</span>
+        <span>{formatStudyDate(entry.date)}</span>
       </span>
     </>
   );
@@ -94,11 +102,11 @@ export function StudyArchive() {
               )}
               {folder.entries.length > 0 ? (
                 <div className="study-entry-list">
-                  {folder.entries.map((entry) => (
+                  {folder.entries.map((entry, entryIndex) => (
                     <StudyEntryRow
                       key={entry.href}
                       entry={entry}
-                      index={folder.index}
+                      index={String(entryIndex + 1).padStart(2, "0")}
                       onPreview={setSelectedEntry}
                     />
                   ))}

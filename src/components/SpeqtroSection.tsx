@@ -34,7 +34,7 @@ export function SpeqtroSection() {
           FID, CSV peaks, or an image of a spectrum.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="rp-macwin">
             <div className="rp-macbar" aria-hidden>
@@ -50,9 +50,8 @@ export function SpeqtroSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/OhhMoo/SPEQTRO" target="_blank" rel="noreferrer">
-          SPEQTRO on GitHub ↗
+          GitHub ↗
         </a>
-        <span className="np-note">pip install speqtro</span>
       </FadeIn>
     </section>
   );

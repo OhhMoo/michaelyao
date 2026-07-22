@@ -24,7 +24,7 @@ export function MsPredSection() {
           fragments, then predicts their intensities into a binned spectrum.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/projects/ms-pyg-teaser.png" alt="Precursor molecule through a collision cell to a learned neural simulator predicting the mass spectrum" />
@@ -45,7 +45,7 @@ export function MsPredSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/OhhMoo/ms-pred-PyG-ver" target="_blank" rel="noreferrer">
-          ms-pred-PyG on GitHub ↗
+          GitHub ↗
         </a>
       </FadeIn>
     </section>

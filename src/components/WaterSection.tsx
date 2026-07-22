@@ -12,7 +12,7 @@ export function WaterSection() {
         </p>
       </FadeIn>
 
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img
@@ -39,7 +39,7 @@ export function WaterSection() {
           (DNLS) — emerge on their own.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/water/1-clustering.png" alt="Order-parameter density resolved into LFTS and DNLS clusters" />
@@ -62,7 +62,7 @@ export function WaterSection() {
           validation share no descriptor, the agreement is model-independent.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/water/2-validation.png" alt="Per-cluster structure factors with distinct first diffraction peaks that superpose into the total" />
@@ -81,7 +81,7 @@ export function WaterSection() {
           supercooling to ambient conditions, and across three independent water models.
         </p>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/research/water/3-generality.png" alt="Structure factors and population fractions across temperature and across water models" />
@@ -95,9 +95,8 @@ export function WaterSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/OhhMoo/Water_Clustering" target="_blank" rel="noreferrer">
-          Water_Clustering on GitHub ↗
+          GitHub ↗
         </a>
-        <span className="np-note">First-author manuscript · in preparation</span>
       </FadeIn>
     </section>
   );

@@ -35,7 +35,7 @@ export function PoppingSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://poppindex.com/" target="_blank" rel="noreferrer">
-          poppindex.com ↗
+          Live website ↗
         </a>
         <a href="https://github.com/OhhMoo/poppingdictionary" target="_blank" rel="noreferrer">
           GitHub ↗

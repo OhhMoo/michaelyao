@@ -38,10 +38,10 @@ export function LangAlphaSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/ginlix-ai/LangAlpha" target="_blank" rel="noreferrer">
-          LangAlpha on GitHub ↗
+          GitHub ↗
         </a>
         <a href="https://ginlix.ai/home" target="_blank" rel="noreferrer">
-          ginlix.ai ↗
+          Live website ↗
         </a>
       </FadeIn>
     </section>

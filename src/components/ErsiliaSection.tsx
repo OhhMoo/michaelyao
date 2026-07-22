@@ -41,7 +41,7 @@ export function ErsiliaSection() {
       <FadeIn className="np-body np-col">
         <h2 className="np-h2">What the benchmark says</h2>
       </FadeIn>
-      <FadeIn className="np-media np-wide">
+      <FadeIn className="np-media np-col">
         <figure>
           <div className="np-glass">
             <img src="/images/ersilia/benchmark.png" alt="family_stack vs family_concat across 9 TDC tasks: a dead heat" />
@@ -55,10 +55,10 @@ export function ErsiliaSection() {
 
       <FadeIn className="np-links np-col">
         <a href="https://github.com/ersilia-os/chem-icl" target="_blank" rel="noreferrer">
-          chem-icl on GitHub ↗
+          GitHub ↗
         </a>
         <a href="https://ersilia.io/" target="_blank" rel="noreferrer">
-          ersilia.io ↗
+          Live website ↗
         </a>
       </FadeIn>
     </section>
