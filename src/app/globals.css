@@ -2391,3 +2391,199 @@ html:has(> body.lock) { overflow: hidden; }
   .rpage .fade-in { transition: none; }
   .rp-links a { transition: none; }
 }
+
+/* ============================================================
+   ESSAY SYSTEM (ai-2027.com-inspired: Tufte-style sidenotes,
+   footnotes, epigraphs, tab asides, reading-progress rail)
+   Additive namespace — does not touch .npage/.rp- tokens.
+   Consumed by: the long-form project-page template (water first),
+   and reusable anywhere a scroll-annotated essay layout is needed.
+============================================================ */
+.essay {
+  --essay-ink: var(--paper-ink, #141413);
+  --essay-muted: var(--paper-muted, #5e5d59);
+  font-family: var(--font-serif-essay), Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  color: var(--essay-ink);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.essay p { margin: 1.1rem 0; }
+.essay h2, .essay h3, .essay h4 {
+  font-family: inherit;
+  color: var(--essay-ink);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.essay h3, .essay h4 { font-style: italic; }
+
+/* Sidenotes / margin notes — floated into the right gutter next to the
+   paragraph that cites them, numbered via a shared CSS counter. */
+.essay { counter-reset: essay-sidenote; }
+.essay-sidenote-ref {
+  counter-increment: essay-sidenote;
+  cursor: pointer;
+  color: var(--acc, var(--accent));
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+}
+.essay-sidenote-ref::after { content: counter(essay-sidenote); }
+.essay-sidenote {
+  counter-increment: essay-sidenote;
+  float: right;
+  clear: right;
+  width: 34%;
+  margin-right: -38%;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--essay-muted);
+}
+.essay-sidenote::before {
+  content: counter(essay-sidenote) " ";
+  font-size: 0.75rem;
+  color: var(--acc, var(--accent));
+  font-weight: 600;
+}
+@media (max-width: 1100px) {
+  /* No room for a floated margin column — render inline instead. */
+  .essay-sidenote {
+    float: none;
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0 1.1rem;
+    padding: 0.6rem 0.9rem;
+    border-left: 2px solid var(--acc, var(--accent));
+    background: rgba(20, 20, 19, 0.03);
+  }
+}
+
+/* Footnotes — a numbered list at the end of the essay, cross-linked from
+   inline refs sharing the same essay-sidenote counter/style. */
+.essay-footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(20, 20, 19, 0.14);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--essay-muted);
+}
+.essay-footnotes ol { padding-left: 1.4rem; }
+.essay-footnotes li { margin-bottom: 0.6rem; }
+.essay-footnotes a { color: var(--acc, var(--accent)); }
+
+/* Epigraph — italic pull-quote block. */
+.essay-epigraph {
+  margin: 2.5rem 0;
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--border);
+}
+.essay-epigraph p {
+  font-style: italic;
+  color: var(--essay-muted);
+}
+.essay-epigraph footer {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-style: normal;
+  color: var(--text-3);
+}
+
+/* Tab-box asides — click-driven, plain bordered pill buttons that swap
+   visible content blocks. Not scroll-driven. */
+.essay-tab-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.75rem 0;
+}
+.essay-tab-boxes button {
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--essay-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--essay-ink);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.essay-tab-boxes button[aria-pressed="true"] {
+  background: var(--essay-ink);
+  color: var(--paper-bg, #fff);
+}
+.essay-tab-panel {
+  margin: 1rem 0 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--essay-muted);
+}
+
+/* Reading-progress rail — thin fixed vertical line that fills as the
+   reader scrolls the current page. Desktop only (matches source's own
+   breakpoint for dropping side chrome on narrow viewports). */
+.essay-progress-rail {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  width: 2px;
+  height: 100vh;
+  background: rgba(20, 20, 19, 0.08);
+  z-index: 60;
+  pointer-events: none;
+}
+.essay-progress-rail-fill {
+  width: 100%;
+  background: var(--acc, var(--accent));
+  transition: height 0.1s linear;
+}
+@media (max-width: 1280px) {
+  .essay-progress-rail { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .essay-progress-rail-fill { transition: none; }
+}
+
+/* Data-panel chrome — flat bordered "figure" frame replacing the
+   mac-window traffic-light chrome for embedded CLI/graph/3D previews.
+   Modeled on this file's own .study-tab label-tag pattern rather than
+   inventing new chrome. */
+.data-panel {
+  position: relative;
+  border: 1px solid rgba(20, 20, 19, 0.15);
+  border-radius: 12px;
+  background: var(--paper-bg, #fff);
+  overflow: hidden;
+}
+.data-panel-tab {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  transform: translateY(-100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px 6px 0 0;
+  background: #1d1d1f;
+  color: #fff;
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.data-panel-tab-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--acc, #a1502b);
+}
+.data-panel-body {
+  position: relative;
+  background: #0f0e0c;
+}
+.data-panel.data-panel-light .data-panel-body { background: var(--paper-bg, #fff); }
+.data-panel-body img,
+.data-panel-body video { width: 100%; height: auto; display: block; }

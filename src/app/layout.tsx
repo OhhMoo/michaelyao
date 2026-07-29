@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lora, Roboto_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "@/styles/maya.css";
 
@@ -16,6 +17,29 @@ const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
   display: "swap",
+});
+
+const etBook = localFont({
+  variable: "--font-serif-essay",
+  display: "swap",
+  fallback: ["Palatino", "Palatino Linotype", "Book Antiqua", "Georgia", "serif"],
+  src: [
+    {
+      path: "./fonts/et-book/et-book-roman-line-figures.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/et-book/et-book-italic.woff",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/et-book/et-book-bold-line-figures.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lora.variable} ${robotoMono.variable}`}>
+    <html lang="en" className={`${lora.variable} ${robotoMono.variable} ${etBook.variable}`}>
       <body>{children}</body>
     </html>
   );
