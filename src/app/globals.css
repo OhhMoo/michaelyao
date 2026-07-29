@@ -2612,8 +2612,11 @@ html:has(> body.lock) { overflow: hidden; }
 }
 @media (min-width: 1280px) {
   .career-layout {
-    grid-template-columns: 1fr 300px;
-    align-items: start;
+    grid-template-columns: 1fr 320px;
+    /* No align-items:start here on purpose — the dashboard grid cell must
+       stretch to match .career-main's full height, or its sticky child has
+       no room to move within its own box and just scrolls away instead of
+       pinning. See .live-dashboard-pin below for the actual sticky element. */
     gap: 56px;
   }
 }
@@ -2672,9 +2675,10 @@ html:has(> body.lock) { overflow: hidden; }
   text-align: right;
 }
 
-/* Mobile/tablet inline readout — same skills/stat data as the desktop
-   dashboard, rendered under the entry's own bullets instead so nothing
-   is lost when the sticky panel is hidden below 1280px. */
+/* Mobile/tablet inline detail — the FULL entry (bullets, sub-entries,
+   paragraphs, stat, skills) rendered under the heading/meta so nothing is
+   lost when the sticky dashboard is hidden below 1280px. On desktop this
+   same content renders only inside LiveDashboard instead. */
 .career-mobile-stats {
   margin-top: 16px;
   padding-top: 14px;
@@ -2685,20 +2689,48 @@ html:has(> body.lock) { overflow: hidden; }
   .career-mobile-stats { display: none; }
 }
 
-/* Sticky live dashboard — desktop only, matches ai-2027.com's own
-   breakpoint for dropping side chrome on narrow viewports. */
+/* Desktop-only wrapper: hidden on mobile, where Timeline.tsx renders the
+   same bullets/subEntries/paragraphs inline via .career-mobile-stats instead. */
+.career-desktop-only { display: none; }
+@media (min-width: 1280px) {
+  .career-desktop-only { display: block; }
+}
+
+/* Live dashboard — desktop only, matches ai-2027.com's own breakpoint for
+   dropping side chrome on narrow viewports. This outer element is the grid
+   cell itself: it must stay a plain stretched box (no position/overflow of
+   its own) so it inherits .career-layout's full row height, giving its
+   .live-dashboard-pin child real room to move within before un-sticking. */
 .live-dashboard {
   display: none;
 }
 @media (min-width: 1280px) {
-  .live-dashboard {
-    display: block;
-    position: sticky;
-    top: calc(var(--nav-h) + 32px);
-    padding: 22px 22px 24px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-  }
+  .live-dashboard { display: block; }
+}
+
+/* The actual sticky element — pinned within the tall .live-dashboard box
+   above, not within its own (short) content height. */
+.live-dashboard-pin {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  padding: 20px 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  max-height: calc(100vh - var(--nav-h) - 64px);
+  overflow-y: auto;
+}
+
+.live-dashboard-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--ff-label), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
 }
 .live-dashboard-label {
   display: block;
@@ -2724,6 +2756,32 @@ html:has(> body.lock) { overflow: hidden; }
   margin: 0 0 16px;
   line-height: 1.5;
 }
+
+/* Mini career-position indicator — a real chronological track (not a
+   fabricated metric): a thin line with one dot per entry, the active one
+   highlighted. Echoes ai-2027's ever-present line chart honestly. */
+.live-dashboard-track {
+  position: relative;
+  height: 3px;
+  margin: 0 4px 20px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.live-dashboard-track-dot {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transform: translate(-50%, -50%);
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.live-dashboard-track-dot.is-active {
+  background: var(--accent);
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
 .live-dashboard-stats {
   margin: 0 0 16px;
 }
@@ -2747,6 +2805,58 @@ html:has(> body.lock) { overflow: hidden; }
   font-weight: 500;
   color: var(--text);
 }
+
+/* Capability grid — small bordered cells (icon-slot styled) rather than
+   plain pill chips, echoing ai-2027's boxy "AI Capabilities" grid. */
+.live-dashboard-capgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 16px;
+}
+.live-dashboard-capcell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--ff-label), monospace;
+  font-size: 11px;
+  color: var(--text);
+}
+.live-dashboard-capcell-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Detail prose — the bullets/sub-entries/paragraphs moved over from the
+   left column. Same real content, just relocated, not summarized away. */
+.live-dashboard-detail {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.live-dashboard-detail p { margin: 0 0 10px; }
+.live-dashboard-detail ul {
+  margin: 0 0 12px;
+  padding-left: 16px;
+}
+.live-dashboard-detail li { margin-bottom: 6px; }
+.live-dashboard-detail-sub {
+  margin-bottom: 14px;
+}
+.live-dashboard-detail-sub h5 {
+  font-family: var(--ff-label), monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
 .live-dashboard-inner {
   animation: liveDashboardIn 0.4s var(--ease);
 }

@@ -16,7 +16,12 @@ export function Timeline({ entries }: { entries: CareerTimelineEntry[] }) {
   return (
     <ul className="timeline">
       {entries.map((entry) => {
-        const hasMobileStats = Boolean(entry.stat?.length) || Boolean(entry.skills?.length);
+        const hasMobileDetail =
+          Boolean(entry.stat?.length) ||
+          Boolean(entry.skills?.length) ||
+          Boolean(entry.bullets?.length) ||
+          Boolean(entry.subEntries?.length) ||
+          Boolean(entry.paragraphs?.length);
         return (
           <li key={entry.heading} id={entry.id}>
             <FadeIn style={{ transitionDelay: "0.1s" }}>
@@ -31,27 +36,6 @@ export function Timeline({ entries }: { entries: CareerTimelineEntry[] }) {
                     </span>
                   ))}
                 </em>
-                {entry.bullets && (
-                  <ul>
-                    {entry.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                )}
-                {entry.subEntries?.map((sub) => (
-                  <div className="timeline-sub" key={sub.subtitle}>
-                    <h5 className="timeline-subtitle">
-                      <span>{sub.subtitle}</span>
-                      {sub.dates && <span className="timeline-sub-dates">{sub.dates}</span>}
-                    </h5>
-                    <ul>
-                      {sub.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-                {entry.paragraphs?.map((p) => <p key={p}>{p}</p>)}
                 {entry.footnote && (
                   <p className="timeline-footnote">
                     {entry.footnote.text}{" "}
@@ -60,8 +44,32 @@ export function Timeline({ entries }: { entries: CareerTimelineEntry[] }) {
                     </a>
                   </p>
                 )}
-                {hasMobileStats && (
+                {/* Full detail (bullets/sub-entries/paragraphs/stat/skills) is
+                    inline here only below 1280px — on desktop the same content
+                    lives in LiveDashboard's sticky panel instead. */}
+                {hasMobileDetail && (
                   <div className="career-mobile-stats">
+                    {entry.bullets && (
+                      <ul>
+                        {entry.bullets.map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {entry.subEntries?.map((sub) => (
+                      <div className="timeline-sub" key={sub.subtitle}>
+                        <h5 className="timeline-subtitle">
+                          <span>{sub.subtitle}</span>
+                          {sub.dates && <span className="timeline-sub-dates">{sub.dates}</span>}
+                        </h5>
+                        <ul>
+                          {sub.bullets.map((b) => (
+                            <li key={b}>{b}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                    {entry.paragraphs?.map((p) => <p key={p}>{p}</p>)}
                     {entry.stat && entry.stat.length > 0 && (
                       <dl className="career-stat-row">
                         {entry.stat.map((stat) => (
