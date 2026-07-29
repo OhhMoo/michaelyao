@@ -2120,6 +2120,7 @@ html:has(> body.lock) { overflow: hidden; }
 .np-media .rp-livewin .rp-livebody { border-radius: 11px; }
 .np-caption {
   margin-top: 0.9rem; text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px; line-height: 1.5; letter-spacing: 0; color: var(--paper-muted);
 }
 
@@ -2428,7 +2429,9 @@ html:has(> body.lock) { overflow: hidden; }
 }
 .essay-sidenote-ref::after { content: counter(essay-sidenote); }
 .essay-sidenote {
-  counter-increment: essay-sidenote;
+  /* No counter-increment here: the ref (above) already incremented the
+     shared counter for this note. Incrementing again would desync the
+     ref number from the note's own ::before number. */
   float: right;
   clear: right;
   width: 34%;
