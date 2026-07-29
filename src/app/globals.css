@@ -1597,6 +1597,10 @@ a.company-tile:hover {
   --cli-dim:    rgba(214, 212, 207, 0.62);
   --cli-quiet:  rgba(214, 212, 207, 0.40);
   color: var(--cli-text);
+  background: #0a0807;
+  padding: 28px 32px 32px;
+  overflow-x: auto;
+  font-family: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
 }
 
 .cli-content {
@@ -2113,6 +2117,7 @@ html:has(> body.lock) { overflow: hidden; }
 }
 .np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 6px; }
 .np-media .rp-livewin, .np-media .rp-macwin { border-radius: 12px; }
+.np-media .rp-livewin .rp-livebody { border-radius: 11px; }
 .np-caption {
   margin-top: 0.9rem; text-align: left;
   font-size: 14px; line-height: 1.5; letter-spacing: 0; color: var(--paper-muted);
@@ -2324,30 +2329,24 @@ html:has(> body.lock) { overflow: hidden; }
 }
 .rp-links a:hover { border-bottom-color: var(--acc); }
 
-/* Live browser-window embed (frosted-glass chrome) — LangAlpha / Popping pages */
+/* Live browser-window embed (frosted-glass chrome) — LangAlpha / Popping pages.
+   Uses the data-panel-tab label idiom (see "Data-panel chrome" below) for the
+   URL instead of mac-style traffic-light dots; overflow/rounding moved onto
+   .rp-livebody so the tab sitting above the top edge isn't clipped. */
 .rp-livewin {
-  border-radius: 18px; overflow: hidden;
+  position: relative;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.65);
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
   -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
+.rp-livebody { border-radius: 17px; overflow: hidden; }
 .rp-livebar {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
   height: 38px; padding: 0 14px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-}
-.rp-livebar span { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
-.rp-livebar span:nth-child(1) { background: #ff5f56; }
-.rp-livebar span:nth-child(2) { background: #ffbd2e; }
-.rp-livebar span:nth-child(3) { background: #27c93f; }
-.rp-liveurl {
-  flex: 1; margin: 0 10px; height: 22px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 99px; background: rgba(0, 0, 0, 0.05);
-  font-family: var(--ff-label), monospace; font-size: 11px;
-  letter-spacing: 0.02em; color: var(--text-2);
 }
 .rp-livego {
   font-family: var(--ff-label), sans-serif; font-size: 10.5px;
@@ -2555,7 +2554,9 @@ html:has(> body.lock) { overflow: hidden; }
   border: 1px solid rgba(20, 20, 19, 0.15);
   border-radius: 12px;
   background: var(--paper-bg, #fff);
-  overflow: hidden;
+  /* overflow intentionally left visible here (clipping happens on
+     .data-panel-body below) so the tab positioned above the top edge
+     via translateY(-100%) isn't clipped off by this box. */
 }
 .data-panel-tab {
   position: absolute;
@@ -2583,7 +2584,14 @@ html:has(> body.lock) { overflow: hidden; }
 .data-panel-body {
   position: relative;
   background: #0f0e0c;
+  border-radius: 11px;
+  overflow: hidden;
 }
 .data-panel.data-panel-light .data-panel-body { background: var(--paper-bg, #fff); }
 .data-panel-body img,
 .data-panel-body video { width: 100%; height: auto; display: block; }
+/* FolderPreview's shared `.preview`/`.preview-*` content blocks, re-scoped
+   from the old .mac-body ancestor onto the new data-panel body. */
+.data-panel-body .preview { border: 0 !important; border-radius: 0; line-height: 0; }
+.data-panel-body .preview img { width: 100%; height: auto; display: block; }
+.data-panel.data-panel-light .preview img { padding: 8px; }

@@ -53,15 +53,24 @@ function fitLine(line: string, width: number): string {
   return line;
 }
 
+/** Pull a short label out of the ASCII top-frame line, e.g. "╭── speqtro ──╮" -> "speqtro". */
+function deriveTabLabel(lines: CliLine[]): string {
+  for (const line of lines) {
+    const m = line.text.match(/^╭─+\s+(.+?)\s+─+╮$/);
+    if (m) return m[1].trim();
+  }
+  return "terminal";
+}
+
 export function CliMockup({ lines, width = 80 }: CliMockupProps) {
+  const tabLabel = deriveTabLabel(lines);
   return (
-    <div className="mac-window mac-cli">
-      <div className="mac-titlebar">
-        <span className="mac-dot mac-dot-red" />
-        <span className="mac-dot mac-dot-yellow" />
-        <span className="mac-dot mac-dot-green" />
-      </div>
-      <div className="mac-body cli-body">
+    <div className="data-panel">
+      <span className="data-panel-tab">
+        <span>{tabLabel}</span>
+        <span className="data-panel-tab-dot" aria-hidden />
+      </span>
+      <div className="data-panel-body cli-body">
         <div className="cli-content">
           {lines.map((line, i) => {
             const variant = line.variant ?? "frame";
