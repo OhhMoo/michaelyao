@@ -1,8 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { MayaHero } from "@/components/MayaHero";
 import { InfoSection } from "@/components/InfoSection";
-import { ExperienceSection } from "@/components/ExperienceSection";
-import { EducationSection } from "@/components/EducationSection";
+import { CareerSection } from "@/components/CareerSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { Folders } from "@/components/Folders";
 import { ClosingSection } from "@/components/ClosingSection";
@@ -16,9 +15,7 @@ export default function Home() {
 
       <InfoSection />
 
-      <ExperienceSection />
-
-      <EducationSection />
+      <CareerSection />
 
       <ProjectsSection />
 

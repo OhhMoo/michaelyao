@@ -2587,3 +2587,162 @@ html:has(> body.lock) { overflow: hidden; }
 .data-panel.data-panel-light .data-panel-body { background: var(--paper-bg, #fff); }
 .data-panel-body img,
 .data-panel-body video { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   CAREER DASHBOARD (ai-2027.com-inspired: scroll-driven live
+   readout tracking whichever CareerSection entry is in view,
+   via useActiveSection's IntersectionObserver — not click-driven)
+   Consumed by: CareerSection.tsx, Timeline.tsx, LiveDashboard.tsx
+============================================================ */
+.career-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 1280px) {
+  .career-layout {
+    grid-template-columns: 1fr 300px;
+    align-items: start;
+    gap: 56px;
+  }
+}
+.career-main { min-width: 0; }
+
+/* Small uppercase tag on each entry distinguishing Experience vs.
+   Education without needing two separate titled sections. */
+.career-group-label {
+  display: block;
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+/* Skill chips + key-stat readout — shared between the mobile inline
+   block (Timeline.tsx, <1280px) and the sticky LiveDashboard (>=1280px). */
+.career-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.career-chip {
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+}
+.career-stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.career-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+.career-stat dt {
+  color: var(--text-2);
+}
+.career-stat dd {
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Mobile/tablet inline readout — same skills/stat data as the desktop
+   dashboard, rendered under the entry's own bullets instead so nothing
+   is lost when the sticky panel is hidden below 1280px. */
+.career-mobile-stats {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.career-mobile-stats .career-stat-row { margin-bottom: 10px; }
+@media (min-width: 1280px) {
+  .career-mobile-stats { display: none; }
+}
+
+/* Sticky live dashboard — desktop only, matches ai-2027.com's own
+   breakpoint for dropping side chrome on narrow viewports. */
+.live-dashboard {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .live-dashboard {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-h) + 32px);
+    padding: 22px 22px 24px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+  }
+}
+.live-dashboard-label {
+  display: block;
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.live-dashboard-heading {
+  font-family: var(--ff-label), monospace;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+.live-dashboard-meta {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.live-dashboard-stats {
+  margin: 0 0 16px;
+}
+.live-dashboard-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.live-dashboard-stat:last-child { border-bottom: none; }
+.live-dashboard-stat dt {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.live-dashboard-stat dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+.live-dashboard-inner {
+  animation: liveDashboardIn 0.4s var(--ease);
+}
+@keyframes liveDashboardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dashboard-inner { animation: none; }
+}
