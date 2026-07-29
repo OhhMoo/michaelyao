@@ -33,14 +33,12 @@ function MacFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`mac-window mac-${tone}`}>
-      <div className="mac-titlebar">
-        <span className="mac-dot mac-dot-red" />
-        <span className="mac-dot mac-dot-yellow" />
-        <span className="mac-dot mac-dot-green" />
-        <span className="mac-title mac-title-hidden">{title}</span>
-      </div>
-      <div className="mac-body">{children}</div>
+    <div className={`data-panel${tone === "light" ? " data-panel-light" : ""}`}>
+      <span className="data-panel-tab">
+        <span>{title}</span>
+        <span className="data-panel-tab-dot" aria-hidden />
+      </span>
+      <div className="data-panel-body">{children}</div>
     </div>
   );
 }
@@ -75,41 +73,27 @@ export function FolderPreview({ preview }: { preview: ProjectPreview }) {
   }
   if (preview.kind === "image") {
     return (
-      <div className="mac-window mac-image">
-        <div className="mac-titlebar">
-          <span className="mac-dot mac-dot-red" />
-          <span className="mac-dot mac-dot-yellow" />
-          <span className="mac-dot mac-dot-green" />
+      <MacFrame title={title} tone="light">
+        <div className="preview">
+          <img src={preview.src} alt={preview.alt ?? ""} />
         </div>
-        <div className="mac-body">
-          <div className="preview">
-            <img src={preview.src} alt={preview.alt ?? ""} />
-          </div>
-        </div>
-      </div>
+      </MacFrame>
     );
   }
   if (preview.kind === "video") {
     return (
-      <div className="mac-window mac-dark mac-video">
-        <div className="mac-titlebar">
-          <span className="mac-dot mac-dot-red" />
-          <span className="mac-dot mac-dot-yellow" />
-          <span className="mac-dot mac-dot-green" />
+      <MacFrame title={title} tone="dark">
+        <div className="preview preview-video">
+          <video
+            src={preview.src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
         </div>
-        <div className="mac-body">
-          <div className="preview preview-video">
-            <video
-              src={preview.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </div>
-        </div>
-      </div>
+      </MacFrame>
     );
   }
   if (preview.kind === "image-pair") {
