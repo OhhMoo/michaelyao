@@ -1,0 +1,133 @@
+/* Shared shell for the simplified three-route portfolio. Page-specific
+   layouts live beside their components in CSS Modules. */
+
+:root {
+  --simple-ink: #171715;
+  --simple-muted: #686863;
+  --simple-line: #d8d8d3;
+  --simple-paper: #ffffff;
+  --simple-width: 980px;
+  --simple-nav-height: 64px;
+}
+
+html {
+  background: var(--simple-paper);
+  color-scheme: light;
+}
+
+body {
+  min-width: 320px;
+  background: var(--simple-paper);
+  color: var(--simple-ink);
+}
+
+.simple-nav {
+  position: relative;
+  z-index: 20;
+  min-height: var(--simple-nav-height);
+  border-bottom: 1px solid var(--simple-line);
+  background: var(--simple-paper);
+}
+
+.simple-nav-inner {
+  width: min(calc(100% - 48px), var(--simple-width));
+  min-height: var(--simple-nav-height);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.simple-nav-name {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.simple-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.simple-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.simple-nav-tabs a {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 22px 0 20px;
+  color: var(--simple-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.simple-nav-tabs a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: var(--simple-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+}
+
+.simple-nav-tabs a:hover,
+.simple-nav-tabs a:focus-visible,
+.simple-nav-tabs a.is-active {
+  color: var(--simple-ink);
+}
+
+.simple-nav-tabs a:hover::after,
+.simple-nav-tabs a:focus-visible::after,
+.simple-nav-tabs a.is-active::after {
+  transform: scaleX(1);
+}
+
+.simple-page {
+  min-height: calc(100vh - var(--simple-nav-height));
+}
+
+/* The previous navigation was fixed; the simplified header participates in
+   normal flow, so legacy secondary routes no longer need a nav-height spacer. */
+.page-with-nav {
+  padding-top: 0;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --simple-nav-height: 84px;
+  }
+
+  .simple-nav-inner {
+    width: min(calc(100% - 32px), var(--simple-width));
+    min-height: var(--simple-nav-height);
+    padding: 11px 0 0;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .simple-nav-tabs {
+    width: 100%;
+    gap: 22px;
+  }
+
+  .simple-nav-tabs a {
+    padding: 7px 0 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-nav-tabs a::after {
+    transition: none;
+  }
+}

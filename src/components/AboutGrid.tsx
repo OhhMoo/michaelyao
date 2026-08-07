@@ -106,10 +106,11 @@ export function AboutGrid() {
               >
                 <Image
                   className={styles.image}
-                  src={`/images/characters/${imageNumber}.png`}
+                  src={`/images/about-grid/${imageNumber}.webp`}
                   alt=""
                   fill
                   sizes="(max-width: 600px) 64px, 104px"
+                  unoptimized
                 />
                 <span
                   className={`${styles.cover} ${isOpen ? styles.coverOpen : ""}`}

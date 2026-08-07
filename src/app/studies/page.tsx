@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import { StudyArchive } from "@/components/StudyArchive";
+import { StudyProgress } from "@/components/StudyProgress";
 
 export const metadata: Metadata = {
-  title: "Studies · Michael Yao",
-  description: "An evolving archive of Michael Yao's study notes and rendered Obsidian pages.",
+  title: "Study Progress — Michael Yao",
+  description: "A rough qualitative snapshot of Michael Yao's current learning progress.",
 };
 
 export default function StudiesPage() {
   return (
     <>
       <Nav />
-      <main className="page-with-nav">
-        <StudyArchive />
+      <main className="simple-page">
+        <StudyProgress />
       </main>
-      <Footer />
     </>
   );
 }

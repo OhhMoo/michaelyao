@@ -1,125 +1,37 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { LinkedInIcon, GitHubIcon, EmailIcon } from "./icons";
+import { usePathname } from "next/navigation";
+
+const primaryLinks = [
+  { href: "/", label: "Academic", key: "academic" },
+  { href: "/about", label: "About", key: "about" },
+  { href: "/studies", label: "Study progress", key: "studies" },
+] as const;
 
 export function Nav() {
-  const [hidden, setHidden] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const lastY = useRef(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (y > lastY.current && y > 80) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      lastY.current = y;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Inside the folder's live preview iframe: hide site chrome (nav + footer)
-  useEffect(() => {
-    if (window.self !== window.top) {
-      document.documentElement.classList.add("embedded");
-    }
-  }, []);
-
-  useEffect(() => {
-    const onClick = (e: Event) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.tagName !== "A") return;
-      const href = target.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
-      const el = document.querySelector(href);
-      if (!el) return;
-      e.preventDefault();
-      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 52;
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
-    };
-    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener("click", onClick));
-    return () => {
-      document.querySelectorAll('a[href^="#"]').forEach((a) => a.removeEventListener("click", onClick));
-    };
-  }, []);
+  const pathname = usePathname();
+  const activeKey = pathname === "/about" ? "about" : pathname === "/studies" ? "studies" : "academic";
 
   return (
-    <nav className={`nav ${hidden ? "nav--hidden" : ""} ${menuOpen ? "menu-open" : ""}`} id="nav">
-      <Link href="/" className="nav-logo" aria-label="Michael Yao — Home">
-        <Image
-          src="/seo/logo.png"
-          alt=""
-          width={36}
-          height={48}
-          className="nav-logo-img"
-          priority
-        />
-        <span className="nav-logo-text">
-          MICHAEL YAO
-          <br />
-          <span style={{ color: "var(--text-2)" }}>RESEARCHER</span>
-        </span>
-      </Link>
-
-      <div className="nav-center">
-        <Link
-          href="/#projects"
-          onClick={(e) => {
-            setMenuOpen(false);
-            if (typeof window !== "undefined" && window.location.pathname === "/") {
-              const el = document.getElementById("projects");
-              if (el) {
-                e.preventDefault();
-                const navH =
-                  parseInt(
-                    getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
-                  ) || 52;
-                window.scrollTo({
-                  top: el.getBoundingClientRect().top + window.scrollY - navH,
-                  behavior: "smooth",
-                });
-              }
-            }
-          }}
-        >
-          Work
+    <header className="simple-nav">
+      <div className="simple-nav-inner">
+        <Link className="simple-nav-name" href="/">
+          Michael Yao
         </Link>
-        <Link href="/about" onClick={() => setMenuOpen(false)}>
-          About
-        </Link>
-        <Link href="/studies" onClick={() => setMenuOpen(false)}>
-          Studies
-        </Link>
+        <nav className="simple-nav-tabs" aria-label="Primary navigation">
+          {primaryLinks.map((link) => (
+            <Link
+              className={link.key === activeKey ? "is-active" : undefined}
+              href={link.href}
+              key={link.key}
+              aria-current={link.key === activeKey ? "page" : undefined}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
-
-      <div className="nav-icons">
-        <a href="https://www.linkedin.com/in/yiqi-yao-michael/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-          <LinkedInIcon />
-        </a>
-        <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
-          <GitHubIcon />
-        </a>
-        <a href="mailto:myao3411@gmail.com" aria-label="Email">
-          <EmailIcon />
-        </a>
-      </div>
-
-      <button
-        className="nav-menu-btn"
-        id="menuBtn"
-        aria-label="Menu"
-        onClick={() => setMenuOpen((v) => !v)}
-        type="button"
-      >
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
+    </header>
   );
 }

@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
-import { Lora, Roboto_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono, Lora, Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import "@/styles/maya.css";
+import "@/styles/simple-portfolio.css";
 
-const lora = Lora({
+// Primary sitewide type — matches langalpha.ai's font choices (Geist / JetBrains Mono).
+const geist = Geist({
   variable: "--ff-body",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--ff-label",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Legacy pair, kept only for the /water essay page (see .npage--water override
+// in globals.css) — that page intentionally keeps its original serif/mono look.
+const lora = Lora({
+  variable: "--font-lora-legacy",
   subsets: ["latin"],
   style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
@@ -13,7 +30,7 @@ const lora = Lora({
 });
 
 const robotoMono = Roboto_Mono({
-  variable: "--ff-label",
+  variable: "--font-roboto-mono-legacy",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
   display: "swap",
@@ -47,16 +64,16 @@ export const metadata: Metadata = {
     default: "Michael Yao",
     template: "%s",
   },
-  description: "Computer-science & math student at Harvey Mudd. Atoms and algorithms.",
+  description: "Michael Yao — computer science, mathematics, computational physics, and machine learning.",
   openGraph: {
     title: "Michael Yao",
-    description: "Computer-science & math student at Harvey Mudd. Atoms and algorithms.",
+    description: "Computer science, mathematics, computational physics, and machine learning.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Michael Yao",
-    description: "Computer-science & math student at Harvey Mudd. Atoms and algorithms.",
+    description: "Computer science, mathematics, computational physics, and machine learning.",
   },
   icons: {
     icon: [
@@ -76,7 +93,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lora.variable} ${robotoMono.variable} ${etBook.variable}`}>
+    <html
+      lang="en"
+      className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
