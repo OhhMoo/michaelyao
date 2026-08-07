@@ -5,44 +5,78 @@ import { education, experience, type TimelineEntry } from "@/data/resume";
 
 import styles from "./AcademicCv.module.css";
 
-const selectedResearch = [
-  {
-    title: "Water",
-    href: "/water",
-    description:
-      "Unsupervised classification of structural heterogeneity across molecular-dynamics trajectories, validated against an independent oxygen–oxygen structure factor.",
-  },
-  {
-    title: "Mode-Selective Criticality",
-    href: "/criticality",
-    description:
-      "A mean-field study of signal propagation in random tanh networks, tracing the order-to-chaos boundary and asking which modes survive depth.",
-  },
-  {
-    title: "SAE × RL",
-    href: "/sae-rl",
-    description:
-      "Sparse autoencoders trained across PPO checkpoints measure how reinforcement learning reorganizes a language model’s internal feature geometry.",
-  },
+const selectedSoftware = [
   {
     title: "SPEQTRO",
     href: "/speqtro",
     description:
-      "An autonomous agent that combines specialist models for NMR, IR, and mass spectra into ranked molecular structures with traceable evidence.",
+      "An autonomous agent that combines NMR, IR, and mass-spectrometry models into ranked molecular structures with traceable evidence.",
   },
   {
-    title: "chem-icl",
+    title: "Chem-ICL",
     href: "/ersilia",
     description:
-      "An in-context TabPFN pipeline that combines Ersilia model representations to predict molecular properties without training a new model for every task.",
+      "An in-context TabPFN pipeline that combines Ersilia model representations for molecular-property prediction without task-specific training.",
   },
   {
-    title: "ms-pred-PyG",
+    title: "ms-pred × PyG",
     href: "/ms-pred",
     description:
-      "A port of ICEBERG’s MS/MS fragmentation pipeline from DGL to PyTorch Geometric, covering 19 files and eight graph-neural-network families.",
+      "A PyTorch Geometric port of ICEBERG’s MS/MS fragmentation pipeline across eight graph-neural-network families.",
   },
 ] as const;
+
+type ExperienceLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
+type ExperienceDetails = {
+  summary?: string;
+  links?: readonly ExperienceLink[];
+  projects?: readonly {
+    title: string;
+    summary: string;
+    href: string;
+  }[];
+};
+
+const experienceDetails: Record<string, ExperienceDetails> = {
+  "Alkera AI, Inc. (YC-S26)": {
+    summary:
+      "Building reinforcement-learning infrastructure and evaluation systems for an LLM data agent.",
+    links: [
+      { label: "Read more", href: "https://www.alkera.ai/", external: true },
+    ],
+  },
+  "Ersilia Open Source Initiative": {
+    summary:
+      "Developing Chem-ICL, an in-context learning pipeline for molecular-property prediction.",
+    links: [{ label: "Read more", href: "/ersilia" }],
+  },
+  "Zhuang Group — Harvey Mudd College": {
+    projects: [
+      {
+        title: "Statistical Physics of Deep Neural Networks",
+        summary:
+          "Using mean-field theory to study signal propagation, criticality, and trainable depth in random neural networks.",
+        href: "/criticality",
+      },
+      {
+        title: "Water × Unsupervised ML",
+        summary:
+          "Using unsupervised learning to identify latent structural populations in molecular-dynamics simulations of supercooled water.",
+        href: "/water",
+      },
+    ],
+  },
+  Algoverse: {
+    summary:
+      "Tracing how reinforcement learning reshapes language-model representations with aligned sparse autoencoders.",
+    links: [{ label: "Read more", href: "/sae-rl" }],
+  },
+};
 
 type TimelineProps = {
   entries: TimelineEntry[];
@@ -99,12 +133,91 @@ function Timeline({ entries }: TimelineProps) {
   );
 }
 
+function ExperienceTimeline({ entries }: TimelineProps) {
+  return (
+    <div className={styles.timeline}>
+      {entries.map((entry) => {
+        const details = experienceDetails[entry.heading];
+        const links = details?.links ?? [];
+        const projects = details?.projects ?? [];
+
+        return (
+          <article className={styles.entry} key={entry.heading}>
+            <div className={styles.meta}>
+              {entry.meta.map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+
+            <div className={styles.entryContent}>
+              <h3>{entry.heading}</h3>
+              {details?.summary && <p>{details.summary}</p>}
+
+              {projects.length > 0 && (
+                <div className={styles.experienceProjects}>
+                  {projects.map((project) => (
+                    <section className={styles.experienceProject} key={project.href}>
+                      <h4>{project.title}</h4>
+                      <p>{project.summary}</p>
+                      <Link
+                        className={styles.readMoreLink}
+                        href={project.href}
+                        aria-label={`Read more about ${project.title}`}
+                      >
+                        Read more
+                      </Link>
+                    </section>
+                  ))}
+                </div>
+              )}
+
+              {links.length > 0 && (
+                <nav
+                  className={styles.readMoreLinks}
+                  aria-label={`Read more about ${entry.heading}`}
+                >
+                  {links.map((link) =>
+                    link.external ? (
+                      <a
+                        className={styles.readMoreLink}
+                        href={link.href}
+                        key={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link className={styles.readMoreLink} href={link.href} key={link.href}>
+                        {link.label}
+                      </Link>
+                    ),
+                  )}
+                </nav>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
 export function AcademicCv() {
   return (
     <main className={styles.root}>
       <header className={styles.identity}>
         <div className={styles.identityText}>
-          <h1>Michael Yao</h1>
+          <div className={styles.nameLine}>
+            <h1>Michael Yao</h1>
+            <Image
+              className={styles.siteLogo}
+              src="/seo/logo.png"
+              alt=""
+              width={28}
+              height={41}
+            />
+          </div>
           <p className={styles.affiliation}>Computer Science &amp; Mathematics · Harvey Mudd College</p>
           <div className={styles.introduction}>
             <p>
@@ -142,21 +255,21 @@ export function AcademicCv() {
 
       <section className={styles.section} aria-labelledby="experience-heading">
         <h2 id="experience-heading">Research &amp; Experience</h2>
-        <Timeline entries={experience} />
+        <ExperienceTimeline entries={experience} />
       </section>
 
-      <section className={styles.section} aria-labelledby="research-heading">
-        <h2 id="research-heading">Selected Research &amp; Software</h2>
-        <div className={styles.researchList}>
-          {selectedResearch.map((item) => (
-            <article className={styles.researchItem} key={item.href}>
+      <section className={styles.section} aria-labelledby="software-heading">
+        <h2 id="software-heading">Selected Software</h2>
+        <ul className={styles.softwareList}>
+          {selectedSoftware.map((item) => (
+            <li className={styles.softwareItem} key={item.href}>
               <h3>
                 <Link href={item.href}>{item.title}</Link>
               </h3>
               <p>{item.description}</p>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section className={styles.section} aria-labelledby="education-heading">

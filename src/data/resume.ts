@@ -48,7 +48,7 @@ export const experience: TimelineEntry[] = [
   {
     heading: "Zhuang Group — Harvey Mudd College",
     meta: [
-      "Student Researcher, Computational Physics & Machine Learning (Prof. Bilin Zhuang)",
+      "Student Researcher, Computational Physics & Machine Learning",
       "Claremont, CA",
       "Oct 2025 – Present",
     ],

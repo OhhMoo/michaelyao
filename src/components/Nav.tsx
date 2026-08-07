@@ -6,12 +6,16 @@ import { usePathname } from "next/navigation";
 const primaryLinks = [
   { href: "/", label: "Academic", key: "academic" },
   { href: "/about", label: "About", key: "about" },
-  { href: "/studies", label: "Study progress", key: "studies" },
 ] as const;
 
 export function Nav() {
   const pathname = usePathname();
-  const activeKey = pathname === "/about" ? "about" : pathname === "/studies" ? "studies" : "academic";
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const activeKey = pathSegments.includes("about")
+    ? "about"
+    : pathSegments.includes("studies")
+      ? null
+      : "academic";
 
   return (
     <header className="simple-nav">

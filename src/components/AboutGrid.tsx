@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { charMessages } from "@/lib/grid-data";
 import styles from "./AboutGrid.module.css";
 
 type GridLayout = "desktop" | "mobile";
@@ -67,6 +68,7 @@ export function AboutGrid() {
   const imageByCell = new Map(
     placements[layout].map(({ cell, image }) => [cell, image]),
   );
+  const columnCount = layout === "mobile" ? 5 : 9;
 
   const toggleImage = (imageNumber: number) => {
     setOpenImages((current) => {
@@ -94,12 +96,14 @@ export function AboutGrid() {
             }
 
             const isOpen = openImages.has(imageNumber);
+            const message = charMessages[String(imageNumber)];
+            const alignBubbleEnd = cell % columnCount >= columnCount - 2;
 
             return (
               <button
-                className={`${styles.cell} ${styles.imageCell}`}
+                className={`${styles.cell} ${styles.imageCell} ${isOpen ? styles.imageCellOpen : ""}`}
                 type="button"
-                aria-label={`${isOpen ? "Hide" : "Reveal"} character illustration ${imageNumber}`}
+                aria-label={`${isOpen ? "Hide" : "Reveal"} note: ${message}`}
                 aria-pressed={isOpen}
                 key={cell}
                 onClick={() => toggleImage(imageNumber)}
@@ -116,6 +120,12 @@ export function AboutGrid() {
                   className={`${styles.cover} ${isOpen ? styles.coverOpen : ""}`}
                   aria-hidden="true"
                 />
+                <span
+                  className={`${styles.bubble} ${alignBubbleEnd ? styles.bubbleEnd : ""} ${isOpen ? styles.bubbleOpen : ""}`}
+                  aria-hidden="true"
+                >
+                  {message}
+                </span>
               </button>
             );
           })}
