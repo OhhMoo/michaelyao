@@ -8,14 +8,11 @@ export type TimelineStat = { k: string; v: string };
 
 export type TimelineEntry = {
   heading: string;
-  meta: string[]; // rendered joined with " | "
+  meta: string[];
   bullets?: string[];
   subEntries?: TimelineSubEntry[];
   paragraphs?: string[];
   footnote?: { text: string; label: string; href: string };
-  /** Short tags surfaced in the live career dashboard while this entry is in view. */
-  skills?: string[];
-  /** Headline numbers pulled verbatim from this entry's own bullets — no invented stats. */
   stat?: TimelineStat[];
 };
 
@@ -28,7 +25,6 @@ export const experience: TimelineEntry[] = [
       "Built an end-to-end GRPO policy-optimization harness in verl for an LLM data agent, spanning agent-loop routing, a DuckDB-backed task runner, and an episode-scoring reward pipeline that raised task success from 10.5% to 46.2%",
       "Containerized training and evaluation with Docker on Linux for deterministic, versioned experiments that reproduce reliably across HPC nodes",
     ],
-    skills: ["verl", "GRPO", "DuckDB", "Docker", "RL"],
     stat: [{ k: "Task success", v: "10.5% → 46.2%" }],
   },
   {
@@ -42,8 +38,10 @@ export const experience: TimelineEntry[] = [
       label: "here",
       href: "/ersilia",
     },
-    skills: ["TabPFN", "In-context learning", "Cheminformatics"],
-    stat: [{ k: "Features", v: "1,458 → 200" }, { k: "Endpoints", v: "9 × 10 splits" }],
+    stat: [
+      { k: "Features", v: "1,458 → 200" },
+      { k: "Endpoints", v: "9 × 10 splits" },
+    ],
   },
   {
     heading: "Zhuang Group — Harvey Mudd College",
@@ -70,7 +68,6 @@ export const experience: TimelineEntry[] = [
         ],
       },
     ],
-    skills: ["Mean-field theory", "MDtraj", "UMAP", "GMM", "DBSCAN"],
     stat: [{ k: "MD trajectories", v: "20 × 20,480 configs" }],
   },
   {
@@ -84,8 +81,10 @@ export const experience: TimelineEntry[] = [
       "Built an end-to-end pipeline (PPO fine-tuning in verl with FSDP + vLLM, activation caching across 8 checkpoints and 4 residual-stream layers, TopK sparse-autoencoder training) to quantify how reinforcement learning reshapes a model's internal representation geometry",
       "Trained 32 warm-start sparse autoencoders with feature indices aligned across checkpoints, making decoder cosine-similarity a well-defined drift metric on high-dimensional feature space",
     ],
-    skills: ["PPO", "verl", "FSDP", "vLLM", "Sparse autoencoders"],
-    stat: [{ k: "SAEs trained", v: "32 warm-start" }, { k: "Checkpoints", v: "8 × 4 layers" }],
+    stat: [
+      { k: "SAEs trained", v: "32 warm-start" },
+      { k: "Checkpoints", v: "8 × 4 layers" },
+    ],
   },
 ];
 
@@ -96,7 +95,6 @@ export const education: TimelineEntry[] = [
     paragraphs: [
       "Relevant coursework: Statistical Mechanics, Probability, Statistics, Differential Equations, Graph Theory",
     ],
-    skills: ["Statistical Mechanics", "Probability", "Graph Theory"],
   },
   {
     heading: "Shanghai Qibao Dwight High School",
@@ -106,7 +104,6 @@ export const education: TimelineEntry[] = [
       "UK Chemistry Olympiad: Round 1 Gold Medalist (2023, 2024), Silver Medalist (2022)",
       "Canadian Chemistry Olympiad: Round 2 Gold Medalist (2024), Round 1 Gold Medalist (2022)",
     ],
-    skills: ["Chemistry"],
     stat: [{ k: "IB Diploma", v: "44 / 45" }],
   },
 ];

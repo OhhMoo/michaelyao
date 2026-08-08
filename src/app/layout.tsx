@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono, Lora, Roboto_Mono } from "next/font/google";
+import {
+  DM_Sans,
+  Geist,
+  IBM_Plex_Sans_Condensed,
+  JetBrains_Mono,
+  Lora,
+  Roboto_Mono,
+} from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import "@/styles/simple-portfolio.css";
+import "@/styles/about-clone.css";
+import "@/styles/site-nav.css";
 
 // Primary sitewide type — matches langalpha.ai's font choices (Geist / JetBrains Mono).
 const geist = Geist({
@@ -16,6 +25,22 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--ff-label",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// /about only — georgialyu.com's exact type pair. Exposed as CSS variables here
+// and remapped onto --ff-body / --ff-label inside `.about-clone` (see
+// styles/about-clone.css) so no other route is affected.
+const dmSans = DM_Sans({
+  variable: "--ff-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const plexCondensed = IBM_Plex_Sans_Condensed({
+  variable: "--ff-plex-condensed",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -95,7 +120,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable}`}
+      className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable} ${dmSans.variable} ${plexCondensed.variable}`}
     >
       <body>{children}</body>
     </html>

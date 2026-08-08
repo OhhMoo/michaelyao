@@ -6,9 +6,12 @@ type FadeInProps = {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  /** Optional DOM id — lets useSectionProgress track this block as a
+      dashboard step anchor (see ScrollDashboard). */
+  id?: string;
 };
 
-export function FadeIn({ children, className = "", style }: FadeInProps) {
+export function FadeIn({ children, className = "", style, id }: FadeInProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -31,7 +34,7 @@ export function FadeIn({ children, className = "", style }: FadeInProps) {
   }, []);
 
   return (
-    <div ref={ref} className={`fade-in ${visible ? "visible" : ""} ${className}`} style={style}>
+    <div ref={ref} id={id} className={`fade-in ${visible ? "visible" : ""} ${className}`} style={style}>
       {children}
     </div>
   );

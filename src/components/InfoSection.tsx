@@ -1,6 +1,14 @@
 import { FadeIn } from "@/components/FadeIn";
 import { EmailIcon, GitHubIcon, LinkedInIcon } from "@/components/icons";
 
+// Real figures only — no invented stats (same convention as resume.ts).
+const STATS = [
+  { k: "Active roles", v: "4" },
+  { k: "Projects shipped", v: "8" },
+  { k: "GitHub stars", v: "1.5k+" },
+  { k: "Manuscripts", v: "1" },
+];
+
 export function InfoSection() {
   return (
     <section id="info" className="maya-section">
@@ -54,20 +62,18 @@ export function InfoSection() {
               </li>
             </ul>
             <div>
-              <div className="about-text">
-                <p>
-                  I&apos;m Michael &mdash; a computer-science &amp; math student at Harvey
-                  Mudd, working in the Zhuang group on the statistical physics of deep neural
-                  networks and the structural heterogeneity of supercooled water: mean-field
-                  theory, large MD simulations, order-parameter embeddings.
-                </p>
-                <p>
-                  Outside the lab I build tools at the seam of atoms and algorithms &mdash; agentic
-                  spectroscopy reasoning, sparse autoencoders on RL-trained models, GNN pipelines
-                  for MS/MS fragmentation. I care about systems you can hold in your head, and
-                  results that survive being looked at twice.
-                </p>
-              </div>
+              <p className="info-epigraph">
+                Atoms and algorithms &mdash; computational physics, ML interpretability, and the
+                tools in between.
+              </p>
+              <dl className="stat-strip">
+                {STATS.map((stat) => (
+                  <div className="stat-cell" key={stat.k}>
+                    <dt className="k">{stat.k}</dt>
+                    <dd className="v">{stat.v}</dd>
+                  </div>
+                ))}
+              </dl>
               <div className="about-btns">
                 <a
                   target="_blank"

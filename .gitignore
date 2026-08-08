@@ -71,3 +71,7 @@ temp/
 # ── Large media: keep speqtro-video.mp4, ignore the rest ──
 public/videos/*
 !public/videos/speqtro-video.mp4
+
+# ── Local scratch / not part of the site ──
+.tmp-shots/
+michaelyao.site.crt

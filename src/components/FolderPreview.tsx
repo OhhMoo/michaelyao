@@ -3,17 +3,19 @@
 import type { ProjectPreview } from "@/data/projects";
 import { CliMockup } from "@/components/CliMockup";
 
-function macTitleFor(preview: ProjectPreview): string {
+/** Tab label for the data-panel chrome; null = no label, dot only — a
+    generic "preview" tag adds no information, so generic kinds omit it. */
+function macTitleFor(preview: ProjectPreview): string | null {
   if (preview.kind === "image") {
     const src = preview.src;
     const file = src.slice(src.lastIndexOf("/") + 1);
-    return file || "preview";
+    return file || null;
   }
-  if (preview.kind === "image-pair") return "preview";
+  if (preview.kind === "image-pair") return null;
   if (preview.kind === "image-gallery") return preview.title ?? "gallery";
-  if (preview.kind === "video") return "preview";
-  if (preview.kind === "iframe") return preview.title ?? "preview";
-  if (preview.kind === "iframe-pair") return preview.title ?? "preview";
+  if (preview.kind === "video") return null;
+  if (preview.kind === "iframe") return preview.title ?? null;
+  if (preview.kind === "iframe-pair") return preview.title ?? null;
   if (preview.kind === "svg") {
     return preview.node === "iceberg" ? "iceberg.note" : "sae-drift.note";
   }
@@ -28,14 +30,14 @@ function MacFrame({
   tone = "light",
   children,
 }: {
-  title: string;
+  title: string | null;
   tone?: "light" | "dark";
   children: React.ReactNode;
 }) {
   return (
     <div className={`data-panel${tone === "light" ? " data-panel-light" : ""}`}>
       <span className="data-panel-tab">
-        <span>{title}</span>
+        {title && <span>{title}</span>}
         <span className="data-panel-tab-dot" aria-hidden />
       </span>
       <div className="data-panel-body">{children}</div>

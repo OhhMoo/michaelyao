@@ -1,0 +1,139 @@
+/* ============================================================
+   SITE NAV — georgialyu.com's header, shared by / and /about
+   ------------------------------------------------------------
+   Deliberately self-contained: values are hard-coded rather than
+   read from custom properties, because this nav sits on top of two
+   pages with different token sets (the academic page uses Geist +
+   indigo, the About clone uses DM Sans + terracotta). Hard-coding
+   is what makes the two headers render identically.
+
+   `.gl-nav` is applied alongside globals.css's `.nav`, and every
+   rule here is a two-class selector so it wins on specificity.
+============================================================ */
+.nav.gl-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 56px;
+  padding: 0 max(1.5rem, calc((100% - 1296px) / 2));
+  background: rgba(249, 249, 249, 0.6);
+  backdrop-filter: blur(16px);
+  font-family: var(--ff-dm-sans), sans-serif;
+  letter-spacing: -0.01em;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav.gl-nav.nav--hidden {
+  transform: translateY(-100%);
+}
+
+/* Two-line wordmark. `display: block` matters — globals.css turns
+   .nav-logo into an inline-flex row, which would swallow the <br>. */
+.gl-nav .nav-logo {
+  display: block;
+  gap: 0;
+  justify-self: start;
+  color: #1a1817;
+  font-size: 0.8rem;
+  font-weight: 450;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.gl-nav .nav-logo:hover {
+  color: #c4593a;
+}
+.gl-nav .nav-logo span {
+  color: #919191;
+}
+
+.gl-nav .nav-center {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.gl-nav .nav-center a {
+  color: #919191;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.gl-nav .nav-center a:hover,
+.gl-nav .nav-center a.active {
+  color: #1a1817;
+}
+
+.gl-nav .nav-icons {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 1.5rem;
+}
+.gl-nav .nav-icons a {
+  display: flex;
+  align-items: center;
+  color: #aaa49c;
+  transition: color 0.2s;
+}
+.gl-nav .nav-icons a:hover {
+  color: #1a1817;
+}
+
+.gl-nav .nav-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.gl-nav .nav-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #1a1817;
+}
+
+/* Spacer that keeps page content clear of the fixed nav. */
+.gl-nav-offset {
+  padding-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .nav.gl-nav {
+    height: 48px;
+    padding: 0 1.5rem;
+    grid-template-columns: 1fr auto;
+  }
+  .gl-nav .nav-center,
+  .gl-nav .nav-icons {
+    display: none;
+  }
+  .gl-nav .nav-menu-btn {
+    display: flex;
+    justify-self: end;
+  }
+  .nav.gl-nav.menu-open .nav-center {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd8cf;
+    background: #ffffff;
+  }
+  .gl-nav-offset {
+    padding-top: 48px;
+  }
+}

@@ -1,180 +1,130 @@
-import {
-  IconChartCandle,
-  IconMathFunction,
-  IconMusic,
-  type Icon as TablerIcon,
-} from "@tabler/icons-react";
 import { FadeIn } from "@/components/FadeIn";
-import { FolderPreview } from "@/components/FolderPreview";
+import { Activity, Droplet, LineChart, Music2, Network, Waves, type LucideIcon } from "lucide-react";
 
-type Flagship = {
+type ShowcaseProject = {
+  id: string;
   title: string;
-  eyebrow: string;
   description: string;
-  tags: string[];
-  links: { label: string; href: string; external?: boolean }[];
-  preview?: React.ComponentProps<typeof FolderPreview>["preview"];
-  image?: { src: string; alt: string };
+  href: string;
+  icon: LucideIcon;
+  stats: { k: string; v: string }[];
 };
 
-const FLAGSHIPS: Flagship[] = [
+const showcaseProjects: ShowcaseProject[] = [
   {
+    id: "project-speqtro",
     title: "SPEQTRO",
-    eyebrow: "Autonomous spectroscopy reasoning agent",
-    description:
-      "An agent that reads NMR, IR, and MS spectra, runs six specialist ML models across four evidence streams, and returns ranked structures — showing its reasoning at every step. Runs as a CLI, a web GUI, or an MCP server inside Claude or Cursor.",
-    tags: ["Python", "PyTorch", "MCP", "Spectroscopy"],
-    links: [
-      { label: "Read the page →", href: "/speqtro" },
-      { label: "GitHub ↗", href: "https://github.com/OhhMoo/SPEQTRO", external: true },
+    description: "Six models rank molecular structures from spectra — and show their reasoning.",
+    href: "/speqtro",
+    icon: Waves,
+    stats: [
+      { k: "MODELS", v: "6 specialist" },
+      { k: "EVIDENCE", v: "NMR · IR · MS" },
+      { k: "OUTPUT", v: "Ranked + traced" },
     ],
-    preview: { kind: "video", src: "/videos/speqtro-video.mp4" },
   },
   {
+    id: "project-water",
     title: "Water, clustered",
-    eyebrow: "Two states of supercooled water, made visible",
-    description:
-      "Is liquid water one continuum or a mixture of two local structures? I let unsupervised clustering decide on MD trajectories, then validated it against an observable the clustering never saw. Two structurally distinct populations emerge on their own.",
-    tags: ["OpenMM", "HDBSCAN", "UMAP", "HPC"],
-    links: [
-      { label: "Read the page →", href: "/water" },
-      { label: "GitHub ↗", href: "https://github.com/OhhMoo/Water_Clustering", external: true },
+    description: "Unsupervised clustering resolves two hidden structures in supercooled water.",
+    href: "/water",
+    icon: Droplet,
+    stats: [
+      { k: "TRAJECTORIES", v: "20 × 20,480 configs" },
+      { k: "METHOD", v: "K-Means · GMM · UMAP" },
+      { k: "RESULT", v: "2 latent populations" },
     ],
-    preview: {
-      kind: "iframe-pair",
-      title: "water 3D clustering",
-      panes: [
-        { src: "/plotly/water-3d-cluster0.html", caption: "cluster 0", title: "Cluster 0 — Low-density" },
-        { src: "/plotly/water-3d-cluster1.html", caption: "cluster 1", title: "Cluster 1 — High-density" },
-      ],
-    },
   },
   {
+    id: "project-sae-rl",
     title: "SAE × RL",
-    eyebrow: "Reading what RL fine-tuning changes inside a model",
-    description:
-      "Can sparse autoencoders trained on a chain of PPO checkpoints tell you what RL fine-tuning changes inside a model? A three-axis scorecard separates reward-invariant reorganization from reward-graded causal load.",
-    tags: ["PyTorch", "SAELens", "verl", "TopK SAE"],
-    links: [
-      { label: "Read the page →", href: "/sae-rl" },
-      { label: "GitHub ↗", href: "https://github.com/OhhMoo/sae_rl", external: true },
+    description: "Aligned sparse autoencoders track what RL reorganizes inside a model.",
+    href: "/sae-rl",
+    icon: Network,
+    stats: [
+      { k: "CHECKPOINTS", v: "8 × 4 layers" },
+      { k: "SAES", v: "32 warm-start" },
+      { k: "METRIC", v: "Decoder cosine drift" },
     ],
-    image: {
-      src: "/images/works/sae-rl/scorecard.png",
-      alt: "Three-axis dissociation scorecard across matched PPO chains",
-    },
   },
-];
-
-type ProjectCard = {
-  title: string;
-  blurb: string;
-  tags: string[];
-  href?: string;
-  Icon: TablerIcon;
-};
-
-const CARDS: ProjectCard[] = [
   {
+    id: "project-langalpha",
     title: "LangAlpha",
-    blurb:
-      "Open-source agentic investing platform (1.5k+ GitHub stars) — live market data, inline financial time-series charts, and TradingView integration for systematic research workflows.",
-    tags: ["FastAPI", "LangGraph", "React", "Daytona"],
+    description: "An open-source agentic workspace for AI-driven investment research.",
     href: "/langalpha",
-    Icon: IconChartCandle,
+    icon: LineChart,
+    stats: [
+      { k: "DATA", v: "Live quotes · SEC EDGAR" },
+      { k: "AGENTS", v: "Multi-agent research" },
+      { k: "STATUS", v: "Open source" },
+    ],
   },
   {
+    id: "project-criticality",
     title: "Mode-Selective Criticality",
-    blurb:
-      "Mean-field signal propagation in random tanh networks — a replication of Poole et al. (2016), transient chaos.",
-    tags: ["NumPy", "Mean-field theory", "SAE"],
+    description: "Replicating mean-field chaos and signal propagation in random tanh networks.",
     href: "/criticality",
-    Icon: IconMathFunction,
+    icon: Activity,
+    stats: [
+      { k: "MODEL", v: "Random tanh networks" },
+      { k: "THEORY", v: "Mean-field signal prop." },
+      { k: "FOCUS", v: "Transient chaos" },
+    ],
   },
   {
+    id: "project-popping",
     title: "Popping Dictionary",
-    blurb:
-      "A curated dictionary of popping dance elements — 18 moves with history, technique, and practice clips, plus the dancers who defined them. Rebuilt from Wix as a static Next.js site, live at poppindex.com.",
-    tags: ["Next.js", "Dance", "poppindex.com"],
+    description: "An editorial index of 18 popping elements, technique, and history.",
     href: "/popping",
-    Icon: IconMusic,
+    icon: Music2,
+    stats: [
+      { k: "ENTRIES", v: "18 elements" },
+      { k: "FORMAT", v: "Editorial index" },
+      { k: "CONTENT", v: "Technique · history · dancers" },
+    ],
   },
 ];
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="maya-section maya-section--alt">
+    <section id="projects" className="maya-section maya-section--alt projects-section">
       <div className="maya-container">
-        <FadeIn style={{ transitionDelay: "0.2s" }}>
+        <FadeIn>
           <div className="maya-title">
             <h2>Projects</h2>
-            <p>Click on any project to learn more</p>
+            <p>Research stories, tools, and archives — hover a card for the evidence behind it.</p>
           </div>
         </FadeIn>
 
-        <div className="featured-stack">
-          {FLAGSHIPS.map((it, i) => (
-            <FadeIn
-              key={it.title}
-              className="feat-item feat-item-inline"
-              style={{ transitionDelay: `${0.06 * i}s` }}
-            >
-              <div className="feat-item-text">
-                <h3 className="feat-item-title">{it.title}</h3>
-                <div className="feat-item-eyebrow">{it.eyebrow}</div>
-                <p className="feat-item-desc">{it.description}</p>
-                <div className="feat-chips">
-                  {it.tags.map((t) => (
-                    <span key={t} className="feat-chip">
-                      {t}
-                    </span>
-                  ))}
+        <FadeIn className="showcase-grid">
+          {showcaseProjects.map((project) => {
+            const Icon = project.icon;
+            return (
+              <a className="showcase-card" href={project.href} key={project.id} id={project.id}>
+                <span className="showcase-arrow" aria-hidden="true">
+                  ↗
+                </span>
+                <div className="showcase-icon">
+                  <Icon strokeWidth={1.25} />
                 </div>
-                <div className="feat-links">
-                  {it.links.map((l) => (
-                    <a
-                      key={l.href}
-                      href={l.href}
-                      {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div className="feat-item-preview">
-                {it.image ? (
-                  <img className="feat-plain-img" src={it.image.src} alt={it.image.alt} />
-                ) : (
-                  it.preview && <FolderPreview preview={it.preview} />
-                )}
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        <div className="maya-projects-grid maya-projects-grid--rest">
-          {CARDS.map((card) => (
-            <FadeIn key={card.title} style={{ transitionDelay: "0.4s" }}>
-              <a href={card.href}>
-                <div className="service-thumb">
-                  <div className="maya-card-icon">
-                    <card.Icon size={45} stroke={1.5} />
-                  </div>
-                  <h4>{card.title}</h4>
-                  <p>{card.blurb}</p>
-                  <div className="skill-container">
-                    {card.tags.map((t) => (
-                      <span key={t} className="skill">
-                        {t}
-                      </span>
-                    ))}
+                <div className="showcase-cap">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="showcase-detail">
+                    <dl className="showcase-detail-rows">
+                      {project.stats.map((stat) => (
+                        <div className="showcase-detail-row" key={stat.k}>
+                          <dt>{stat.k}</dt>
+                          <dd>{stat.v}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
                 </div>
               </a>
-            </FadeIn>
-          ))}
-        </div>
+            );
+          })}
+        </FadeIn>
       </div>
     </section>
   );

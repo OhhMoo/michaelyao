@@ -5,25 +5,52 @@
 ============================================================ */
 :root {
   --bg:           #ffffff;
-  --bg-card:      #f0f7ff;
+  --bg-card:      #ffffff;
   --projects-tag: #f0f0f0;
-  --text:         #2b2b2b;
-  --text-2:       #696969;
-  --text-3:       #9a9a9a;
+  --surface:      #ffffff;
+  --surface-soft: #f5f5f2;
+  --nav-bg:       rgba(255, 255, 255, 0.72);
+  --text:         #141413;
+  --text-2:       #5e5d59;
+  --text-3:       #8c8a80;
   --accent:       #303F9F;
   --accent-2:     #7682cc;
-  --border:       #D0D0D0;
+  --border:       #ded9c9;
 
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   --nav-h: 56px;
 }
 
+[data-theme="dark"] {
+  --bg:           #101216;
+  --bg-card:      #171a20;
+  --projects-tag: #22262e;
+  --surface:      #181b21;
+  --surface-soft: #20242b;
+  --nav-bg:       rgba(16, 18, 22, 0.78);
+  --text:         #f2f0e9;
+  --text-2:       #bbb9b2;
+  --text-3:       #8c8f97;
+  --accent:       #9ba8ff;
+  --accent-2:     #7d8ce8;
+  --border:       #343944;
+}
+
 /* ============================================================
    RESET
 ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+/* overflow-x: clip (not hidden) — unlike hidden, clip creates no scroll
+   container, so position:sticky descendants (live dashboard, essay rail)
+   still stick to the viewport. hidden on html/body silently breaks that. */
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  background: var(--bg);
+  color-scheme: light;
+}
+html[data-theme="dark"] { color-scheme: dark; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -32,8 +59,9 @@ body {
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: -0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.24s var(--ease), color 0.24s var(--ease);
 }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
@@ -100,7 +128,7 @@ img { display: block; max-width: 100%; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 max(1.5rem, calc((100% - 1296px) / 2));
-  background: rgba(249, 249, 249, 0.55);
+  background: var(--nav-bg);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   transition: transform 0.3s var(--ease);
@@ -159,6 +187,14 @@ img { display: block; max-width: 100%; }
 .nav-icons a:hover {
   color: var(--text);
 }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 1.25rem;
+}
+
 
 .nav-menu-btn {
   display: none;
@@ -1099,15 +1135,14 @@ img { display: block; max-width: 100%; }
 }
 .feat-item {
   padding: 34px 38px 38px;
-  background: #ffffff;
-  border-radius: 28px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   display: flex; flex-direction: column; gap: 22px;
-  transition: box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+  transition: border-color 0.3s var(--ease);
 }
 .feat-item:hover {
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
-  transform: translateY(-3px);
+  border-color: var(--accent);
 }
 .feat-item.feat-item-inline { flex-direction: row; align-items: flex-start; gap: 40px; }
 .feat-item.feat-item-stacked { flex-direction: column; gap: 28px; }
@@ -1167,7 +1202,7 @@ img { display: block; max-width: 100%; }
 .archive-head .w {
   font-family: var(--ff-label), monospace; font-weight: 400;
   font-size: 35px; line-height: 52px;
-  color: #2b2b2b;
+  color: var(--text);
 }
 .archive-head .archive-note p {
   font-family: var(--ff-label), sans-serif; font-size: 11px;
@@ -1205,8 +1240,8 @@ img { display: block; max-width: 100%; }
   position: relative; z-index: 1; height: 27px;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 0 18px 0 14px;
-  background: var(--f-bg, #ffffff);
-  border: 1px solid #B6B6B6; border-bottom: 0;
+  background: var(--f-bg, var(--bg));
+  border: 1px solid var(--border); border-bottom: 0;
   border-radius: 10px 10px 0 0;
   margin-bottom: -1px;
   font-family: var(--ff-label), sans-serif; font-size: 10.5px;
@@ -1215,12 +1250,12 @@ img { display: block; max-width: 100%; }
   transition: border-color .4s ease-in-out;
 }
 .folder .body {
-  background: var(--f-bg, #ffffff);
+  background: var(--f-bg, var(--bg));
   padding: 20px 22px 46px;
   color: var(--f-fg, var(--text));
   min-height: 170px;
   display: flex; flex-direction: column; gap: 12px;
-  border: 1px solid #B6B6B6;
+  border: 1px solid var(--border);
   border-radius: 0 18px 18px 18px;
   transition: border-color .4s ease-in-out;
   position: relative;
@@ -1270,7 +1305,7 @@ img { display: block; max-width: 100%; }
 }
 .folder:hover:not(.open) .body,
 .folder:hover:not(.open) .tab {
-  border-color: #2b2b2b;
+  border-color: var(--accent);
 }
 .folder:hover:not(.open) h3 { transform: translateX(6px); }
 .folder:hover:not(.open) .hint { opacity: 1; }
@@ -1281,7 +1316,7 @@ img { display: block; max-width: 100%; }
 .f-grey,
 .f-dgrey,
 .f-black,
-.f-white { --f-bg: #ffffff; --f-fg: #2b2b2b; --f-meta: #696969; }
+.f-white { --f-bg: var(--bg); --f-fg: var(--text); --f-meta: var(--text-2); }
 
 /* Photography folder: cover white like the rest, but its OPEN preview page is dark */
 .f-black.open > .body { background: #1A1817; color: #f2efe7; }
@@ -2039,11 +2074,11 @@ html:has(> body.lock) { overflow: hidden; }
 .npage--popping  { --acc: #b54511; --acc-2: #d07a4e; --tint: rgba(181, 69, 17, 0.07); }
 .npage--ersilia  { --acc: #50285a; --acc-2: #6c4a7e; --tint: rgba(80, 40, 90, 0.07); }
 
-.np-col  { max-width: 640px; margin-left: auto; margin-right: auto; }
+.np-col  { max-width: 640px; margin-left: 0; margin-right: auto; }
 .np-wide {
   width: min(100%, 640px);
   max-width: 640px;
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -2054,9 +2089,9 @@ html:has(> body.lock) { overflow: hidden; }
   max-width: 1100px;
 }
 
-/* Header — centered, paper-style (title spans wider than the reading column) */
-.np-head { padding: 1rem 0 0.75rem; text-align: center; }
-.np-head.np-col { max-width: 983px; }
+/* Header — left-aligned, paper-style (title spans wider than the reading column) */
+.np-head { padding: 1rem 0 0.75rem; text-align: left; }
+.np-head.np-col { max-width: 983px; margin-left: 0; }
 .np-eyebrow {
   font-size: 15px; font-weight: 700; letter-spacing: 0;
   text-transform: none; color: var(--paper-ink);
@@ -2067,21 +2102,22 @@ html:has(> body.lock) { overflow: hidden; }
 }
 .np-headline {
   margin-top: 0.35rem;
+  font-family: var(--font-serif-essay), Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
   font-size: clamp(36px, 4.5vw, 52px); font-weight: 700;
-  line-height: 1.08; letter-spacing: -0.025em; color: var(--paper-ink);
+  line-height: 1.08; letter-spacing: -0.015em; color: var(--paper-ink);
   text-wrap: balance;
 }
 .np-subhead {
-  margin: 1.5rem auto 0;
+  margin: 1.5rem 0 0;
   max-width: 44rem;
-  text-align: center;
+  text-align: left;
   font-family: var(--ff-body), Georgia, serif;
   font-size: 17px; font-weight: 400;
   line-height: 1.62; letter-spacing: 0; color: var(--paper-muted);
   text-wrap: pretty;
 }
 .npage .np-subhead {
-  text-align: center;
+  text-align: left;
   font-size: 17px;
 }
 
@@ -2107,16 +2143,21 @@ html:has(> body.lock) { overflow: hidden; }
 }
 
 /* Media band — flat paper-style figures */
-.np-media { margin: 2.75rem auto; }
+.np-media { margin: 3.25rem 0; }
+.npage .np-media.np-col {
+  width: min(100%, 980px);
+  max-width: 980px;
+}
 .np-media > figure { margin: 0; }
 .np-glass {
-  background: #ffffff;
-  border: 1px solid rgba(20, 20, 19, 0.10);
-  border-radius: 12px;
-  padding: 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
 }
-.np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 6px; }
-.np-media .rp-livewin, .np-media .rp-macwin { border-radius: 12px; }
+.np-glass img, .np-glass video { display: block; width: 100%; height: auto; border-radius: 0; }
+.np-media .rp-livewin { border-radius: 12px; }
+.np-media .rp-macwin { border-radius: 0; }
 .np-media .rp-livewin .rp-livebody { border-radius: 11px; }
 .np-caption {
   margin-top: 0.9rem; text-align: left;
@@ -2184,8 +2225,10 @@ html:has(> body.lock) { overflow: hidden; }
   .npage { padding-top: 3.25rem; padding-bottom: 5rem; }
   .np-headline { font-size: clamp(34px, 10vw, 44px); }
   .np-subhead { margin-top: 1.25rem; font-size: 16px; }
-  .np-media { margin: 2rem auto; }
-  .np-glass { padding: 8px; border-radius: 14px; }
+  .np-media { margin: 2.25rem 0; }
+  /* Side-by-side 3D scenes are unusable at phone width — stack them.
+     Scoped to .np-media so the folder-preview tile keeps its 2-up grid. */
+  .np-media .pair-live-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .npage .fade-in { transition: none; }
@@ -2362,23 +2405,13 @@ html:has(> body.lock) { overflow: hidden; }
   .rp-livewin iframe { height: 480px; }
 }
 
-/* Mac-style window chrome (SPEQTRO terminal) — scoped to avoid the FolderPreview .mac-window */
+/* Clean media frame for the SPEQTRO terminal capture. */
 .rp-macwin {
-  border-radius: 10px; overflow: hidden;
-  border: 1px solid var(--border);
+  border-radius: 0; overflow: hidden;
+  border: 0;
   background: #1e1e1e;
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.16);
+  box-shadow: none;
 }
-.rp-macbar {
-  display: flex; align-items: center; gap: 8px;
-  height: 34px; padding: 0 14px;
-  background: #2b2b2b;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.rp-macbar span { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
-.rp-macbar span:nth-child(1) { background: #ff5f56; }
-.rp-macbar span:nth-child(2) { background: #ffbd2e; }
-.rp-macbar span:nth-child(3) { background: #27c93f; }
 .rp-macwin img { display: block; width: 100%; height: auto; border-radius: 0; }
 
 @media (max-width: 680px) {
@@ -2415,6 +2448,18 @@ html:has(> body.lock) { overflow: hidden; }
   line-height: 1.15;
 }
 .essay h3, .essay h4 { font-style: italic; }
+
+/* Essay + live dashboard split — the reading column keeps its 640px measure
+   on the left, the sticky ScrollDashboard pins 320px on the right, and
+   floated sidenotes keep the gutter in between (a sidenote's -38% margin
+   reaches ~860px past the column start; the panel starts at ~860px+gap, so
+   at ≥1280px the three zones never overlap — the same breakpoint the
+   career dashboard and sidenote fallback already use). Below it the panel
+   is display:none (see .live-dashboard) and this collapses to plain block. */
+@media (min-width: 1280px) {
+  .essay-dash { display: flex; align-items: stretch; gap: 3rem; }
+  .essay-dash-main { flex: 1 1 auto; min-width: 0; }
+}
 
 /* Sidenotes / margin notes — floated into the right gutter next to the
    paragraph that cites them, numbered via a shared CSS counter. */
@@ -2463,6 +2508,14 @@ html:has(> body.lock) { overflow: hidden; }
 
 /* Footnotes — a numbered list at the end of the essay, cross-linked from
    inline refs sharing the same essay-sidenote counter/style. */
+.essay-footnote-ref {
+  cursor: pointer;
+  color: var(--acc, var(--accent));
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  font-weight: 600;
+}
 .essay-footnotes {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -2600,59 +2653,35 @@ html:has(> body.lock) { overflow: hidden; }
 .data-panel.data-panel-light .preview img { padding: 8px; }
 
 /* ============================================================
-   CAREER DASHBOARD (ai-2027.com-inspired: scroll-driven live
-   readout tracking whichever CareerSection entry is in view,
-   via useActiveSection's IntersectionObserver — not click-driven)
-   Consumed by: CareerSection.tsx, Timeline.tsx, LiveDashboard.tsx
+   CAREER DASHBOARD (ai-2027.com-inspired: continuous scroll-driven
+   readout — values tween with position via useSectionProgress, not
+   click-driven and not snapped per-entry)
+   Consumed by: CareerSection.tsx, Timeline.tsx, LiveDashboard.tsx,
+   ScrollDashboard.tsx
 ============================================================ */
+/* Flexbox, not grid: position:sticky inside a CSS Grid item whose height
+   comes only from implicit align-items:stretch is unreliable in Chromium —
+   the sticky containing block can end up sized from the item's own
+   (much shorter) content instead of the stretched track height, so the
+   panel un-sticks and vanishes well before .career-main actually ends.
+   Flexbox's align-items:stretch establishes an unambiguous explicit height
+   on the flex item, which sticky positioning handles correctly. */
 .career-layout {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 40px;
 }
 @media (min-width: 1280px) {
   .career-layout {
-    grid-template-columns: 1fr 320px;
-    /* No align-items:start here on purpose — the dashboard grid cell must
-       stretch to match .career-main's full height, or its sticky child has
-       no room to move within its own box and just scrolls away instead of
-       pinning. See .live-dashboard-pin below for the actual sticky element. */
+    flex-direction: row;
+    align-items: stretch;
     gap: 56px;
   }
 }
-.career-main { min-width: 0; }
+.career-main { min-width: 0; flex: 1 1 auto; }
 
-/* Small uppercase tag on each entry distinguishing Experience vs.
-   Education without needing two separate titled sections. */
-.career-group-label {
-  display: block;
-  font-family: var(--ff-label), monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-
-/* Skill chips + key-stat readout — shared between the mobile inline
-   block (Timeline.tsx, <1280px) and the sticky LiveDashboard (>=1280px). */
-.career-chip-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.career-chip {
-  font-family: var(--ff-label), monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-2);
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg);
-}
+/* Key-stat readout — shared between the mobile inline block
+   (Timeline.tsx, <1280px) and the sticky LiveDashboard (>=1280px). */
 .career-stat-row {
   display: flex;
   flex-direction: column;
@@ -2665,36 +2694,26 @@ html:has(> body.lock) { overflow: hidden; }
   gap: 12px;
   font-size: 13px;
 }
-.career-stat dt {
+.career-stat-k {
   color: var(--text-2);
 }
-.career-stat dd {
+.career-stat-v {
   margin: 0;
   color: var(--text);
   font-weight: 500;
   text-align: right;
 }
 
-/* Mobile/tablet inline detail — the FULL entry (bullets, sub-entries,
-   paragraphs, stat, skills) rendered under the heading/meta so nothing is
-   lost when the sticky dashboard is hidden below 1280px. On desktop this
-   same content renders only inside LiveDashboard instead. */
-.career-mobile-stats {
+/* Full entry detail (bullets, sub-entries, paragraphs, stat) rendered
+   under the heading/meta on every viewport — this is the source of truth for
+   an entry's description. LiveDashboard's sticky panel only ever shows a
+   compact stat summary, never a duplicate of this prose. */
+.career-detail {
   margin-top: 16px;
   padding-top: 14px;
   border-top: 1px dashed var(--border);
 }
-.career-mobile-stats .career-stat-row { margin-bottom: 10px; }
-@media (min-width: 1280px) {
-  .career-mobile-stats { display: none; }
-}
-
-/* Desktop-only wrapper: hidden on mobile, where Timeline.tsx renders the
-   same bullets/subEntries/paragraphs inline via .career-mobile-stats instead. */
-.career-desktop-only { display: none; }
-@media (min-width: 1280px) {
-  .career-desktop-only { display: block; }
-}
+.career-detail .career-stat-row { margin: 14px 0 10px; }
 
 /* Live dashboard — desktop only, matches ai-2027.com's own breakpoint for
    dropping side chrome on narrow viewports. This outer element is the grid
@@ -2705,7 +2724,7 @@ html:has(> body.lock) { overflow: hidden; }
   display: none;
 }
 @media (min-width: 1280px) {
-  .live-dashboard { display: block; }
+  .live-dashboard { display: block; flex: 0 0 320px; }
 }
 
 /* The actual sticky element — pinned within the tall .live-dashboard box
@@ -2739,7 +2758,8 @@ html:has(> body.lock) { overflow: hidden; }
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  /* Page-scoped accent (essay .npage--* themes set --acc); site accent otherwise. */
+  color: var(--acc, var(--accent));
   margin-bottom: 10px;
 }
 .live-dashboard-heading {
@@ -2767,9 +2787,21 @@ html:has(> body.lock) { overflow: hidden; }
   background: var(--border);
   border-radius: 2px;
 }
+/* Continuous fill driven by useSectionProgress — grows as the reader
+   advances through the entries, shrinks when scrolling back. */
+.live-dashboard-track-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--acc, var(--accent));
+  border-radius: 2px;
+  opacity: 0.35;
+}
 .live-dashboard-track-dot {
   position: absolute;
   top: 50%;
+  z-index: 1;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -2778,7 +2810,7 @@ html:has(> body.lock) { overflow: hidden; }
   transition: background 0.3s var(--ease), transform 0.3s var(--ease);
 }
 .live-dashboard-track-dot.is-active {
-  background: var(--accent);
+  background: var(--acc, var(--accent));
   transform: translate(-50%, -50%) scale(1.5);
 }
 
@@ -2793,72 +2825,233 @@ html:has(> body.lock) { overflow: hidden; }
   border-bottom: 1px solid var(--border);
 }
 .live-dashboard-stat:last-child { border-bottom: none; }
-.live-dashboard-stat dt {
+.live-dashboard-stat-k {
+  display: block;
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-3);
 }
-.live-dashboard-stat dd {
+.live-dashboard-stat-v {
+  display: block;
   margin: 0;
   font-size: 15px;
   font-weight: 500;
   color: var(--text);
+  /* Fixed-width digits so scroll-driven count-ups don't jitter the layout. */
+  font-variant-numeric: tabular-nums;
 }
 
-/* Capability grid — small bordered cells (icon-slot styled) rather than
-   plain pill chips, echoing ai-2027's boxy "AI Capabilities" grid. */
-.live-dashboard-capgrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  margin: 0 0 16px;
+/* Delta bar chart — real "before → after" stat pairs (task success,
+   feature-count reduction) rendered as a two-row horizontal bar chart
+   instead of plain text, matching ai-2027's dashboard bar readouts. */
+.delta-bar { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.live-dashboard-stats .delta-bar:last-child { border-bottom: none; }
+.delta-bar-label {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
 }
-.live-dashboard-capcell {
-  display: flex;
+.delta-bar-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
   align-items: center;
   gap: 8px;
-  padding: 7px 9px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-family: var(--ff-label), monospace;
-  font-size: 11px;
-  color: var(--text);
+  margin-bottom: 4px;
 }
-.live-dashboard-capcell-dot {
-  width: 6px;
+.delta-bar-row:last-child { margin-bottom: 0; }
+.delta-bar-row-tag {
+  font-family: var(--ff-label), monospace;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.delta-bar-track {
   height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
 }
-
-/* Detail prose — the bullets/sub-entries/paragraphs moved over from the
-   left column. Same real content, just relocated, not summarized away. */
-.live-dashboard-detail {
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--text-2);
+.delta-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s var(--ease);
 }
-.live-dashboard-detail p { margin: 0 0 10px; }
-.live-dashboard-detail ul {
-  margin: 0 0 12px;
-  padding-left: 16px;
-}
-.live-dashboard-detail li { margin-bottom: 6px; }
-.live-dashboard-detail-sub {
-  margin-bottom: 14px;
-}
-.live-dashboard-detail-sub h5 {
-  font-family: var(--ff-label), monospace;
-  font-size: 11.5px;
+.delta-bar-fill--from { background: var(--text-3); }
+.delta-bar-fill--to { background: var(--acc, var(--accent)); }
+.delta-bar-value {
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
-  margin: 0 0 6px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  min-width: 44px;
 }
 
 .live-dashboard-inner {
   animation: liveDashboardIn 0.4s var(--ease);
+}
+
+/* Media tile inside the floating window (SelectedWork featured previews). */
+.live-dashboard-tile {
+  margin: 0 0 16px;
+}
+/* The data-panel tab floats above the panel's top edge (translateY(-100%)),
+   which collides with the dashboard meta line — tiles here go tab-less. */
+.live-dashboard-tile .data-panel-tab {
+  display: none;
+}
+.live-dashboard-tile .data-panel-body {
+  max-height: 150px;
+  overflow: hidden;
+}
+.live-dashboard-tile img,
+.live-dashboard-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Selected Work list — plain entries (no timeline rail, no chips): the
+   rail/progress lives only in the sticky ScrollDashboard beside it. */
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.work-list > li {
+  padding: 44px 0;
+  border-bottom: 1px solid var(--border);
+}
+.work-list > li:first-child { padding-top: 8px; }
+.work-list > li:last-child { border-bottom: none; }
+.work-kicker {
+  display: block;
+  font-family: var(--ff-label), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+.work-title {
+  font-family: var(--ff-label), monospace;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.work-teaser {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--text-2);
+  max-width: 56ch;
+  margin: 0 0 14px;
+}
+.work-link {
+  font-family: var(--ff-label), monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease);
+}
+.work-link:hover { border-color: var(--accent); }
+.work-edu {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+/* StatViz charts — ring / waffle / scale strip variants of a stat. */
+.stat-viz {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.live-dashboard-stats .stat-viz:last-child { border-bottom: none; }
+
+.stat-ring {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  margin-top: 6px;
+}
+.stat-ring svg { display: block; width: 100%; height: 100%; transform: rotate(-90deg); }
+.stat-ring-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 5;
+}
+.stat-ring-fg {
+  fill: none;
+  stroke: var(--acc, var(--accent));
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.stat-ring-val {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.stat-ring-sub {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-3);
+  margin-left: 1px;
+}
+
+.stat-waffle {
+  display: grid;
+  grid-template-columns: repeat(17, 1fr);
+  gap: 3px;
+  margin-top: 8px;
+}
+.stat-waffle-dot {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--acc, var(--accent));
+}
+
+.stat-scale {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.stat-scale-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-scale-fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--acc, var(--accent));
+}
+.stat-scale-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+  text-align: right;
 }
 @keyframes liveDashboardIn {
   from { opacity: 0; transform: translateY(6px); }
@@ -2867,3 +3060,519 @@ html:has(> body.lock) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .live-dashboard-inner { animation: none; }
 }
+
+/* ============================================================
+   NIGHT MODE
+   Neutral navy-black surfaces preserve the site's paper hierarchy while
+   keeping screenshots, figures, and embedded websites in their native color.
+============================================================ */
+[data-theme="dark"] .npage {
+  --paper-ink: #f2f0e9;
+  --paper-muted: #bbb9b2;
+  --paper-bg: #101216;
+}
+/* The /water essay page keeps the site's original Lora/Roboto Mono type
+   (on top of its own --font-serif-essay prose font) instead of the
+   sitewide Geist/JetBrains Mono pair used everywhere else. */
+.npage--water {
+  --ff-body: var(--font-lora-legacy);
+  --ff-label: var(--font-roboto-mono-legacy);
+}
+[data-theme="dark"] .npage--water {
+  --acc: #72bdc5;
+  --acc-2: #94cdd2;
+}
+[data-theme="dark"] .npage--crit {
+  --acc: #9299ed;
+  --acc-2: #b0b5f3;
+}
+[data-theme="dark"] .npage--speqtro {
+  --acc: #d8946f;
+  --acc-2: #e7af90;
+}
+[data-theme="dark"] .npage--langalpha {
+  --acc: #79bca5;
+  --acc-2: #9bcdbd;
+}
+[data-theme="dark"] .npage--mspred {
+  --acc: #82acd3;
+  --acc-2: #a2c2df;
+}
+[data-theme="dark"] .npage--saerl {
+  --acc: #bd91dc;
+  --acc-2: #cfafe5;
+}
+[data-theme="dark"] .npage--popping {
+  --acc: #df8b61;
+  --acc-2: #e9a987;
+}
+[data-theme="dark"] .npage--ersilia {
+  --acc: #bd8bc7;
+  --acc-2: #cfabd6;
+}
+
+[data-theme="dark"] .np-glass,
+[data-theme="dark"] .np-stat,
+[data-theme="dark"] .study-folder[open],
+[data-theme="dark"] .study-preview {
+  background: var(--surface);
+  border-color: var(--border);
+}
+[data-theme="dark"] .np-glass {
+  background: transparent;
+}
+[data-theme="dark"] .study-folder {
+  background: var(--surface-soft);
+  border-color: var(--border);
+}
+[data-theme="dark"] .study-folder:hover {
+  background: color-mix(in srgb, var(--surface-soft) 78%, var(--accent));
+}
+[data-theme="dark"] .study-header,
+[data-theme="dark"] .study-preview-header,
+[data-theme="dark"] .np-links {
+  border-color: var(--border);
+}
+[data-theme="dark"] .study-preview-header button {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+[data-theme="dark"] .study-preview-header button:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+[data-theme="dark"] .npage code,
+[data-theme="dark"] .np-pipeline {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border);
+}
+[data-theme="dark"] .np-links a.np-link-quiet,
+[data-theme="dark"] .np-note {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border);
+}
+[data-theme="dark"] .rp-livewin,
+[data-theme="dark"] .ers-pipeline,
+[data-theme="dark"] .rp-pipeline {
+  background: rgba(24, 27, 33, 0.82);
+  border-color: var(--border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+[data-theme="dark"] .rp-livebar {
+  border-color: var(--border);
+}
+[data-theme="dark"] .bubble,
+[data-theme="dark"] .grid-col-ext-bubble {
+  background: rgba(24, 27, 33, 0.82);
+  color: var(--text);
+  box-shadow: 0 8px 34px rgba(0, 0, 0, 0.24);
+}
+[data-theme="dark"] .project-page-pane iframe {
+  background: var(--bg);
+  border-color: var(--border);
+}
+[data-theme="dark"] .data-panel {
+  border-color: var(--border);
+}
+[data-theme="dark"] .company-tile {
+  background: #ffffff;
+}
+[data-theme="dark"] .nav-logo-img {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.55));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   PROJECT SHOWCASE GRID
+   Pattern reference: langalpha.ai/home data-source grid (bp-grid) —
+   dot-grid cards, hover-expand via :has(), stagger reveal on scroll.
+   Ported to this site's own tokens/fonts, not the source's.
+============================================================ */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--border);
+  overflow: hidden;
+}
+.showcase-grid.fade-in .showcase-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease),
+    background-color 0.3s var(--ease);
+}
+.showcase-grid.fade-in.visible .showcase-card {
+  opacity: 1;
+  transform: none;
+}
+.showcase-grid.fade-in.visible .showcase-card:nth-child(1) { transition-delay: 0s; }
+.showcase-grid.fade-in.visible .showcase-card:nth-child(2) { transition-delay: 0.06s; }
+.showcase-grid.fade-in.visible .showcase-card:nth-child(3) { transition-delay: 0.12s; }
+.showcase-grid.fade-in.visible .showcase-card:nth-child(4) { transition-delay: 0.18s; }
+.showcase-grid.fade-in.visible .showcase-card:nth-child(5) { transition-delay: 0.24s; }
+.showcase-grid.fade-in.visible .showcase-card:nth-child(6) { transition-delay: 0.3s; }
+
+.showcase-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  padding: 26px 24px 28px;
+  background-color: var(--surface);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--text) 8%, transparent) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  background-position: 14px 14px;
+  color: var(--text);
+}
+.showcase-card:hover,
+.showcase-card:focus-visible {
+  background-color: var(--surface-soft);
+}
+
+.showcase-arrow {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 13px;
+  color: var(--text-3);
+  transition:
+    color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.showcase-card:hover .showcase-arrow,
+.showcase-card:focus-visible .showcase-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+.showcase-icon {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  margin: 16px 0 8px;
+  color: var(--text-3);
+}
+.showcase-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.showcase-cap h3 {
+  margin: 0 0 7px;
+  font-family: var(--ff-body), sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.showcase-cap p {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--ff-label), monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.showcase-detail {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.6s var(--ease),
+    opacity 0.45s var(--ease),
+    margin-top 0.55s var(--ease);
+}
+.showcase-detail-rows {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 16px;
+  margin: 0;
+}
+.showcase-detail-row {
+  display: contents;
+}
+.showcase-detail-rows dt,
+.showcase-detail-rows dd {
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  line-height: 1.25;
+}
+.showcase-detail-rows dt {
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.showcase-detail-rows dd {
+  margin: 0;
+  text-align: right;
+  color: var(--text);
+}
+
+@media (min-width: 961px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .showcase-grid {
+    grid-template-rows: 1fr 1fr;
+    height: 695px;
+    transition:
+      grid-template-columns 0.7s var(--ease),
+      grid-template-rows 0.7s var(--ease);
+  }
+  .showcase-card {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .showcase-icon {
+    transition: opacity 0.4s var(--ease);
+  }
+  .showcase-grid:has(.showcase-card:is(:hover, :focus-visible)) {
+    transition-delay: 0.2s;
+  }
+  .showcase-grid:has(.showcase-card:is(:hover, :focus-visible)) .showcase-card:not(:hover):not(:focus-visible) {
+    opacity: 0.34;
+  }
+  .showcase-grid:has(.showcase-card:nth-child(3n+1):is(:hover, :focus-visible)) {
+    grid-template-columns: 1.5fr 0.75fr 0.75fr;
+  }
+  .showcase-grid:has(.showcase-card:nth-child(3n+2):is(:hover, :focus-visible)) {
+    grid-template-columns: 0.75fr 1.5fr 0.75fr;
+  }
+  .showcase-grid:has(.showcase-card:nth-child(3n):is(:hover, :focus-visible)) {
+    grid-template-columns: 0.75fr 0.75fr 1.5fr;
+  }
+  .showcase-grid:has(.showcase-card:nth-child(-n+3):is(:hover, :focus-visible)) {
+    grid-template-rows: 1.5fr 0.5fr;
+  }
+  .showcase-grid:has(.showcase-card:nth-child(n+4):is(:hover, :focus-visible)) {
+    grid-template-rows: 0.5fr 1.5fr;
+  }
+  .showcase-card:hover .showcase-icon,
+  .showcase-card:focus-visible .showcase-icon {
+    opacity: 0;
+  }
+  .showcase-card:hover .showcase-detail,
+  .showcase-card:focus-visible .showcase-detail {
+    max-height: 240px;
+    margin-top: 14px;
+    opacity: 1;
+    transition-delay: 0.28s;
+  }
+}
+
+@media (max-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.live-dashboard-link span {
+  transition: transform 0.25s var(--ease);
+}
+.live-dashboard-link:hover span,
+.live-dashboard-link:focus-visible span {
+  transform: translate(2px, -2px);
+}
+.live-dashboard-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+.live-dashboard-link:hover,
+.live-dashboard-link:focus-visible {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.project-viz {
+  margin: 2px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border);
+}
+.project-viz-title {
+  margin-bottom: 16px;
+  font-family: var(--ff-label), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.project-viz-note {
+  margin: 14px 0 0;
+  font-size: 10px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+.project-viz-donut {
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+.project-viz-ring {
+  position: relative;
+  width: 124px;
+  height: 124px;
+}
+.project-viz-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.project-viz-ring circle {
+  fill: none;
+  stroke-width: 10;
+}
+.project-viz-ring-track {
+  stroke: var(--border);
+}
+.project-viz-ring-fill {
+  stroke: var(--accent);
+  stroke-linecap: butt;
+}
+.project-viz-ring-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.project-viz-ring-copy strong {
+  font-family: var(--ff-body), sans-serif;
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text);
+}
+.project-viz-ring-copy small {
+  max-width: 8ch;
+  margin-top: 5px;
+  font-family: var(--ff-label), monospace;
+  font-size: 8px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.project-viz-legend {
+  min-width: 0;
+}
+.project-viz-legend-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 7px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--text-2);
+}
+.project-viz-legend-row:last-child {
+  border-bottom: 0;
+}
+.project-viz-legend-index {
+  font-family: var(--ff-label), monospace;
+  font-size: 8px;
+  color: var(--accent);
+}
+.project-viz-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.project-viz-bar-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+.project-viz-bar-copy strong {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.project-viz-bar-track {
+  display: block;
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+}
+.project-viz-bar-bg {
+  fill: var(--border);
+}
+.project-viz-bar-fill {
+  fill: var(--accent);
+}
+.project-viz-line svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.project-viz-gridline {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.project-viz-line-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.project-viz-line-point {
+  fill: var(--accent);
+}
+.project-viz-line-point text {
+  font-family: var(--ff-label), monospace;
+  font-size: 8px;
+  fill: var(--text-2);
+}
+.project-viz-axis-label {
+  font-family: var(--ff-label), monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  fill: var(--text-3);
+}
+

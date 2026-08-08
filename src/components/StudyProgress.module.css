@@ -28,7 +28,7 @@
 .chart {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 48px;
 }
 
 .rowLabel {
@@ -76,6 +76,56 @@
 
 .fillStatisticalPhysics {
   width: 38%;
+}
+
+.notePreview {
+  display: grid;
+  gap: 6px;
+  max-width: 640px;
+  margin-top: 20px;
+  padding-left: 14px;
+  border-left: 1px solid #d6d6d6;
+}
+
+.noteMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  color: #767676;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.noteTitle {
+  width: fit-content;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.noteTitle:hover {
+  text-decoration-thickness: 2px;
+}
+
+.noteTitle:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 3px;
+}
+
+.noteExcerpt {
+  max-width: 62ch;
+  margin: 0;
+  color: #4f4f4f;
+  font-size: 13px;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 .focus {

@@ -1,0 +1,77 @@
+/* ============================================================
+   ABOUT-CLONE — georgialyu.com's design system, scoped to /about
+   ------------------------------------------------------------
+   globals.css already carries the full georgialyu stylesheet
+   (.nav / .hero / .grid / .cell / .work / .project-card / .foot),
+   but its tokens were retuned for the academic side of the site.
+   This file re-pins those tokens to georgialyu.com's exact values
+   for everything inside `.about-clone`, and nothing else.
+
+   Because --ff-body / --ff-label are redeclared here, every
+   descendant rule in globals.css that reads them resolves to
+   DM Sans / IBM Plex Sans Condensed automatically.
+============================================================ */
+.about-clone {
+  --bg: #ffffff;
+  --bg-card: #edeae4;
+  --projects-tag: #f7f7f7;
+  --text: #1a1817;
+  --text-2: #919191;
+  --text-3: #aaa49c;
+  --accent: #c4593a;
+  --border: #ddd8cf;
+
+  --ff-body: var(--ff-dm-sans);
+  --ff-label: var(--ff-plex-condensed);
+
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 56px;
+
+  /* body {} equivalent — set explicitly so descendants inherit the
+     clone's type rather than the site-wide computed value. */
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body), sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav: globals diverged slightly; restore the original values ── */
+/* The header is no longer scoped here — it is shared with the academic page
+   and lives in styles/site-nav.css under `.gl-nav`. */
+
+/* Project cards run 3:2 rather than the original's 4:3. */
+.about-clone .project-visual {
+  aspect-ratio: 3 / 2;
+}
+
+/* No hover zoom on the card art — the original scales the image to 1.04,
+   which reads as noise on figures rather than photography. */
+.about-clone .project-card:hover .project-img {
+  transform: none;
+}
+
+/* Drop the original's inset bevel/glow ring around the card visual.
+   `content: none` stops the pseudo-element being generated at all; the
+   box-shadow reset just makes that unambiguous to anyone reading it. */
+.about-clone .project-visual::after {
+  content: none;
+  box-shadow: none;
+}
+
+/* The original's 420px floor was tuned for a 4:3 tile; at 3:2 the tile is
+   ~38px shorter, and keeping the floor would hang dead space under the
+   caption. Grid stretch still keeps cards in a row equal height. */
+.about-clone .project-inner {
+  min-height: auto;
+}
+
+@media (max-width: 768px) {
+  .about-clone {
+    --nav-h: 48px;
+  }
+}

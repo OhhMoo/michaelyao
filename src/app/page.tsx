@@ -1,11 +1,14 @@
 import { AcademicCv } from "@/components/AcademicCv";
-import { Nav } from "@/components/Nav";
+import { SiteNav } from "@/components/SiteNav";
 
 export default function HomePage() {
   return (
     <>
-      <Nav />
-      <AcademicCv />
+      <SiteNav />
+      {/* The shared nav is position: fixed — this keeps the CV clear of it. */}
+      <div className="gl-nav-offset">
+        <AcademicCv />
+      </div>
     </>
   );
 }

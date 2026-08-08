@@ -27,7 +27,9 @@ export function imgPath(charKey: string): string {
   if (charKey === "b1" || charKey === "b2") {
     return `/images/buttom-characters/${charKey.slice(1)}.jpg`;
   }
-  return `/images/characters/${charKey}.png`;
+  // about-grid holds the same illustrations as characters/*.png at 384px
+  // instead of 2048px — visually identical in a 104px cell, ~70× lighter.
+  return `/images/about-grid/${charKey}.webp`;
 }
 
 export type SocialLinkType = "github" | "linkedin" | "email";
@@ -79,26 +81,47 @@ export function buildCells(layout: GridLayout, blackCount = BLACK_COUNT): CellSp
   return cells;
 }
 
+/** Portrait shown uncovered at the centre of the single-row grid, and its line. */
+const ROW_CHAR = "3";
+const ROW_MESSAGE = "Computer science & mathematics at Harvey Mudd.";
+
+/**
+ * Single-row grid: no dark door tiles at all. Just three filled cells —
+ * a GitHub button, the phone-in-hand portrait uncovered at the centre,
+ * and a LinkedIn button — evenly spread either side of the middle.
+ */
 export function buildRowCells(layout: GridLayout): CellSpec[] {
   const cols = layout.cols;
   const center = Math.floor(cols / 2);
-
-  // Three fixed-position social link cells, evenly spread around the center.
   const offset = Math.min(2, center);
-  const leftPos = center - offset;
-  const rightPos = center + offset;
-
-  const linkMap = new Map<number, SocialLink>([
-    [leftPos, { type: "github", href: "https://github.com/OhhMoo", label: "GitHub" }],
-    [center, { type: "linkedin", href: "https://www.linkedin.com/in/yiqi-yao-michael/", label: "LinkedIn" }],
-    [rightPos, { type: "email", href: "mailto:myao3411@gmail.com", label: "Email" }],
-  ]);
 
   const cells: CellSpec[] = [];
   for (let i = 0; i < cols; i++) {
-    const link = linkMap.get(i);
-    if (link) {
-      cells.push({ index: i, isBlack: true, link, message: link.label });
+    if (i === center - offset) {
+      cells.push({
+        index: i,
+        isBlack: true,
+        link: { type: "github", href: "https://github.com/OhhMoo", label: "GitHub" },
+        message: "GitHub",
+      });
+    } else if (i === center) {
+      cells.push({
+        index: i,
+        isBlack: true,
+        charKey: ROW_CHAR,
+        message: ROW_MESSAGE,
+      });
+    } else if (i === center + offset) {
+      cells.push({
+        index: i,
+        isBlack: true,
+        link: {
+          type: "linkedin",
+          href: "https://www.linkedin.com/in/yiqi-yao-michael/",
+          label: "LinkedIn",
+        },
+        message: "LinkedIn",
+      });
     } else {
       cells.push({ index: i, isBlack: false });
     }
