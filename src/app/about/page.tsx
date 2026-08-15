@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { AboutFooter } from "@/components/about/AboutFooter";
 import { AboutImpact } from "@/components/about/AboutImpact";
-import { AboutPrinciples } from "@/components/about/AboutPrinciples";
 import { AboutProjects } from "@/components/about/AboutProjects";
 import { AboutStack } from "@/components/about/AboutStack";
 import { GridRowSection } from "@/components/GridRowSection";
@@ -34,8 +33,6 @@ export default function AboutPage() {
       </div>
 
       <AboutProjects />
-
-      <AboutPrinciples />
 
       <AboutStack />
 
