@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { ThemeToggle } from "./ThemeToggle";
+
 const primaryLinks = [
   { href: "/", label: "Academic", key: "academic" },
   { href: "/about", label: "About", key: "about" },
@@ -23,18 +25,21 @@ export function Nav() {
         <Link className="simple-nav-name" href="/">
           Michael Yao
         </Link>
-        <nav className="simple-nav-tabs" aria-label="Primary navigation">
-          {primaryLinks.map((link) => (
-            <Link
-              className={link.key === activeKey ? "is-active" : undefined}
-              href={link.href}
-              key={link.key}
-              aria-current={link.key === activeKey ? "page" : undefined}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="simple-nav-actions">
+          <nav className="simple-nav-tabs" aria-label="Primary navigation">
+            {primaryLinks.map((link) => (
+              <Link
+                className={link.key === activeKey ? "is-active" : undefined}
+                href={link.href}
+                key={link.key}
+                aria-current={link.key === activeKey ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

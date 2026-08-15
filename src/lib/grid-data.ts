@@ -27,6 +27,9 @@ export function imgPath(charKey: string): string {
   if (charKey === "b1" || charKey === "b2") {
     return `/images/buttom-characters/${charKey.slice(1)}.jpg`;
   }
+  if (charKey === "1") {
+    return "/images/illustrations/about-grid-center.png";
+  }
   // about-grid holds the same illustrations as characters/*.png at 384px
   // instead of 2048px — visually identical in a 104px cell, ~70× lighter.
   return `/images/about-grid/${charKey}.webp`;

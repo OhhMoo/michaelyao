@@ -3,7 +3,7 @@
   max-width: 820px;
   margin: 0 auto;
   padding: 128px 24px 144px;
-  color: #111111;
+  color: var(--simple-ink);
 }
 
 .header {
@@ -45,7 +45,7 @@
 }
 
 .status {
-  color: #767676;
+  color: var(--simple-muted);
   font-size: 12px;
   letter-spacing: 0.08em;
   line-height: 1.4;
@@ -54,12 +54,12 @@
 
 .baseline {
   height: 12px;
-  border-bottom: 1px solid #a8a8a8;
+  border-bottom: 1px solid var(--simple-line);
 }
 
 .fill {
   height: 12px;
-  background: #111111;
+  background: var(--simple-ink);
 }
 
 .fillEstablished {
@@ -84,14 +84,14 @@
   max-width: 640px;
   margin-top: 20px;
   padding-left: 14px;
-  border-left: 1px solid #d6d6d6;
+  border-left: 1px solid var(--simple-line);
 }
 
 .noteMeta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
-  color: #767676;
+  color: var(--simple-muted);
   font-size: 10px;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
@@ -101,7 +101,7 @@
 
 .noteTitle {
   width: fit-content;
-  color: #111111;
+  color: var(--simple-ink);
   font-size: 14px;
   font-weight: 650;
   line-height: 1.4;
@@ -115,14 +115,14 @@
 }
 
 .noteTitle:focus-visible {
-  outline: 2px solid #111111;
+  outline: 2px solid var(--simple-ink);
   outline-offset: 3px;
 }
 
 .noteExcerpt {
   max-width: 62ch;
   margin: 0;
-  color: #4f4f4f;
+  color: var(--simple-muted);
   font-size: 13px;
   line-height: 1.6;
   text-wrap: pretty;
@@ -138,7 +138,7 @@
 .focusLabel {
   display: block;
   margin-bottom: 8px;
-  color: #767676;
+  color: var(--simple-muted);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;

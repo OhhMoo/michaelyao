@@ -39,6 +39,21 @@ type ExperienceDetails = {
     title: string;
     summary: string;
     href: string;
+    media:
+      | {
+          type: "image";
+          src: string;
+          alt: string;
+          width: number;
+          height: number;
+        }
+      | {
+          type: "water-plots";
+          plots: readonly {
+            src: string;
+            title: string;
+          }[];
+        };
   }[];
 };
 
@@ -62,12 +77,32 @@ const experienceDetails: Record<string, ExperienceDetails> = {
         summary:
           "Using mean-field theory to study signal propagation, criticality, and trainable depth in random neural networks.",
         href: "/criticality",
+        media: {
+          type: "image",
+          src: "/images/research/criticality/fixed-point-chaos-boundary.png",
+          alt: "Heatmaps of the neural-network fixed point and order-to-chaos boundary",
+          width: 1400,
+          height: 536,
+        },
       },
       {
         title: "Water × Unsupervised ML",
         summary:
           "Using unsupervised learning to identify latent structural populations in molecular-dynamics simulations of supercooled water.",
         href: "/water",
+        media: {
+          type: "water-plots",
+          plots: [
+            {
+              src: "/plotly/water-3d-cluster0.html",
+              title: "Interactive 3D view of water structure cluster 0",
+            },
+            {
+              src: "/plotly/water-3d-cluster1.html",
+              title: "Interactive 3D view of water structure cluster 1",
+            },
+          ],
+        },
       },
     ],
   },
@@ -157,15 +192,40 @@ function ExperienceTimeline({ entries }: TimelineProps) {
                 <div className={styles.experienceProjects}>
                   {projects.map((project) => (
                     <section className={styles.experienceProject} key={project.href}>
-                      <h4>{project.title}</h4>
-                      <p>{project.summary}</p>
-                      <Link
-                        className={styles.readMoreLink}
-                        href={project.href}
-                        aria-label={`Read more about ${project.title}`}
-                      >
-                        Read more
-                      </Link>
+                      <div className={styles.experienceProjectText}>
+                        <h4>{project.title}</h4>
+                        <p>{project.summary}</p>
+                        <Link
+                          className={styles.readMoreLink}
+                          href={project.href}
+                          aria-label={`Read more about ${project.title}`}
+                        >
+                          Read more
+                        </Link>
+                      </div>
+
+                      {project.media.type === "image" ? (
+                        <div className={styles.experienceProjectMedia}>
+                          <Image
+                            className={styles.experienceProjectImage}
+                            src={project.media.src}
+                            alt={project.media.alt}
+                            width={project.media.width}
+                            height={project.media.height}
+                            sizes="(max-width: 700px) 100vw, 380px"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          className={`${styles.experienceProjectMedia} ${styles.waterPlots}`}
+                        >
+                          {project.media.plots.map((plot) => (
+                            <div className={styles.waterPlot} key={plot.src}>
+                              <iframe src={plot.src} title={plot.title} loading="lazy" />
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </section>
                   ))}
                 </div>
@@ -258,7 +318,7 @@ export function AcademicCv() {
         <ExperienceTimeline entries={experience} />
       </section>
 
-      <section className={styles.section} aria-labelledby="software-heading">
+      <section className={styles.section} id="projects" aria-labelledby="software-heading">
         <h2 id="software-heading">Selected Software</h2>
         <ul className={styles.softwareList}>
           {selectedSoftware.map((item) => (
@@ -276,6 +336,16 @@ export function AcademicCv() {
         <h2 id="education-heading">Education</h2>
         <Timeline entries={education} />
       </section>
+
+      <figure className={styles.endingIllustration}>
+        <Image
+          src="/images/illustrations/academic-ending.png"
+          alt="Line illustration of Michael resting among cats at the end of the page"
+          width={2255}
+          height={1824}
+          sizes="(max-width: 700px) calc(100vw - 32px), 900px"
+        />
+      </figure>
     </main>
   );
 }

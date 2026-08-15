@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
 import { AboutFooter } from "@/components/about/AboutFooter";
+import { AboutImpact } from "@/components/about/AboutImpact";
+import { AboutPrinciples } from "@/components/about/AboutPrinciples";
 import { AboutProjects } from "@/components/about/AboutProjects";
+import { AboutStack } from "@/components/about/AboutStack";
 import { GridRowSection } from "@/components/GridRowSection";
 import { HeroGrid } from "@/components/HeroGrid";
 import { ScrollDownIcon } from "@/components/icons";
@@ -13,10 +16,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Section order mirrors georgialyu.com/index.html exactly:
- * nav → hero grid → scroll arrow → PROJECTS → single-row grid → foot.
- * The `about-clone` wrapper re-pins the design tokens to that site's
- * values without touching any other route (see styles/about-clone.css).
+ * The interactive grid establishes the visual language; Projects, Stack,
+ * and Impact extend its numbered cells and warm editorial palette.
  */
 export default function AboutPage() {
   return (
@@ -33,6 +34,12 @@ export default function AboutPage() {
       </div>
 
       <AboutProjects />
+
+      <AboutPrinciples />
+
+      <AboutStack />
+
+      <AboutImpact />
 
       <GridRowSection />
 

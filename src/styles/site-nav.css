@@ -1,15 +1,32 @@
 /* ============================================================
    SITE NAV — georgialyu.com's header, shared by / and /about
    ------------------------------------------------------------
-   Deliberately self-contained: values are hard-coded rather than
-   read from custom properties, because this nav sits on top of two
-   pages with different token sets (the academic page uses Geist +
-   indigo, the About clone uses DM Sans + terracotta). Hard-coding
-   is what makes the two headers render identically.
+   Deliberately self-contained: the shared variables below keep the
+   header identical over the academic and About page token systems.
 
    `.gl-nav` is applied alongside globals.css's `.nav`, and every
    rule here is a two-class selector so it wins on specificity.
 ============================================================ */
+:root {
+  --gl-nav-bg: rgba(249, 249, 249, 0.68);
+  --gl-nav-ink: #1a1817;
+  --gl-nav-muted: #919191;
+  --gl-nav-soft: #aaa49c;
+  --gl-nav-accent: #c4593a;
+  --gl-nav-line: #ddd8cf;
+  --gl-nav-menu-bg: #ffffff;
+}
+
+html[data-theme="dark"] {
+  --gl-nav-bg: rgba(21, 20, 18, 0.82);
+  --gl-nav-ink: #f1ece3;
+  --gl-nav-muted: #a9a196;
+  --gl-nav-soft: #827a70;
+  --gl-nav-accent: #d78263;
+  --gl-nav-line: #3d3831;
+  --gl-nav-menu-bg: #1c1a17;
+}
+
 .nav.gl-nav {
   position: fixed;
   top: 0;
@@ -21,11 +38,13 @@
   align-items: center;
   height: 56px;
   padding: 0 max(1.5rem, calc((100% - 1296px) / 2));
-  background: rgba(249, 249, 249, 0.6);
+  background: var(--gl-nav-bg);
   backdrop-filter: blur(16px);
   font-family: var(--ff-dm-sans), sans-serif;
   letter-spacing: -0.01em;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    background-color 0.24s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav.gl-nav.nav--hidden {
@@ -38,7 +57,7 @@
   display: block;
   gap: 0;
   justify-self: start;
-  color: #1a1817;
+  color: var(--gl-nav-ink);
   font-size: 0.8rem;
   font-weight: 450;
   line-height: 1.6;
@@ -46,10 +65,10 @@
   transition: color 0.2s;
 }
 .gl-nav .nav-logo:hover {
-  color: #c4593a;
+  color: var(--gl-nav-accent);
 }
 .gl-nav .nav-logo span {
-  color: #919191;
+  color: var(--gl-nav-muted);
 }
 
 .gl-nav .nav-center {
@@ -58,7 +77,7 @@
   gap: 1.5rem;
 }
 .gl-nav .nav-center a {
-  color: #919191;
+  color: var(--gl-nav-muted);
   font-size: 0.8rem;
   font-weight: 400;
   text-decoration: none;
@@ -67,23 +86,30 @@
 }
 .gl-nav .nav-center a:hover,
 .gl-nav .nav-center a.active {
-  color: #1a1817;
+  color: var(--gl-nav-ink);
+}
+
+.gl-nav .nav-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 1.25rem;
 }
 
 .gl-nav .nav-icons {
   display: flex;
   align-items: center;
-  justify-self: end;
+  justify-self: auto;
   gap: 1.5rem;
 }
 .gl-nav .nav-icons a {
   display: flex;
   align-items: center;
-  color: #aaa49c;
+  color: var(--gl-nav-soft);
   transition: color 0.2s;
 }
 .gl-nav .nav-icons a:hover {
-  color: #1a1817;
+  color: var(--gl-nav-ink);
 }
 
 .gl-nav .nav-menu-btn {
@@ -99,7 +125,73 @@
   display: block;
   width: 22px;
   height: 1.5px;
-  background: #1a1817;
+  background: var(--gl-nav-ink);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-transform: uppercase;
+}
+
+.theme-toggle-mark {
+  position: relative;
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  overflow: hidden;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transition: transform 220ms ease;
+}
+
+.theme-toggle-mark::after {
+  position: absolute;
+  inset: 1px 1px 1px 50%;
+  border-radius: 0 999px 999px 0;
+  background: currentColor;
+  content: "";
+}
+
+html[data-theme="dark"] .theme-toggle-mark {
+  transform: rotate(180deg);
+}
+
+.theme-toggle-label {
+  font-family: var(--ff-plex-condensed), var(--ff-label), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  color: var(--gl-nav-ink, var(--simple-ink));
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--gl-nav-accent, var(--simple-ink));
+  outline-offset: 3px;
+}
+
+.gl-nav .theme-toggle {
+  color: var(--gl-nav-soft);
+}
+
+.gl-nav .theme-toggle:hover {
+  color: var(--gl-nav-ink);
 }
 
 /* Spacer that keeps page content clear of the fixed nav. */
@@ -117,6 +209,9 @@
   .gl-nav .nav-icons {
     display: none;
   }
+  .gl-nav .nav-actions {
+    gap: 1rem;
+  }
   .gl-nav .nav-menu-btn {
     display: flex;
     justify-self: end;
@@ -130,10 +225,17 @@
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.5rem;
-    border-bottom: 1px solid #ddd8cf;
-    background: #ffffff;
+    border-bottom: 1px solid var(--gl-nav-line);
+    background: var(--gl-nav-menu-bg);
   }
   .gl-nav-offset {
     padding-top: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-mark,
+  .nav.gl-nav {
+    transition: none;
   }
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   DM_Sans,
   Geist,
@@ -12,6 +13,22 @@ import "./globals.css";
 import "@/styles/simple-portfolio.css";
 import "@/styles/about-clone.css";
 import "@/styles/site-nav.css";
+
+const THEME_BOOTSTRAP = `
+  (function () {
+    try {
+      var stored = window.localStorage.getItem("theme");
+      var theme = stored === "light" || stored === "dark"
+        ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      document.documentElement.dataset.theme = theme;
+    } catch (error) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+`;
 
 // Primary sitewide type — matches langalpha.ai's font choices (Geist / JetBrains Mono).
 const geist = Geist({
@@ -120,9 +137,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable} ${dmSans.variable} ${plexCondensed.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          id="theme-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP }}
+        />
+      </body>
     </html>
   );
 }

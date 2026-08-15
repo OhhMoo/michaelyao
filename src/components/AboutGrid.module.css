@@ -3,8 +3,8 @@
   min-height: 100vh;
   padding: clamp(7rem, 13vw, 12rem) 0 clamp(6rem, 10vw, 9rem);
   overflow: hidden;
-  color: #1a1817;
-  background: #ffffff;
+  color: var(--text);
+  background: var(--bg);
 }
 
 .gridViewport {
@@ -25,8 +25,8 @@
   grid-template-rows: repeat(5, 104px);
   width: max-content;
   margin-inline: auto;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid var(--grid-line);
+  border-left: 1px solid var(--grid-line);
   box-sizing: content-box;
 }
 
@@ -37,8 +37,8 @@
   padding: 0;
   overflow: visible;
   border: 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
   border-radius: 0;
   box-sizing: border-box;
   color: inherit;
@@ -56,7 +56,7 @@
 
 .imageCell:focus-visible {
   z-index: 4;
-  outline: 2px solid #1a1817;
+  outline: 2px solid var(--text);
   outline-offset: -4px;
 }
 
@@ -101,10 +101,10 @@
   width: max-content;
   max-width: min(16rem, calc(100vw - 2rem));
   padding: 8px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  color: rgba(0, 0, 0, 0.9);
-  background: rgba(255, 255, 255, 0.82);
+  color: var(--glass-text);
+  background: var(--glass-bg);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   font-size: 11px;
   font-weight: 500;

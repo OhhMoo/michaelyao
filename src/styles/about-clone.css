@@ -38,37 +38,22 @@
   line-height: 1.6;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.24s var(--ease), color 0.24s var(--ease);
 }
 
-/* ── Nav: globals diverged slightly; restore the original values ── */
-/* The header is no longer scoped here — it is shared with the academic page
-   and lives in styles/site-nav.css under `.gl-nav`. */
-
-/* Project cards run 3:2 rather than the original's 4:3. */
-.about-clone .project-visual {
-  aspect-ratio: 3 / 2;
+html[data-theme="dark"] .about-clone {
+  --bg: #151412;
+  --bg-card: #1d1b18;
+  --projects-tag: #27241f;
+  --text: #f1ece3;
+  --text-2: #b8b0a5;
+  --text-3: #827a70;
+  --accent: #d78263;
+  --border: #3d3831;
 }
 
-/* No hover zoom on the card art — the original scales the image to 1.04,
-   which reads as noise on figures rather than photography. */
-.about-clone .project-card:hover .project-img {
-  transform: none;
-}
-
-/* Drop the original's inset bevel/glow ring around the card visual.
-   `content: none` stops the pseudo-element being generated at all; the
-   box-shadow reset just makes that unambiguous to anyone reading it. */
-.about-clone .project-visual::after {
-  content: none;
-  box-shadow: none;
-}
-
-/* The original's 420px floor was tuned for a 4:3 tile; at 3:2 the tile is
-   ~38px shorter, and keeping the floor would hang dead space under the
-   caption. Grid stretch still keeps cards in a row equal height. */
-.about-clone .project-inner {
-  min-height: auto;
-}
+/* The header is shared with the academic page and lives in
+   styles/site-nav.css under `.gl-nav`. */
 
 @media (max-width: 768px) {
   .about-clone {

@@ -1,9 +1,10 @@
 .root {
+  position: relative;
   width: min(900px, calc(100% - 48px));
   margin: 0 auto;
   padding: 72px 0 96px;
-  background: #ffffff;
-  color: #171717;
+  background: var(--bg);
+  color: var(--text);
   font-size: 15px;
   line-height: 1.55;
 }
@@ -62,6 +63,11 @@
   width: 28px;
   height: 41px;
   object-fit: contain;
+  transition: filter 0.24s var(--ease);
+}
+
+:global(html[data-theme="dark"]) .siteLogo {
+  filter: brightness(0) invert(1);
 }
 
 .affiliation {
@@ -92,13 +98,14 @@
 }
 
 .section {
+  scroll-margin-top: 96px;
   margin-top: 48px;
 }
 
 .section > h2 {
   margin-bottom: 24px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1px solid var(--text);
   font-size: 13px;
   font-weight: 700;
   line-height: 1.2;
@@ -118,7 +125,7 @@
 }
 
 .meta {
-  color: #555555;
+  color: var(--text-2);
   font-size: 13px;
   line-height: 1.45;
 }
@@ -168,7 +175,7 @@
 .subEntryHeading p {
   flex: 0 0 auto;
   margin-bottom: 0;
-  color: #555555;
+  color: var(--text-2);
   font-size: 13px;
 }
 
@@ -187,8 +194,19 @@
 
 .experienceProjects {
   display: grid;
-  gap: 18px;
+  gap: 24px;
   margin-top: 16px;
+}
+
+.experienceProject {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(300px, 1.18fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.experienceProjectText {
+  min-width: 0;
 }
 
 .experienceProject h4 {
@@ -202,13 +220,53 @@
   margin-bottom: 9px;
 }
 
+.experienceProjectMedia {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+
+.experienceProjectImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.waterPlots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border);
+}
+
+.waterPlot {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface-soft);
+}
+
+.waterPlot iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .root .readMoreLink {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
   padding: 5px 10px;
-  border: 1px solid #b7b7b7;
-  color: #171717;
+  border: 1px solid var(--border);
+  color: var(--text);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
@@ -217,12 +275,12 @@
 }
 
 .root .readMoreLink:hover {
-  border-color: #171717;
-  background: #f3f3f3;
+  border-color: var(--text);
+  background: var(--surface-soft);
 }
 
 .root .readMoreLink:focus-visible {
-  outline: 2px solid #171717;
+  outline: 2px solid var(--text);
   outline-offset: 2px;
 }
 
@@ -249,6 +307,23 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 1.35;
+}
+
+.endingIllustration {
+  width: 60%;
+  margin: 80px auto -28px;
+}
+
+.endingIllustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: filter 0.24s var(--ease), opacity 0.24s var(--ease);
+}
+
+:global(html[data-theme="dark"]) .endingIllustration img {
+  filter: invert(1);
+  opacity: 0.86;
 }
 
 @media (max-width: 700px) {
@@ -278,8 +353,21 @@
     gap: 4px;
   }
 
+  .experienceProject {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .experienceProjectMedia {
+    height: clamp(150px, 45vw, 220px);
+  }
+
   .meta {
     margin-bottom: 2px;
+  }
+
+  .endingIllustration {
+    margin-top: 56px;
   }
 
   .subEntryHeading {

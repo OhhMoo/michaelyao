@@ -70,12 +70,6 @@ export function HeroGrid() {
           <div className="grid-col-ext-cell"></div>
           <div className="grid-col-ext-cell"></div>
           <div className="grid-col-ext-cell"></div>
-          <div className="grid-col-ext-char">
-            <img className="grid-col-ext-img" src="/images/extra-1.png" alt="" />
-            <div className="grid-col-ext-bubble">
-              👀 Take a glimpse of what I&apos;ve been working on!
-            </div>
-          </div>
         </div>
       </div>
       <p className="grid-hint" style={{ opacity: hintOpacity }}>

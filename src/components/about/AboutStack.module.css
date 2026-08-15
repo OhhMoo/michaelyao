@@ -1,0 +1,151 @@
+.section {
+  width: 100%;
+  padding: 7rem max(1.5rem, calc((100% - 1296px) / 2)) 8rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.reveal,
+.rowReveal,
+.figureReveal {
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(9rem, 13vw, 12rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: end;
+}
+
+.matrix {
+  border-top: 1px solid var(--border);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(12rem, 0.58fr) minmax(0, 1.42fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.index {
+  padding-top: 0.3rem;
+  color: var(--accent);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.groupHeading h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.groupHeading p {
+  max-width: 24rem;
+  margin: 0.35rem 0 0;
+  color: var(--text-2);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.items li {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  color: var(--text-2);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+  transition:
+    border-color 180ms var(--ease),
+    color 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.items li:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.figureReveal {
+  align-self: end;
+}
+
+.figure {
+  width: 100%;
+  margin: 0 0 1.5rem;
+  pointer-events: none;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1.2rem 1.8rem var(--figure-shadow));
+}
+
+@media (max-width: 1080px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .figureReveal {
+    width: clamp(7.5rem, 17vw, 10rem);
+    margin-top: 2rem;
+    justify-self: end;
+  }
+
+  .figure {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 780px) {
+  .section {
+    padding: 5.5rem 1rem 6.5rem;
+  }
+
+  .row {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .items {
+    grid-column: 2;
+  }
+
+  .figureReveal {
+    width: 7.5rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .items li {
+    transition: none;
+  }
+
+  .items li:hover {
+    transform: none;
+  }
+}

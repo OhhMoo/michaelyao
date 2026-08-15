@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { EmailIcon, GitHubIcon, LinkedInIcon } from "./icons";
+import { ThemeToggle } from "./ThemeToggle";
 
 const TABS = [
   { href: "/", label: "Academic", key: "academic" },
@@ -66,33 +67,37 @@ export function SiteNav() {
         ))}
       </div>
 
-      <div className="nav-icons">
-        <a
-          href="https://www.linkedin.com/in/yiqi-yao-michael/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-        >
-          <LinkedInIcon />
-        </a>
-        <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
-          <GitHubIcon />
-        </a>
-        <a href="mailto:myao3411@gmail.com" aria-label="Email">
-          <EmailIcon />
-        </a>
-      </div>
+      <div className="nav-actions">
+        <div className="nav-icons">
+          <a
+            href="https://www.linkedin.com/in/yiqi-yao-michael/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <LinkedInIcon />
+          </a>
+          <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <GitHubIcon />
+          </a>
+          <a href="mailto:myao3411@gmail.com" aria-label="Email">
+            <EmailIcon />
+          </a>
+        </div>
 
-      <button
-        className="nav-menu-btn"
-        type="button"
-        aria-label="Menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((open) => !open)}
-      >
-        <span />
-        <span />
-      </button>
+        <ThemeToggle />
+
+        <button
+          className="nav-menu-btn"
+          type="button"
+          aria-label="Menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+        </button>
+      </div>
     </nav>
   );
 }
