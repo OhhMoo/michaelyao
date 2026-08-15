@@ -29,7 +29,7 @@
   margin: 1rem min(15rem, 18%) 0.35rem auto;
   color: var(--text-3);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
 }
@@ -61,7 +61,7 @@
 .index {
   color: var(--accent);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -71,7 +71,7 @@
   margin: 0 0 0.35rem;
   color: var(--accent);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   line-height: 1.35;
@@ -80,7 +80,7 @@
 
 .copy h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(1.15rem, 1.35vw, 1.35rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.4;
@@ -90,8 +90,8 @@
   max-width: 27rem;
   margin: 0.35rem 0 0;
   color: var(--text-2);
-  font-size: 0.76rem;
-  line-height: 1.5;
+  font-size: clamp(0.84rem, 0.88vw, 0.92rem);
+  line-height: 1.55;
 }
 
 .plot {
@@ -160,7 +160,7 @@
   margin-top: 0.45rem;
   color: var(--text-2);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.74rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.035em;
   line-height: 1.35;
@@ -177,7 +177,7 @@
 .outcome strong {
   color: var(--accent);
   font-family: var(--ff-label), sans-serif;
-  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  font-size: clamp(1.4rem, 2.35vw, 2.1rem);
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -187,7 +187,7 @@
 .outcome span {
   color: var(--text-2);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.025em;
   line-height: 1.4;

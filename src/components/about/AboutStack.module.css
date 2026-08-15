@@ -35,7 +35,7 @@
   padding-top: 0.3rem;
   color: var(--accent);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -43,7 +43,7 @@
 
 .groupHeading h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(1.15rem, 1.35vw, 1.35rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.35;
@@ -53,8 +53,8 @@
   max-width: 24rem;
   margin: 0.35rem 0 0;
   color: var(--text-2);
-  font-size: 0.78rem;
-  line-height: 1.45;
+  font-size: clamp(0.86rem, 0.9vw, 0.94rem);
+  line-height: 1.5;
 }
 
 .items {
@@ -72,7 +72,7 @@
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   color: var(--text-2);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.72rem;
+  font-size: clamp(0.78rem, 0.82vw, 0.86rem);
   letter-spacing: 0.025em;
   line-height: 1.2;
   transition:
