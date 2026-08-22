@@ -17,11 +17,11 @@
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--text-3);
+  padding-bottom: 0.42rem;
+  border-bottom: 1.5px solid var(--text-2);
   color: var(--text);
   font-family: var(--ff-label), sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-decoration: none;

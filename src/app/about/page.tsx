@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { AboutFooter } from "@/components/about/AboutFooter";
 import { AboutImpact } from "@/components/about/AboutImpact";
+import { AboutLearningFolders } from "@/components/about/AboutLearningFolders";
 import { AboutProjects } from "@/components/about/AboutProjects";
 import { AboutStack } from "@/components/about/AboutStack";
 import { GridRowSection } from "@/components/GridRowSection";
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * The interactive grid establishes the visual language; Projects, Stack,
- * and Impact extend its numbered cells and warm editorial palette.
+ * The interactive grid establishes the visual language; Projects, learning
+ * notes, Stack, and Impact extend its numbered cells and warm editorial palette.
  */
 export default function AboutPage() {
   return (
@@ -37,6 +38,8 @@ export default function AboutPage() {
       <AboutStack />
 
       <AboutImpact />
+
+      <AboutLearningFolders />
 
       <GridRowSection />
 

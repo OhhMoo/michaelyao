@@ -119,11 +119,11 @@ export function AboutImpact() {
         <FadeIn className={styles.figureReveal}>
           <figure className={styles.figure}>
             <Image
-              src="/images/illustrations/impact-walker.png"
-              alt="Illustration of Michael walking forward beside the impact chart"
+              src="/images/illustrations/learning-sitter.png"
+              alt="Illustration of Michael sitting in thought beside the impact chart"
               width={569}
               height={759}
-              sizes="(max-width: 700px) 120px, 180px"
+              sizes="(max-width: 700px) 105px, 155px"
             />
           </figure>
         </FadeIn>

@@ -1,0 +1,874 @@
+.section {
+  width: 100%;
+  padding: 6.5rem max(1.5rem, calc((100% - 1296px) / 2)) 9rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.reveal,
+.gridReveal,
+.figureReveal {
+  width: 100%;
+}
+
+.intro {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  max-width: 62rem;
+  margin: 0 auto 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.intro p {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--text-2);
+  font-size: clamp(0.94rem, 1.05vw, 1.05rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.intro > span {
+  flex: none;
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(7.5rem, 10vw, 9.5rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: end;
+}
+
+.folderGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.figureReveal {
+  align-self: end;
+}
+
+.figure {
+  width: 100%;
+  margin: 0 0 1.5rem;
+  pointer-events: none;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1.2rem 1.8rem var(--figure-shadow));
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: transform 260ms var(--ease);
+}
+
+.folder:nth-child(2),
+.folder:nth-child(4) {
+  transform: translateY(1.4rem);
+}
+
+.folder:hover {
+  transform: translateY(-0.35rem);
+}
+
+.folder:nth-child(2):hover,
+.folder:nth-child(4):hover {
+  transform: translateY(1.05rem);
+}
+
+.folderTab {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  width: 7.25rem;
+  height: 2rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 0.65rem 0.65rem 0 0;
+  background: color-mix(in srgb, var(--bg-card) 55%, var(--bg));
+  color: var(--text-2);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.67rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  transition:
+    border-color 220ms var(--ease),
+    background-color 220ms var(--ease);
+}
+
+.tabDot {
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.folderBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 14rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: 0 1.15rem 1.15rem 1.15rem;
+  background: color-mix(in srgb, var(--bg-card) 55%, var(--bg));
+  transition:
+    border-color 220ms var(--ease),
+    background-color 220ms var(--ease),
+    box-shadow 220ms var(--ease);
+}
+
+.folder:hover .folderTab,
+.folder:hover .folderBody {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--bg-card) 72%, var(--bg));
+}
+
+.folder:hover .folderBody {
+  box-shadow: 0 1.2rem 2.8rem -2rem color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.folder:focus-visible {
+  outline: none;
+}
+
+.folder:focus-visible .folderTab,
+.folder:focus-visible .folderBody {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+.folderTitle {
+  margin-bottom: 1rem;
+  font-family: var(--ff-label), sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.7rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+
+.folderDescription {
+  max-width: 34ch;
+  color: var(--text-2);
+  font-size: clamp(0.86rem, 0.95vw, 0.96rem);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.folderMeta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.64rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.openLabel {
+  color: var(--text);
+  transition: color 180ms var(--ease);
+}
+
+.folder:hover .openLabel {
+  color: var(--accent);
+}
+
+.overlay {
+  position: fixed;
+  z-index: 400;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: color-mix(in srgb, var(--bg) 76%, transparent);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  animation: overlayIn 220ms ease-out both;
+}
+
+.dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(76rem, 100%);
+  height: min(48rem, calc(100dvh - 4rem));
+  min-height: 34rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.35rem;
+  background: var(--bg);
+  box-shadow: 0 2.5rem 6rem -2rem color-mix(in srgb, var(--text) 28%, transparent);
+  animation: dialogIn 300ms var(--ease) both;
+}
+
+.dialogHeader {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.35rem clamp(1.25rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--accent);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dialogHeader h2 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.closeButton {
+  flex: none;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms var(--ease),
+    color 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.closeButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.closeButton:active {
+  transform: translateY(1px);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.38fr) minmax(0, 0.62fr);
+  min-height: 0;
+}
+
+.filePane {
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  border-right: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-card) 32%, var(--bg));
+}
+
+.filePane > p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.sourceList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1.2rem 0 2rem;
+}
+
+.sourceList span {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.fileList {
+  border-top: 1px solid var(--border);
+}
+
+.emptyFileList {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 1rem 0.45rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-3);
+}
+
+.emptyFileList > span {
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.emptyFileList p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.fileButton {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.9rem 0.45rem;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease),
+    padding 180ms var(--ease);
+}
+
+.fileButton:hover,
+.fileButton[aria-current="page"] {
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.fileButton[aria-current="page"] {
+  color: var(--accent);
+}
+
+.fileButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.fileIndex {
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.fileCopy {
+  display: block;
+  min-width: 0;
+}
+
+.fileCopy strong,
+.fileCopy span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileCopy strong {
+  font-size: 0.82rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+}
+
+.fileCopy span {
+  margin-top: 0.2rem;
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.63rem;
+  letter-spacing: 0.02em;
+}
+
+.fileArrow {
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  transition:
+    opacity 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.fileButton:hover .fileArrow,
+.fileButton[aria-current="page"] .fileArrow {
+  opacity: 1;
+  transform: none;
+}
+
+.previewPane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.previewHeader {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 2.8rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-card) 30%, var(--bg));
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+}
+
+.previewDots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.previewDots span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.previewDots span:first-child {
+  background: var(--accent);
+}
+
+.previewFilename {
+  overflow: hidden;
+  color: var(--text-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.previewMode {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.previewBody {
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  overscroll-behavior: contain;
+}
+
+.emptyPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 26rem;
+  margin: clamp(3rem, 12vh, 7rem) auto 0;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.emptyPreview > span {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 4.25rem;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem 0.75rem 0.25rem 0.25rem;
+  background: color-mix(in srgb, var(--bg-card) 40%, var(--bg));
+  color: var(--accent);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.emptyPreview strong {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 560;
+}
+
+.emptyPreview p {
+  margin: 0.45rem 0 0;
+  color: var(--text-2);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.markdown {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: var(--text);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.markdown h1 {
+  margin: 0 0 1.4rem;
+  font-size: clamp(1.8rem, 3.2vw, 2.55rem);
+  line-height: 1.08;
+}
+
+.markdown h2 {
+  margin: 2.4rem 0 0.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: clamp(1.18rem, 2vw, 1.45rem);
+  line-height: 1.25;
+}
+
+.markdown h3 {
+  margin: 1.7rem 0 0.55rem;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.markdown p,
+.markdown li {
+  color: var(--text-2);
+  font-size: clamp(0.9rem, 1vw, 0.98rem);
+  line-height: 1.72;
+}
+
+.markdown p {
+  margin: 0.8rem 0;
+}
+
+.markdown ul,
+.markdown ol {
+  margin: 0.9rem 0 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.markdown li + li {
+  margin-top: 0.35rem;
+}
+
+.markdown strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.markdown blockquote {
+  margin: 1.5rem 0;
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  border-left: 2px solid var(--accent);
+}
+
+.markdown blockquote p {
+  color: var(--text);
+  font-style: italic;
+}
+
+.markdown code {
+  padding: 0.12rem 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--bg-card) 55%, var(--bg));
+  color: var(--accent);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.markdown pre {
+  max-width: 100%;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, var(--bg-card) 55%, var(--bg));
+}
+
+.markdown pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.markdown hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.loadingState span {
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  background: var(--border);
+  opacity: 0.6;
+  animation: loadingPulse 1.2s ease-in-out infinite alternate;
+}
+
+.loadingState span:first-child {
+  width: 58%;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loadingState span:nth-child(3) {
+  width: 88%;
+}
+
+.loadingState span:last-child {
+  width: 72%;
+}
+
+.errorState {
+  max-width: 34rem;
+  margin: 4rem auto 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+
+.errorState strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 1rem;
+}
+
+.errorState p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes loadingPulse {
+  from { opacity: 0.35; }
+  to { opacity: 0.72; }
+}
+
+@media (max-width: 1080px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .figureReveal {
+    width: clamp(6.5rem, 14vw, 8.5rem);
+    margin-top: 2rem;
+    justify-self: end;
+  }
+
+  .figure {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 780px) {
+  .section {
+    padding: 5.5rem 1rem 7rem;
+  }
+
+  .intro {
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .folderGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .folder:nth-child(2),
+  .folder:nth-child(4),
+  .folder:nth-child(2):hover,
+  .folder:nth-child(4):hover {
+    transform: none;
+  }
+
+  .folder:hover {
+    transform: translateY(-0.25rem);
+  }
+
+  .folderBody {
+    min-height: 12.5rem;
+  }
+
+  .figureReveal {
+    width: 6.5rem;
+    margin-right: 1rem;
+  }
+
+  .overlay {
+    padding: 0.75rem;
+  }
+
+  .dialog {
+    width: 100%;
+    height: calc(100dvh - 1.5rem);
+    min-height: 0;
+    border-radius: 1rem;
+  }
+
+  .dialogHeader {
+    padding: 1rem;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(13rem, 38%) minmax(0, 62%);
+  }
+
+  .filePane {
+    overflow-y: auto;
+    padding: 1.15rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filePane > p,
+  .sourceList {
+    display: none;
+  }
+
+  .fileButton {
+    padding-top: 0.72rem;
+    padding-bottom: 0.72rem;
+  }
+
+  .previewMode {
+    display: none;
+  }
+
+  .previewHeader {
+    grid-template-columns: 3.2rem minmax(0, 1fr);
+  }
+
+  .previewBody {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .intro {
+    display: block;
+  }
+
+  .intro > span {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .folderMeta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dialogHeader h2 {
+    font-size: 1.05rem;
+  }
+
+  .eyebrow {
+    max-width: 22ch;
+    line-height: 1.4;
+  }
+
+  .closeButton {
+    padding: 0.55rem 0.65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folder,
+  .folderTab,
+  .folderBody,
+  .openLabel,
+  .closeButton,
+  .fileButton,
+  .fileArrow,
+  .emptyPreview,
+  .overlay,
+  .dialog,
+  .loadingState span {
+    animation: none;
+    transition: none;
+  }
+}
