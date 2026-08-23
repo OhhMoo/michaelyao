@@ -339,10 +339,10 @@ export function AcademicCv() {
 
       <figure className={styles.endingIllustration}>
         <Image
-          src="/images/illustrations/academic-ending.png"
-          alt="Line illustration of Michael resting among cats at the end of the page"
-          width={2255}
-          height={1824}
+          src="/images/illustrations/academic-sleep.png"
+          alt="Line illustration of Michael sleeping on a couch among cats"
+          width={918}
+          height={742}
           sizes="(max-width: 700px) calc(100vw - 32px), 900px"
         />
       </figure>

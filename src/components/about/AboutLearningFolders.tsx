@@ -3,9 +3,14 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 
 import {
   learningFolders,
+  learningNoteCount,
+  type LearningFolder,
   type LearningFolderId,
 } from "@/data/learning-notes";
 
@@ -14,8 +19,30 @@ import styles from "./AboutLearningFolders.module.css";
 
 type NoteStatus = "idle" | "loading" | "ready" | "error";
 
+const missingImageMessage = "[sorrrrrrrry image is missing and we are working on it...]";
+
+function getFolderNoteCount(folder: LearningFolder) {
+  return folder.notes.length + folder.subfolders.reduce(
+    (total, subfolder) => total + subfolder.notes.length,
+    0,
+  );
+}
+
+function replaceMissingImages(markdown: string) {
+  return markdown
+    .replace(
+      /!\[\[[^\]]+\.(?:avif|gif|jpe?g|png|svg|webp)(?:#[^|\]]+)?(?:\|[^\]]+)?\]\]/gi,
+      `\n\n${missingImageMessage}\n\n`,
+    )
+    .replace(
+      /!\[[^\]]*\]\((?:[^()]|\([^()]*\))*\)/g,
+      `\n\n${missingImageMessage}\n\n`,
+    );
+}
+
 export function AboutLearningFolders() {
   const [openFolderId, setOpenFolderId] = useState<LearningFolderId | null>(null);
+  const [selectedSubfolderId, setSelectedSubfolderId] = useState<string | null>(null);
   const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null);
   const [noteContent, setNoteContent] = useState("");
   const [noteStatus, setNoteStatus] = useState<NoteStatus>("idle");
@@ -23,12 +50,17 @@ export function AboutLearningFolders() {
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   const openFolder = learningFolders.find((folder) => folder.id === openFolderId);
-  const activeNote = openFolder?.notes.find((note) => note.id === selectedNoteId)
-    ?? openFolder?.notes[0];
+  const activeSubfolder = openFolder?.subfolders.find(
+    (subfolder) => subfolder.id === selectedSubfolderId,
+  ) ?? openFolder?.subfolders[0];
+  const activeNotes = activeSubfolder?.notes ?? openFolder?.notes ?? [];
+  const activeNote = activeNotes.find((note) => note.id === selectedNoteId)
+    ?? activeNotes[0];
   const activeNoteHref = activeNote?.href;
 
   const closeFolder = useCallback(() => {
     setOpenFolderId(null);
+    setSelectedSubfolderId(null);
     setSelectedNoteId(null);
     setNoteContent("");
     setNoteStatus("idle");
@@ -63,7 +95,7 @@ export function AboutLearningFolders() {
         return response.text();
       })
       .then((content) => {
-        setNoteContent(content);
+        setNoteContent(replaceMissingImages(content));
         setNoteStatus("ready");
       })
       .catch((error: unknown) => {
@@ -84,43 +116,56 @@ export function AboutLearningFolders() {
           <p>
             Working notes from classes, papers, and ideas I am still trying to make precise.
           </p>
-          <span>0 notes · 4 folders</span>
+          <span>{learningNoteCount} notes · {learningFolders.length} folders</span>
         </div>
       </FadeIn>
 
       <div className={styles.content}>
         <FadeIn className={styles.gridReveal}>
           <div className={styles.folderGrid}>
-            {learningFolders.map((folder) => (
-              <button
-                className={styles.folder}
-                type="button"
-                key={folder.id}
-                aria-haspopup="dialog"
-                aria-expanded={openFolderId === folder.id}
-                aria-controls="learning-folder-dialog"
-                onClick={(event) => {
-                  lastTriggerRef.current = event.currentTarget;
-                  setNoteContent("");
-                  setNoteStatus(folder.notes.length > 0 ? "loading" : "idle");
-                  setSelectedNoteId(folder.notes[0]?.id ?? null);
-                  setOpenFolderId(folder.id);
-                }}
-              >
-                <span className={styles.folderTab}>
-                  <span>{folder.index}</span>
-                  <span className={styles.tabDot} aria-hidden />
-                </span>
-                <span className={styles.folderBody}>
-                  <span className={styles.folderTitle}>{folder.title}</span>
-                  <span className={styles.folderDescription}>{folder.description}</span>
-                  <span className={styles.folderMeta}>
-                    <span>{String(folder.notes.length).padStart(2, "0")} Markdown files</span>
-                    <span className={styles.openLabel}>Open folder <span aria-hidden>↗</span></span>
+            {learningFolders.map((folder) => {
+              const noteCount = getFolderNoteCount(folder);
+              const subfolderLabel = folder.subfolders.length === 1 ? "subfolder" : "subfolders";
+
+              return (
+                <button
+                  className={styles.folder}
+                  type="button"
+                  key={folder.id}
+                  aria-haspopup="dialog"
+                  aria-expanded={openFolderId === folder.id}
+                  aria-controls="learning-folder-dialog"
+                  onClick={(event) => {
+                    const firstSubfolder = folder.subfolders[0];
+                    const firstNote = firstSubfolder?.notes[0] ?? folder.notes[0];
+                    lastTriggerRef.current = event.currentTarget;
+                    setNoteContent("");
+                    setNoteStatus(firstNote ? "loading" : "idle");
+                    setSelectedSubfolderId(firstSubfolder?.id ?? null);
+                    setSelectedNoteId(firstNote?.id ?? null);
+                    setOpenFolderId(folder.id);
+                  }}
+                >
+                  <span className={styles.folderTab}>
+                    <span>{folder.index}</span>
+                    <span className={styles.tabDot} aria-hidden />
                   </span>
-                </span>
-              </button>
-            ))}
+                  <span className={styles.folderBody}>
+                    <span className={styles.folderTitle}>{folder.title}</span>
+                    <span className={styles.folderDescription}>{folder.description}</span>
+                    <span className={styles.folderMeta}>
+                      <span>
+                        {String(noteCount).padStart(2, "0")} files
+                        {folder.subfolders.length > 0 && (
+                          <> · {String(folder.subfolders.length).padStart(2, "0")} {subfolderLabel}</>
+                        )}
+                      </span>
+                      <span className={styles.openLabel}>Open folder <span aria-hidden>↗</span></span>
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </FadeIn>
 
@@ -173,9 +218,52 @@ export function AboutLearningFolders() {
                 <div className={styles.sourceList} aria-label="Learning sources">
                   {openFolder.sources.map((source) => <span key={source}>{source}</span>)}
                 </div>
-                <nav className={styles.fileList} aria-label={`${openFolder.title} notes`}>
-                  {openFolder.notes.length > 0 ? (
-                    openFolder.notes.map((note, index) => (
+
+                {openFolder.subfolders.length > 0 && (
+                  <>
+                    <div className={styles.directoryHeader}>
+                      <span>Subfolders</span>
+                      <span>{String(openFolder.subfolders.length).padStart(2, "0")}</span>
+                    </div>
+                    <nav className={styles.subfolderList} aria-label={`${openFolder.title} subfolders`}>
+                      {openFolder.subfolders.map((subfolder) => (
+                        <button
+                          className={styles.subfolderButton}
+                          type="button"
+                          key={subfolder.id}
+                          aria-current={activeSubfolder?.id === subfolder.id ? "true" : undefined}
+                          onClick={() => {
+                            if (activeSubfolder?.id === subfolder.id) return;
+                            setNoteContent("");
+                            setNoteStatus(subfolder.notes[0] ? "loading" : "idle");
+                            setSelectedSubfolderId(subfolder.id);
+                            setSelectedNoteId(subfolder.notes[0]?.id ?? null);
+                          }}
+                        >
+                          <span className={styles.subfolderIcon} aria-hidden />
+                          <span className={styles.subfolderCopy}>
+                            <strong>{subfolder.index}. {subfolder.title}</strong>
+                            <span>{String(subfolder.notes.length).padStart(2, "0")} Markdown files</span>
+                          </span>
+                          <span className={styles.subfolderArrow} aria-hidden>→</span>
+                        </button>
+                      ))}
+                    </nav>
+                  </>
+                )}
+
+                <div className={styles.activeDirectory}>
+                  <span>{activeSubfolder?.title ?? `${openFolder.title} Notes`}</span>
+                  <p>
+                    {activeSubfolder?.description
+                      ?? (openFolder.notes.length > 0
+                        ? `Markdown files stored directly in the ${openFolder.title} folder.`
+                        : "No notes in this folder yet.")}
+                  </p>
+                </div>
+                <nav className={styles.fileList} aria-label={`${activeSubfolder?.title ?? openFolder.title} notes`}>
+                  {activeNotes.length > 0 ? (
+                    activeNotes.map((note, index) => (
                       <button
                         className={styles.fileButton}
                         type="button"
@@ -193,7 +281,7 @@ export function AboutLearningFolders() {
                           <strong>{note.title}</strong>
                           <span>{note.filename}</span>
                         </span>
-                        <span className={styles.fileArrow} aria-hidden>→</span>
+                        <span className={styles.fileArrow} aria-hidden>↗</span>
                       </button>
                     ))
                   ) : (
@@ -212,7 +300,11 @@ export function AboutLearningFolders() {
                     <span />
                     <span />
                   </span>
-                  <span className={styles.previewFilename}>{activeNote?.filename ?? "No file selected"}</span>
+                  <span className={styles.previewFilename}>
+                    {activeNote
+                      ? `${activeSubfolder?.title ?? openFolder.title} / ${activeNote.filename}`
+                      : "No file selected"}
+                  </span>
                   <span className={styles.previewMode}>Rendered Markdown</span>
                 </header>
 
@@ -243,7 +335,13 @@ export function AboutLearningFolders() {
 
                   {noteStatus === "ready" && (
                     <div className={styles.markdown}>
-                      <Markdown skipHtml>{noteContent}</Markdown>
+                      <Markdown
+                        skipHtml
+                        remarkPlugins={[remarkMath, remarkGfm]}
+                        rehypePlugins={[[rehypeKatex, { strict: false, throwOnError: false }]]}
+                      >
+                        {noteContent}
+                      </Markdown>
                     </div>
                   )}
                 </div>

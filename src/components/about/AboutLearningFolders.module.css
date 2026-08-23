@@ -337,6 +337,146 @@
   letter-spacing: 0.08em;
 }
 
+.directoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.subfolderList {
+  border-top: 1px solid var(--border);
+}
+
+.subfolderButton {
+  display: grid;
+  grid-template-columns: 1.7rem minmax(0, 1fr) auto;
+  gap: 0.72rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.82rem 0.45rem;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease),
+    padding 180ms var(--ease);
+}
+
+.subfolderButton:hover,
+.subfolderButton[aria-current="true"] {
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.subfolderButton[aria-current="true"] {
+  color: var(--accent);
+}
+
+.subfolderButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.subfolderIcon {
+  position: relative;
+  display: block;
+  width: 1.3rem;
+  height: 0.9rem;
+  margin-top: 0.18rem;
+  border: 1px solid currentcolor;
+  border-radius: 0.12rem;
+  opacity: 0.72;
+}
+
+.subfolderIcon::before {
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: -1px;
+  width: 0.58rem;
+  height: 0.28rem;
+  border: 1px solid currentcolor;
+  border-bottom: 0;
+  border-radius: 0.12rem 0.12rem 0 0;
+  content: "";
+}
+
+.subfolderCopy {
+  display: block;
+  min-width: 0;
+}
+
+.subfolderCopy strong,
+.subfolderCopy span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subfolderCopy strong {
+  font-size: 0.82rem;
+  font-weight: 560;
+}
+
+.subfolderCopy span {
+  margin-top: 0.18rem;
+  color: var(--text-3);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.61rem;
+  letter-spacing: 0.04em;
+}
+
+.subfolderArrow {
+  opacity: 0;
+  transform: translateX(-0.2rem);
+  transition:
+    opacity 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.subfolderButton:hover .subfolderArrow,
+.subfolderButton[aria-current="true"] .subfolderArrow {
+  opacity: 1;
+  transform: none;
+}
+
+.activeDirectory {
+  margin-top: 1.6rem;
+  padding-bottom: 0.75rem;
+}
+
+.activeDirectory > span {
+  display: block;
+  color: var(--text);
+  font-family: var(--ff-label), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.activeDirectory p {
+  margin: 0.35rem 0 0;
+  color: var(--text-3);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
 .fileList {
   border-top: 1px solid var(--border);
 }
@@ -556,7 +696,10 @@
 
 .markdown h1,
 .markdown h2,
-.markdown h3 {
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
   color: var(--text);
   font-weight: 560;
   letter-spacing: -0.03em;
@@ -583,6 +726,14 @@
   line-height: 1.35;
 }
 
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin: 1.35rem 0 0.45rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
 .markdown p,
 .markdown li {
   color: var(--text-2);
@@ -607,6 +758,49 @@
 .markdown strong {
   color: var(--text);
   font-weight: 600;
+}
+
+.markdown a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.markdown table {
+  width: 100%;
+  margin: 1.25rem 0 1.5rem;
+  border-collapse: collapse;
+  color: var(--text-2);
+  font-size: clamp(0.78rem, 0.9vw, 0.9rem);
+  line-height: 1.5;
+}
+
+.markdown th,
+.markdown td {
+  padding: 0.58rem 0.7rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown th {
+  background: color-mix(in srgb, var(--bg-card) 55%, var(--bg));
+  color: var(--text);
+  font-weight: 600;
+}
+
+.markdown :global(.katex-display) {
+  max-width: 100%;
+  margin: 1.35rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0;
+}
+
+.markdown :global(.katex) {
+  color: var(--text);
+  font-size: 1.02em;
 }
 
 .markdown blockquote {
@@ -809,6 +1003,14 @@
     display: none;
   }
 
+  .activeDirectory {
+    margin-top: 1rem;
+  }
+
+  .activeDirectory p {
+    display: none;
+  }
+
   .fileButton {
     padding-top: 0.72rem;
     padding-bottom: 0.72rem;
@@ -862,6 +1064,8 @@
   .folderBody,
   .openLabel,
   .closeButton,
+  .subfolderButton,
+  .subfolderArrow,
   .fileButton,
   .fileArrow,
   .emptyPreview,

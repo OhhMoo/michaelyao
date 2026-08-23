@@ -9,6 +9,7 @@ import {
   Roboto_Mono,
 } from "next/font/google";
 import localFont from "next/font/local";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 import "@/styles/simple-portfolio.css";
 import "@/styles/about-clone.css";
