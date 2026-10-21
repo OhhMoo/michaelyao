@@ -7,19 +7,6 @@ type Theme = "light" | "dark";
 const STORAGE_KEY = "theme";
 const THEME_CHANGE_EVENT = "themechange";
 
-function getSystemTheme(): Theme {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function getStoredTheme(): Theme | null {
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === "dark" || stored === "light" ? stored : null;
-  } catch {
-    return null;
-  }
-}
-
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
   window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
@@ -34,24 +21,14 @@ function getServerThemeSnapshot(): Theme {
 }
 
 function subscribeToTheme(onStoreChange: () => void) {
-  const media = window.matchMedia("(prefers-color-scheme: dark)");
-  const handleSystemChange = () => {
-    if (getStoredTheme()) return;
-    applyTheme(getSystemTheme());
-  };
   const handleStorage = (event: StorageEvent) => {
     if (event.key !== STORAGE_KEY) return;
-    const next = event.newValue === "dark" || event.newValue === "light"
-      ? event.newValue
-      : getSystemTheme();
-    applyTheme(next);
+    applyTheme(event.newValue === "dark" ? "dark" : "light");
   };
 
-  media.addEventListener("change", handleSystemChange);
   window.addEventListener("storage", handleStorage);
   window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
   return () => {
-    media.removeEventListener("change", handleSystemChange);
     window.removeEventListener("storage", handleStorage);
     window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
   };

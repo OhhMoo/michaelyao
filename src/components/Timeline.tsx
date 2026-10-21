@@ -57,7 +57,7 @@ export function Timeline({ entries }: { entries: CareerTimelineEntry[] }) {
                           )}
                         </h5>
                         <ul>
-                          {subEntry.bullets.map((bullet) => (
+                          {subEntry.bullets?.map((bullet) => (
                             <li key={bullet}>{bullet}</li>
                           ))}
                         </ul>

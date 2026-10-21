@@ -19,12 +19,7 @@ const THEME_BOOTSTRAP = `
   (function () {
     try {
       var stored = window.localStorage.getItem("theme");
-      var theme = stored === "light" || stored === "dark"
-        ? stored
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.theme = stored === "dark" ? "dark" : "light";
     } catch (error) {
       document.documentElement.dataset.theme = "light";
     }
@@ -107,16 +102,19 @@ export const metadata: Metadata = {
     default: "Michael Yao",
     template: "%s",
   },
-  description: "Michael Yao — computer science, mathematics, computational physics, and machine learning.",
+  description:
+    "Michael Yao — computer science and mathematics at Harvey Mudd College. Research in LLM post-training with reinforcement learning, tool-use agents, AI for science, and mechanistic interpretability.",
   openGraph: {
     title: "Michael Yao",
-    description: "Computer science, mathematics, computational physics, and machine learning.",
+    description:
+      "LLM post-training with reinforcement learning, tool-use agents, AI for science, and mechanistic interpretability.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Michael Yao",
-    description: "Computer science, mathematics, computational physics, and machine learning.",
+    description:
+      "LLM post-training with reinforcement learning, tool-use agents, AI for science, and mechanistic interpretability.",
   },
   icons: {
     icon: [

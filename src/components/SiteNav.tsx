@@ -80,7 +80,7 @@ export function SiteNav() {
           <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
             <GitHubIcon />
           </a>
-          <a href="mailto:myao3411@gmail.com" aria-label="Email">
+          <a href="mailto:miyao@hmc.edu" aria-label="Email">
             <EmailIcon />
           </a>
         </div>

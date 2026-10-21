@@ -484,7 +484,7 @@ export const projects: Project[] = [
       "For research conversations, collaborations, or anything worth more than a message.",
     year: "live",
     techStack: [],
-    links: [{ label: "myao3411@gmail.com ↗", href: "mailto:myao3411@gmail.com" }],
+    links: [{ label: "miyao@hmc.edu ↗", href: "mailto:miyao@hmc.edu" }],
     preview: { kind: "quote", text: "write, reply, say hello.", bg: "#f5f5f5" },
   },
   {
