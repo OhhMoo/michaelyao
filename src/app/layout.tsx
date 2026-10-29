@@ -7,6 +7,7 @@ import {
   JetBrains_Mono,
   Lora,
   Roboto_Mono,
+  Source_Code_Pro,
 } from "next/font/google";
 import localFont from "next/font/local";
 import "katex/dist/katex.min.css";
@@ -74,6 +75,14 @@ const robotoMono = Roboto_Mono({
   display: "swap",
 });
 
+// The blog and academic memo pages (styles in components/blog/memo.css), and the
+// shared nav on those pages.
+const sourceCodePro = Source_Code_Pro({
+  variable: "--ff-memo",
+  subsets: ["latin", "greek"],
+  display: "swap",
+});
+
 const etBook = localFont({
   variable: "--font-serif-essay",
   display: "swap",
@@ -137,7 +146,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable} ${dmSans.variable} ${plexCondensed.variable}`}
+      className={`${geist.variable} ${jetbrainsMono.variable} ${lora.variable} ${robotoMono.variable} ${etBook.variable} ${dmSans.variable} ${plexCondensed.variable} ${sourceCodePro.variable}`}
     >
       <body>
         {children}

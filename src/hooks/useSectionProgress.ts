@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
  * Continuous, position-driven scroll progress across a list of section ids —
  * the engine behind ai-2027.com's "values change as you scroll" readouts.
  *
- * Unlike useScrollProgress (whole-page 0–100 percentage), this reports a
+ * Rather than a whole-page percentage, this reports a
  * float in `[0, ids.length - 1]`: integer `i` means section `i`'s center
  * sits exactly on the reading line (45% of viewport height), and fractional
  * values interpolate between neighbours. Consumers can therefore tween

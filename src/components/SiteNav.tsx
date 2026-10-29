@@ -10,14 +10,15 @@ import { ThemeToggle } from "./ThemeToggle";
 const TABS = [
   { href: "/", label: "Academic", key: "academic" },
   { href: "/about", label: "About", key: "about" },
+  { href: "/blog", label: "Blog", key: "blog" },
 ] as const;
 
 /**
  * The shared site header, in georgialyu.com's style: two-line wordmark left,
- * tabs centre, social icons right, hamburger under 768px. Used by both the
- * academic page and the About clone so the two share one header and one set
+ * tabs centre, social icons right, hamburger under 768px. Used by the academic
+ * page, the About clone and the blog so all three share one header and one set
  * of tabs; `.gl-nav` styling is hard-coded (see styles/site-nav.css) so it
- * renders identically on top of either page's token set.
+ * renders identically on top of each page's token set.
  *
  * Hides on scroll-down past 80px, reappears on scroll-up — the original's rule.
  */
@@ -37,9 +38,12 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const activeKey = pathname.split("/").filter(Boolean).includes("about")
+  const segments = pathname.split("/").filter(Boolean);
+  const activeKey = segments.includes("about")
     ? "about"
-    : "academic";
+    : segments.includes("blog")
+      ? "blog"
+      : "academic";
 
   const className = ["nav", "gl-nav", hidden ? "nav--hidden" : "", menuOpen ? "menu-open" : ""]
     .filter(Boolean)

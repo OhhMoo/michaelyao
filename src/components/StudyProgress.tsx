@@ -48,7 +48,7 @@ const progressRows = [
       label: "Working note",
       title: "Signal propagation and criticality",
       date: "Current",
-      href: "/criticality",
+      href: "/blog/criticality",
       excerpt:
         "Mean-field recursions track how variance and correlation evolve with depth and where the order-to-chaos transition appears.",
     },

@@ -5,7 +5,7 @@ import { useSyncExternalStore } from "react";
 type Theme = "light" | "dark";
 
 const STORAGE_KEY = "theme";
-const THEME_CHANGE_EVENT = "themechange";
+export const THEME_CHANGE_EVENT = "themechange";
 
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;

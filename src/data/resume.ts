@@ -1,17 +1,7 @@
 export type TimelineLink = { label: string; href: string };
 
-export type TimelineFigure =
-  | {
-      type: "image";
-      src: string;
-      alt: string;
-      width: number;
-      height: number;
-    }
-  | {
-      type: "plots";
-      plots: { src: string; title: string }[];
-    };
+/** A small memo-style plot drawn from the research's own numbers. */
+export type TimelineSketch = "circles";
 
 export type TimelineSubEntry = {
   subtitle: string;
@@ -19,7 +9,7 @@ export type TimelineSubEntry = {
   summary?: string;
   bullets?: string[];
   links?: TimelineLink[];
-  figure?: TimelineFigure;
+  sketch?: TimelineSketch;
 };
 
 export type TimelineStat = { k: string; v: string };
@@ -51,12 +41,14 @@ export type CvProject = {
   description: string;
 };
 
-// Source: resume_m.pdf (2026-10). Bullets may cite publications as "[n]".
+// Source: resume_m.pdf (2026-10). Summaries may cite publications as "[n]".
 export const profile = {
   name: "Michael Yao",
-  affiliation: "B.S. Joint Computer Science & Mathematics · Harvey Mudd College",
   bio: [
-    "I am currently a machine learning engineering intern at Alkera AI (YC S26), where I train SQL data agents with execution-verified reinforcement learning. I also do research with Bilin Zhuang at Harvey Mudd on unsupervised learning for molecular systems and the mean-field theory of deep networks, and with Miquel Duran-Frigola at Ersilia on tabular foundation models for low-data molecular prediction.",
+    "hi! i'm michael",
+    "my goal is to understand how learning systems work, and to use them to do science.",
+    "right now i'm a machine learning engineering intern at alkera ai (yc s26), where i train sql agents with reinforcement learning. on the research side, i work with bilin zhuang at harvey mudd on water and the mean-field theory of deep networks, and with miquel duran-frigola at ersilia on tabular foundation models for molecules. i also like reading what training changes inside a model (interpretability!).",
+    "i love reading detective stories, a big fan of Shirai Tomoyuki",
   ],
   interests: [
     "LLM post-training (RL)",
@@ -109,40 +101,22 @@ export const publications: Publication[] = [
 
 export const researchExperience: TimelineEntry[] = [
   {
-    heading: "Zhuang Group — Harvey Mudd College",
+    heading: "Harvey Mudd College",
     meta: ["Undergraduate Researcher", "Advisor: Bilin Zhuang", "Claremont, CA", "Oct 2025 – Present"],
     subEntries: [
       {
         subtitle: "Unsupervised Machine Learning on Water Structure",
-        summary:
-          "GMM classification in (q, LSI, sₖ, ζ) order-parameter space · likelihood-ratio abstention · TIP4P/2005, TIP5P, SWM4-NDP MD · state-resolved S(k) [2]",
-        links: [{ label: "Read more", href: "/water" }],
-        figure: {
-          type: "plots",
-          plots: [
-            {
-              src: "/plotly/water-3d-cluster0.html",
-              title: "Interactive 3D view of water structure cluster 0",
-            },
-            {
-              src: "/plotly/water-3d-cluster1.html",
-              title: "Interactive 3D view of water structure cluster 1",
-            },
-          ],
-        },
+        summary: "Likelihood-ratio abstention · Molecular Dynamics analysis",
+        links: [
+          { label: "Read more", href: "/blog/water" },
+          { label: "Code", href: "https://zenodo.org/records/23351258" },
+        ],
       },
       {
         subtitle: "Mean-Field Theory of Deep Neural Networks",
-        summary:
-          "Deep tanh networks · mean-field variance & correlation recursions · fixed point c* · order-to-chaos boundary χ₁ = 1 · width-1,000 simulations",
-        links: [{ label: "Read more", href: "/criticality" }],
-        figure: {
-          type: "image",
-          src: "/images/research/criticality/fixed-point-chaos-boundary.png",
-          alt: "Heatmaps of the neural-network fixed point and order-to-chaos boundary",
-          width: 1400,
-          height: 536,
-        },
+        summary: "Mean-field theory · Order-to-chaos boundary",
+        links: [{ label: "Read more", href: "/blog/criticality" }],
+        sketch: "circles",
       },
     ],
   },
@@ -152,16 +126,8 @@ export const researchExperience: TimelineEntry[] = [
     subEntries: [
       {
         subtitle: "Feature Selection for Tabular Foundation Models",
-        summary:
-          "TabPFN in-context learning · 77 few-shot tasks · RDKit, fingerprint & pharmacophore families · +3.5–5.3 ROC-AUC · assay selection · ADME/Tox leakage audit [1]",
-        links: [{ label: "Read more", href: "https://arxiv.org/abs/2609.30789" }],
-        figure: {
-          type: "image",
-          src: "/images/research/ersilia/feature-utility-radar.png",
-          alt: "Radar chart of ROC-AUC gain over RDKit-11 for each molecular feature family at 16 and 128 labels",
-          width: 1845,
-          height: 1004,
-        },
+        summary: "TabPFN in-context learning · Molecular feature selection",
+        links: [{ label: "arXiv", href: "https://arxiv.org/abs/2609.30789" }],
       },
     ],
   },
@@ -171,32 +137,19 @@ export const industryExperience: TimelineEntry[] = [
   {
     heading: "Alkera AI (YC S26)",
     meta: ["Machine Learning Engineering Intern", "San Francisco, CA", "May 2026 – Present"],
-    subEntries: [
-      {
-        subtitle: "Execution-Verified Reinforcement Learning",
-        bullets: [
-          "Implemented multi-turn GRPO in verl for SQL pipeline synthesis and debugging with iterative tool execution",
-          "Scaled Qwen3.5 from 9B to 27B (8×A100 to 8×H100), raising the mean execution-graded score by 67% (0.18 to 0.30)",
-          "Bounded execution-verifier rewards with baseline and gold anchors to reward correct SQL outcomes over surface matches",
-        ],
-      },
-      {
-        subtitle: "Sandboxed Agent Infrastructure & Evaluation",
-        bullets: [
-          "Built a sandboxed 63-tool MCP gateway emulating 19 vendor platforms, integrating DuckDB, dbt, BI, Jira, and Slack",
-          "Designed 32 data-incident tasks with deterministic execution graders and tiered rewards; evaluated 483 agent rollouts",
-          "Patched sandbox-escape and root-credential exploits uncovered in agent rollouts to prevent execution-based reward hacking",
-        ],
-      },
+    summary: "Training AI agents to fix data pipelines, rewarded only when their code gets the right answer",
+    paragraphs: [
+      "I built Dataline, the RL environment behind it: a data engineer's whole working computer (warehouse, dbt, scheduler, BI dashboards, tickets, chat), rebuilt from a seed with something broken. The agent gets a terminal and is graded only on what it leaves behind; lying about its work or crossing a permission line is the only way to score below zero.",
     ],
-    links: [{ label: "Website", href: "https://www.alkera.ai/" }],
+    links: [
+      { label: "Website", href: "https://www.alkera.ai/" },
+      { label: "Dataline", href: "https://github.com/OhhMoo/Dataline" },
+    ],
   },
   {
     heading: "Fresenius Kabi",
     meta: ["R&D Data & Quality Systems Intern", "Wuxi, China", "Aug 2026 – Sep 2026"],
-    bullets: [
-      "Built a Python and JavaScript ETL pipeline to automate quality-compliance audits across 665 documents, reconciling 222 SOP records against master databases and automatically repairing 189 broken cross-references",
-    ],
+    summary: "Automating quality-compliance checks across hundreds of R&D documents",
   },
 ];
 
@@ -206,21 +159,18 @@ export const experience: TimelineEntry[] = [...industryExperience, ...researchEx
 export const cvProjects: CvProject[] = [
   {
     title: "NullStep",
-    href: "/sae-rl",
-    description:
-      "A null-step control, with model weights held fixed, that isolates dictionary-retraining noise in sparse-autoencoder feature-drift metrics across 112 TopK and JumpReLU SAEs on SFT and PPO checkpoints. With Cole Blodin (AWS).",
+    href: "https://github.com/OhhMoo/NullStepSAE",
+    description: "Telling real changes inside a fine-tuned model apart from measurement noise",
   },
   {
     title: "LangAlpha",
-    href: "/langalpha",
-    description:
-      "A multi-agent financial research platform with real-time Server-Sent Events streams that expose agent reasoning and per-turn source-citation tracking that links research to its evidence.",
+    href: "https://github.com/ginlix-ai/LangAlpha",
+    description: "AI research agents for finance that show their reasoning and cite their sources",
   },
   {
     title: "SPEQTRO",
-    href: "/speqtro",
-    description:
-      "An autonomous agent that combines NMR, IR, and mass-spectrometry models into ranked molecular structures with traceable evidence.",
+    href: "https://github.com/OhhMoo/SPEQTRO",
+    description: "An AI agent that reads a molecule's spectra and works out its structure",
   },
 ];
 
@@ -228,28 +178,23 @@ export const education: TimelineEntry[] = [
   {
     heading: "Harvey Mudd College",
     meta: ["B.S. — Joint Computer Science & Mathematics", "Claremont, CA", "Expected May 2028"],
-    paragraphs: [
-      "GPA: 3.90",
-      "Relevant coursework: Statistical Mechanics, Probability, Statistics, Differential Equations, Graph Theory",
-    ],
+    summary: "GPA 3.90 · Statistical Mechanics · Probability · Statistics · Differential Equations · Graph Theory",
   },
   {
     heading: "Shanghai Qibao Dwight High School",
     meta: ["IB Diploma", "Shanghai, China", "2022 – 2025"],
-    paragraphs: ["Score: 44 / 45"],
+    summary: "Score 44 / 45",
     stat: [{ k: "IB Diploma", v: "44 / 45" }],
   },
 ];
 
 export const programs: TimelineEntry[] = [
   {
-    heading: "Break Through Tech AI — Cornell Tech",
-    meta: ["May 2026 – Present"],
+    heading: "Break Through Tech AI",
+    meta: ["Cornell Tech", "May 2026 – Present"],
   },
   {
     heading: "Summer Science Program (SSP)",
     meta: ["Southwestern Oklahoma State University", "Weatherford, OK", "Jun 2024 – Aug 2024"],
-    summary:
-      "Cross-bridged tetraazamacrocycle (Me₂B1#N₄) synthesis · Ni, Co, Cu complexes · Fenton-type dye-bleaching catalysis · NMR, UV-Vis, MS",
   },
 ];

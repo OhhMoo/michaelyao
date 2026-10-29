@@ -1,0 +1,236 @@
+/* ============================================================
+   MEMO — the /blog post, typed like a numbered transcript.
+   Every rule is scoped under .memo: the row classes are short
+   (.l, .c, .r) and would collide with other routes.
+============================================================ */
+.memo {
+  --ink: #141413;
+  --paper: #ffffff;
+  --gutter: #8a8a8a;
+  --faint: #c9c9c9;
+  --muted: #595959;
+  --lh: 1.8;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff-memo), ui-monospace, Menlo, monospace;
+  font-size: 15px;
+  line-height: var(--lh);
+  letter-spacing: 0;
+}
+
+/* One background for the whole page: white, or black in dark mode. */
+html[data-theme="dark"] .memo {
+  --ink: #f2f2f2;
+  --paper: #000000;
+  --gutter: #747474;
+  --faint: #3d3d3d;
+  --muted: #a6a6a6;
+}
+/* The strip under the fixed nav and any overscroll belong to <html> and <body>, outside .memo. */
+html:has(.memo),
+html:has(.memo) body { background: #ffffff; }
+html[data-theme="dark"]:has(.memo),
+html[data-theme="dark"]:has(.memo) body { background: #000000; }
+
+/* One weight throughout: headings are rows like any other. */
+.memo :is(h1, h2, h3, b, strong) { font: inherit; margin: 0; }
+.memo a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.memo sub, .memo sup { font-size: 0.72em; line-height: 0; }
+/* Capitalised rows would turn σ into Σ and q into Q; symbols opt out. */
+.memo .m { text-transform: none; }
+
+.memo .doc { counter-reset: ln; padding: 48px 0 calc(var(--lh) * 3em); }
+.memo .sheet { max-width: 96ch; margin: 0 auto; padding: 0 24px 0 64px; }
+
+/* Every row is one numbered line; LineNumbers gives a wrapped row one number per line. */
+.memo .l {
+  counter-increment: ln;
+  position: relative;
+  min-height: calc(var(--lh) * 1em);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 2ch;
+}
+.memo .l::before {
+  content: counter(ln);
+  position: absolute;
+  left: -5ch;
+  top: 0.55em;
+  width: 3.2ch;
+  text-align: right;
+  font-size: 10px;
+  color: var(--gutter);
+}
+.memo .l[data-ln]::before { content: attr(data-ln); white-space: pre; line-height: var(--ln-lh); top: 0; }
+
+.memo .gap { margin-top: 0.5em; }
+.memo .c { justify-content: center; text-align: center; }
+.memo .notice, .memo .tx, .memo .q, .memo .a > span { text-transform: uppercase; }
+.memo .para > span, .memo .a > span { max-width: 72ch; }
+.memo .legend { color: var(--muted); white-space: pre-wrap; }
+.memo .dim { color: var(--muted); }
+
+/* Blog index rows: the whole title is the link, inverted on hover like the chips. */
+.memo .idx a { text-decoration: none; }
+.memo .idx a:hover,
+.memo .idx a:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+.memo .idx .arr { margin-left: 1ch; }
+@media (min-width: 681px) {
+  .memo .tx.narrow { grid-template-columns: minmax(0, 1fr) 16ch; }
+}
+
+/* Equations scroll sideways on narrow screens; the scroller is the inner span so the row's
+   line number, which sits outside the row, is not clipped. */
+.memo .eq > span {
+  min-width: 0;
+  padding-left: 2ch;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.memo .tx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 34ch); }
+.memo .tx .dt-m { display: none; }
+
+.memo .divider > span { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; }
+
+/* Chips stay on the row grid: the negative margin takes back the border's two pixels. */
+.memo .chip,
+.memo .hero-title {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  padding: 0 1.5ch;
+  margin: -1px 0;
+  text-decoration: none;
+}
+.memo .hero-title,
+.memo .cta { background: var(--ink); color: var(--paper); }
+.memo .chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.memo .cta .arr { display: inline-block; margin-left: 1.5ch; }
+.memo .cta:hover .arr,
+.memo .cta:focus-visible .arr { animation: memo-bob 0.7s ease-in-out infinite alternate; }
+@keyframes memo-bob { to { transform: translate(2px, -3px); } }
+
+.memo button.t {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0 0.5ch;
+  cursor: pointer;
+  line-height: inherit;
+}
+.memo button.t:hover { outline: 1px solid var(--ink); outline-offset: -1px; }
+.memo button.t:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.memo button.t[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.memo .exhibit figure { margin: 0.5em 0; }
+/* Live readouts never wrap, so the page below them stays still while values change. */
+.memo .ro { flex-wrap: nowrap; }
+.memo .ro > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.memo .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.memo .trio > span { text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.memo .circle-fig { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2ch; }
+.memo .circle-fig canvas { display: block; width: 100%; aspect-ratio: 1; border: 1px solid var(--faint); }
+
+.memo .plots { display: flex; flex-wrap: wrap; column-gap: 24px; }
+.memo .exhibit svg { display: block; overflow: visible; }
+.memo svg text { font-family: inherit; font-size: 10px; fill: var(--muted); }
+.memo svg .lbl { fill: var(--ink); }
+.memo svg .axis { fill: none; stroke: var(--muted); }
+.memo svg .id { fill: none; stroke: var(--muted); stroke-dasharray: 3 3; }
+.memo svg .curve { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.memo svg .web { fill: none; stroke: var(--ink); stroke-opacity: 0.55; }
+.memo svg .dot { fill: var(--ink); }
+.memo svg .sim { fill: var(--paper); stroke: var(--ink); }
+.memo svg .fix { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
+.memo svg .aside { fill: var(--faint); }
+.memo svg .curve.dashed { stroke-dasharray: 4 3; }
+
+.memo .phase-fig { cursor: crosshair; touch-action: manipulation; }
+.memo .phase-fig:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.memo .phase-fig .ord { fill: var(--faint); }
+.memo .phase-fig .cha { fill: var(--ink); }
+.memo .phase-fig .halo { fill: none; stroke: var(--paper); stroke-width: 5; }
+.memo .phase-fig .edge { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.memo .phase-fig .net { fill: var(--paper); stroke: var(--ink); }
+.memo .phase-fig .pulse {
+  fill: none;
+  stroke: var(--ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: memo-pulse 2.4s ease-out infinite;
+}
+.memo .phase-fig .probe { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.memo .phase-fig .head { stroke: var(--ink); stroke-dasharray: 1.5 1.5; }
+.memo .phase-fig .tag { fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 5px; stroke-linejoin: round; }
+.memo .keyline { justify-content: flex-start; column-gap: 3ch; color: var(--muted); }
+.memo .keyline > span { white-space: nowrap; }
+.memo .key-cha { color: var(--ink); }
+.memo .key-ord { color: var(--faint); }
+@keyframes memo-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(4); opacity: 0; } }
+
+.memo .plate { margin: 0.5em 0; padding: 8px; border: 1px dashed var(--muted); }
+.memo .plate img { display: block; width: 100%; height: auto; background: #ffffff; }
+/* The research figures are white plots; in dark mode they invert onto the black page, and the
+   hue turn keeps each series' line colour recognisable. */
+html[data-theme="dark"] .memo :is(.plate img, .ending img) { filter: invert(1) hue-rotate(180deg); }
+
+/* ---- Academic page */
+.memo .in { padding-left: 2ch; }
+.memo .entry { text-transform: uppercase; }
+.memo .entry > span:first-child { font-weight: 700; }
+.memo .kv { display: grid; grid-template-columns: 16ch minmax(0, 1fr); }
+.memo .chips > span { display: flex; flex-wrap: wrap; column-gap: 1.5ch; }
+.memo a.chip:not(.cta):hover,
+.memo a.chip:not(.cta):focus-visible { background: var(--ink); color: var(--paper); }
+.memo .me { text-decoration: underline; text-underline-offset: 3px; }
+.memo .portrait-fig { float: right; width: 200px; margin: 0 0 1em 4ch; }
+.memo .portrait { display: block; width: 100%; height: auto; aspect-ratio: 187 / 233; object-fit: cover; border: 1px solid var(--faint); }
+.memo .clear { clear: both; }
+
+/* Exhibit A's three circles in a row, under the mean-field research entry. */
+.memo .circles { display: grid; grid-template-columns: repeat(3, 140px); column-gap: 2ch; margin: 0.5em 0 0.5em 2ch; }
+.memo .circles canvas { display: block; width: 100%; aspect-ratio: 1; border: 1px solid var(--faint); }
+.memo .ending { width: 300px; max-width: 70%; margin: 1.5em auto 0.5em; }
+.memo .ending img { display: block; width: 100%; height: auto; }
+
+/* On memo pages the shared nav takes the memo's typewriter face too. */
+html:has(.memo) .nav.gl-nav,
+html:has(.memo) .gl-nav .theme-toggle-label {
+  font-family: var(--ff-memo), ui-monospace, Menlo, monospace;
+  letter-spacing: 0;
+}
+
+.memo .ref { display: grid; grid-template-columns: 4ch minmax(0, 1fr); }
+
+@media (prefers-reduced-motion: reduce) {
+  .memo .cta:hover .arr,
+  .memo .cta:focus-visible .arr { animation: none; }
+  .memo .phase-fig .pulse { animation: none; opacity: 0; }
+}
+@media (forced-colors: active) {
+  .memo button.t[aria-pressed="true"],
+  .memo .hero-title,
+  .memo .cta { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+}
+
+@media (max-width: 680px) {
+  .memo { font-size: 14px; }
+  .memo .doc { padding-top: 28px; }
+  .memo .sheet { padding: 0 16px 0 36px; }
+  .memo .l::before { left: -4ch; }
+  .memo .tx { grid-template-columns: minmax(0, 1fr); }
+  .memo .tx .dt { display: none; }
+  .memo .tx .dt-m { display: block; color: var(--muted); }
+  .memo .circle-fig { column-gap: 1ch; }
+  .memo .trio > span { font-size: 11px; }
+  .memo .portrait-fig { float: none; width: 150px; margin: 0 0 1em; }
+  .memo .kv { grid-template-columns: minmax(0, 1fr); }
+  .memo .circles { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1ch; margin-left: 0; }
+  /* Two-part readouts always take two rows on phones, so nothing jumps as values change. */
+  .memo .ro { flex-wrap: wrap; }
+  .memo .ro > span:last-child:not(:first-child) { flex-basis: 100%; text-align: right; }
+}
