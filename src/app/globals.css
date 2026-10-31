@@ -59,6 +59,8 @@ html {
   overflow-x: clip;
   background: var(--bg);
   color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 html[data-theme="dark"] { color-scheme: dark; }
 body {
@@ -1855,7 +1857,9 @@ html:has(> body.lock) { overflow: hidden; }
   .grid-col-ext--top .grid-col-ext-bubble { width: 8rem; max-width: 8rem; margin-left: -14rem; margin-top: -2rem; }
   .cell-fill { border-radius: 5px; }
   .cell-img img { border-radius: 6px; }
-  .bubble { left: 58px; font-size: 10px; padding: 6px 10px; }
+  /* At most 150px wide, and opening leftward from the two right columns, keeps every bubble on a 360px screen. */
+  .bubble { left: 58px; font-size: 10px; padding: 6px 10px; width: max-content; max-width: 150px; white-space: normal; }
+  .grid > .cell:is(:nth-child(5n + 4), :nth-child(5n)) .bubble { left: auto; right: 58px; }
 
   .grid-row-section { padding: calc(4rem + 2 * 64px) 1.5rem 4rem; }
   .work { padding-left: 1.5rem; padding-right: 1.5rem; }

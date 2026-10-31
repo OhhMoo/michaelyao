@@ -113,6 +113,7 @@ html[data-theme="dark"] {
 }
 
 .gl-nav .nav-menu-btn {
+  position: relative;
   display: none;
   flex-direction: column;
   gap: 5px;
@@ -120,6 +121,12 @@ html[data-theme="dark"] {
   border: none;
   background: none;
   cursor: pointer;
+}
+/* The icon is 30×16; this widens its touch target to 44×44 without moving it. */
+.gl-nav .nav-menu-btn::after {
+  content: "";
+  position: absolute;
+  inset: -14px -7px;
 }
 .gl-nav .nav-menu-btn span {
   display: block;
