@@ -7,7 +7,7 @@ import { useAnimationLoop, useBox, usePrefersReducedMotion } from "@/components/
 import { THEME_CHANGE_EVENT } from "@/components/ThemeToggle";
 
 const WEIGHTS = [1.2, 2.5, 4.0];
-const STEP_MS = 500;
+const STEP_MS = 250;
 const HOLD_MS = 1800;
 /** The layer shown, without animating, to readers who prefer reduced motion. */
 const STILL_LAYER = 12;
