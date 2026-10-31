@@ -9,7 +9,6 @@ import { ThemeToggle } from "./ThemeToggle";
 
 const TABS = [
   { href: "/", label: "Academic", key: "academic" },
-  { href: "/about", label: "About", key: "about" },
   { href: "/blog", label: "Blog", key: "blog" },
 ] as const;
 

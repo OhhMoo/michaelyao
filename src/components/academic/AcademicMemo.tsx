@@ -235,6 +235,12 @@ export function AcademicMemo() {
       <div className="l c">
         <span>*** END OF PAGE ***</span>
       </div>
+      <div className="l" />
+      <div className="l c">
+        <span>
+          <Link href="/about">Click here to know more about me</Link>
+        </span>
+      </div>
     </Memo>
   );
 }
