@@ -197,12 +197,15 @@ html[data-theme="dark"] .memo :is(.plate img, .ending img) { filter: invert(1) h
 .memo .ending { width: 300px; max-width: 70%; margin: 1.5em auto 0.5em; }
 .memo .ending img { display: block; width: 100%; height: auto; }
 
-/* On memo pages the shared nav takes the memo's typewriter face too. */
+/* On memo pages the shared nav takes the memo's typewriter face and its paper too. The paper is
+   solid: the nav's frosted default would tint it wherever rows scroll under. */
 html:has(.memo) .nav.gl-nav,
 html:has(.memo) .gl-nav .theme-toggle-label {
   font-family: var(--ff-memo), ui-monospace, Menlo, monospace;
   letter-spacing: 0;
 }
+html:has(.memo) { --gl-nav-bg: #ffffff; --gl-nav-menu-bg: #ffffff; }
+html[data-theme="dark"]:has(.memo) { --gl-nav-bg: #000000; --gl-nav-menu-bg: #000000; }
 
 .memo .ref { display: grid; grid-template-columns: 4ch minmax(0, 1fr); }
 
