@@ -51,11 +51,7 @@ html[data-theme="dark"] {
   transform: translateY(-100%);
 }
 
-/* Two-line wordmark. `display: block` matters — globals.css turns
-   .nav-logo into an inline-flex row, which would swallow the <br>. */
 .gl-nav .nav-logo {
-  display: block;
-  gap: 0;
   justify-self: start;
   color: var(--gl-nav-ink);
   font-size: 0.8rem;
@@ -66,9 +62,6 @@ html[data-theme="dark"] {
 }
 .gl-nav .nav-logo:hover {
   color: var(--gl-nav-accent);
-}
-.gl-nav .nav-logo span {
-  color: var(--gl-nav-muted);
 }
 
 .gl-nav .nav-center {

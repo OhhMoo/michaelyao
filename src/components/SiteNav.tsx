@@ -12,7 +12,7 @@ const TABS = [
 ] as const;
 
 /**
- * The shared site header, in georgialyu.com's style: two-line wordmark left,
+ * The shared site header, in georgialyu.com's style: wordmark left,
  * tabs centre, social links right, hamburger under 768px. Used by the academic
  * page, the About clone and the blog so all three share one header and one set
  * of tabs; `.gl-nav` styling is hard-coded (see styles/site-nav.css) so it
@@ -51,8 +51,6 @@ export function SiteNav() {
     <nav className={className} id="nav">
       <Link className="nav-logo" href="/">
         MICHAEL YAO
-        <br />
-        <span>RESEARCHER</span>
       </Link>
 
       <div className="nav-center">
