@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { EmailIcon, GitHubIcon, LinkedInIcon } from "./icons";
 import { ThemeToggle } from "./ThemeToggle";
 
 const TABS = [
@@ -14,7 +13,7 @@ const TABS = [
 
 /**
  * The shared site header, in georgialyu.com's style: two-line wordmark left,
- * tabs centre, social icons right, hamburger under 768px. Used by the academic
+ * tabs centre, social links right, hamburger under 768px. Used by the academic
  * page, the About clone and the blog so all three share one header and one set
  * of tabs; `.gl-nav` styling is hard-coded (see styles/site-nav.css) so it
  * renders identically on top of each page's token set.
@@ -72,20 +71,13 @@ export function SiteNav() {
 
       <div className="nav-actions">
         <div className="nav-icons">
-          <a
-            href="https://www.linkedin.com/in/yiqi-yao-michael/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon />
+          <a href="https://www.linkedin.com/in/yiqi-yao-michael/" target="_blank" rel="noreferrer">
+            LinkedIn
           </a>
-          <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <GitHubIcon />
+          <a href="https://github.com/OhhMoo" target="_blank" rel="noreferrer">
+            GitHub
           </a>
-          <a href="mailto:miyao@hmc.edu" aria-label="Email">
-            <EmailIcon />
-          </a>
+          <a href="mailto:miyao@hmc.edu">Email</a>
         </div>
 
         <ThemeToggle />

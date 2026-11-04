@@ -76,7 +76,8 @@ html[data-theme="dark"] {
   align-items: center;
   gap: 1.5rem;
 }
-.gl-nav .nav-center a {
+.gl-nav .nav-center a,
+.gl-nav .nav-icons a {
   color: var(--gl-nav-muted);
   font-size: 0.8rem;
   font-weight: 400;
@@ -85,7 +86,8 @@ html[data-theme="dark"] {
   transition: color 0.2s;
 }
 .gl-nav .nav-center a:hover,
-.gl-nav .nav-center a.active {
+.gl-nav .nav-center a.active,
+.gl-nav .nav-icons a:hover {
   color: var(--gl-nav-ink);
 }
 
@@ -101,15 +103,6 @@ html[data-theme="dark"] {
   align-items: center;
   justify-self: auto;
   gap: 1.5rem;
-}
-.gl-nav .nav-icons a {
-  display: flex;
-  align-items: center;
-  color: var(--gl-nav-soft);
-  transition: color 0.2s;
-}
-.gl-nav .nav-icons a:hover {
-  color: var(--gl-nav-ink);
 }
 
 .gl-nav .nav-menu-btn {
